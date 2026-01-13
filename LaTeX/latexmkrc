@@ -1,0 +1,16 @@
+# latexmk configuration (Perl)
+# Build from the LaTeX/ folder.
+
+$pdflatex = 'pdflatex -interaction=nonstopmode -halt-on-error %O %S';
+
+# Keep aux files separated
+$aux_dir = 'build';
+
+# Put PDFs in ../pdf
+$out_dir = '../pdf';
+
+# Enable bibliography with bibtex when needed
+$bibtex = 'bibtex %O %B';
+
+# Always generate .synctex.gz for editor integration
+$pdf_mode = 1;
