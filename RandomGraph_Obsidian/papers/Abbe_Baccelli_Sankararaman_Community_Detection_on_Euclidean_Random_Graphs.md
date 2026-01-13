@@ -45,6 +45,15 @@ Dans un cas simple de $f_{in}$ et $f_{out}$,  ("un disque"), on obtient une cond
 
 La preuve a pu être faite grâce à des progrès à propos de l'erreur pour distinguer entre 2 vecteurs aléatoires de Poisson et par des résultats de Large-Déviations.
 
+## Méthodes et Techniques utilisées
+
+Dans les preuves, il a été utilisé de manière générale,
++ Thinning, couplage PPP (page 50)
++ Palm probability, théorème Slivnyak sert au pour Information Flow from Infinity et arguments ergodiques.
++ Théorèmes Campbell / Campbell–Mecke + "moment measure expansion" [inconnu ce terme donc à comprendre un peu mieux]
++ Domination par percolation
+
+La méthode générale utilisée pour la preuve serait appelée (Raph l'a décidé) [[Coarse-grained]].
 
 # Ref
 

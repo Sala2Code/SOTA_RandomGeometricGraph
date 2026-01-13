@@ -4,7 +4,7 @@ On s'intéresse à la **détection de communautés** dans les **Graphes aléatoi
 
 Le but c'est d'établir un **état de l'art** sur ce sujet plus ou moins large. Il y a pas mal de pistes à explorer et à détailler. Voici une liste non exhaustive :
 + Conditions sur le graphe ($f_{in}, f_{out}$, la géométrie, le bruit dans les données, le nombre de communautés, $\dots$)
-+ Les techniques employées pour le résoudre ([[Méthodes spectrales]], [[Message passing]], [[Broadcast process on trees]], [[Convex relaxations]], [A compléter])
++ Les techniques employées pour le résoudre ([[Méthodes spectrales]], [[Message passing]], [[Broadcast process on trees]], [[Convex relaxations]], [[Coarse-grained]] [A compléter])
 + Quelles problématiques ? ([[Weak recovery]], [[Exact Recovery]], [[Distinguishability]] ) 
 + La performance des algorithmes + leur fonctionnement (en bref) 
 + Performance théorique. *(Dans les cas asymptotiques, non-asymptotiques, (autre ?))*
