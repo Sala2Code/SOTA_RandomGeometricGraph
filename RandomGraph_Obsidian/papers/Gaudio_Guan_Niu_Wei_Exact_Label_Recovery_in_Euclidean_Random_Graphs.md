@@ -13,4 +13,4 @@ Le lien arXiv si besoin : https://arxiv.org/pdf/2407.11163
 
 # Tag
 
-#paper #euclidien 
+#paper #euclidien #rgg

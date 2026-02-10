@@ -58,9 +58,10 @@ C'est un fourre-tout sous forme de liste concise des choses à mettre d'une mani
 
 + 2 communautés ou +
 + communautés de tailles égales (ou pas)
-+ membres avec plusieurs (ou même 0 !) communautés (lui on va s'en doute l'oublier)
++ membres avec plusieurs (ou même 0 !) communautés (lui on va s'en doute l'oublier) (overlapping communities)
 + graphe spatial ou non
 + graphe orienté ou non (et donc la matrice d'adjacence est symétrique)
 + graphes spatial avec erreur : positions avec incertitudes, positions manquantes.
 + hiérarchie dans les communautés. 
 + faire (prendre) un tableau résumant les différents comportements/seuil/autres selon les hypothèses considérées.
++ Communautés dynamiques (à oublier)

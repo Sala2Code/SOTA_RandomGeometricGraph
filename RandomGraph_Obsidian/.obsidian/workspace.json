@@ -8,31 +8,73 @@
         "type": "tabs",
         "children": [
           {
-            "id": "b5b23b38b5da930f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "papers/Abbe_Baccelli_Sankararaman_Community_Detection_on_Euclidean_Random_Graphs.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Abbe_Baccelli_Sankararaman_Community_Detection_on_Euclidean_Random_Graphs"
-            }
-          },
-          {
             "id": "74887a724fa9eb51",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "papers/Abbe_Baccelli_Sankararaman_Community_Detection_on_Euclidean_Random_Graphs.md",
+                "file": "Plan.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Abbe_Baccelli_Sankararaman_Community_Detection_on_Euclidean_Random_Graphs"
+              "title": "Plan"
+            }
+          },
+          {
+            "id": "4677887698d1cb54",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "papers/Duchemin_DeCastro_Random_Geometric_Graph_Some_recent_devlopments.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Duchemin_DeCastro_Random_Geometric_Graph_Some_recent_devlopments"
+            }
+          },
+          {
+            "id": "a6eda0d377b3ba66",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "papers/Gomez_Vasseur_Vergne_Martins_Decreusefond_Chen_A_Case_Study_On_Regularity_In_Cellular_Network_Deployment.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Gomez_Vasseur_Vergne_Martins_Decreusefond_Chen_A_Case_Study_On_Regularity_In_Cellular_Network_Deployment"
+            }
+          },
+          {
+            "id": "ce1bb5688a1d7d02",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "papers/Gilbert_Random_plane_networks.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Gilbert_Random_plane_networks"
+            }
+          },
+          {
+            "id": "051f308d4e76f3c0",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Main Project.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Main Project"
             }
           },
           {
@@ -41,26 +83,16 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "papers/Abbe_Baccelli_Sankararaman_Community_Detection_on_Euclidean_Random_Graphs.md",
+                "file": "Plan.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Abbe_Baccelli_Sankararaman_Community_Detection_on_Euclidean_Random_Graphs"
+              "title": "Plan"
             }
           },
           {
-            "id": "8283495ab7051f5b",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
-            }
-          },
-          {
-            "id": "8c37435ee901df90",
+            "id": "f669927cf7dd6ed8",
             "type": "leaf",
             "state": {
               "type": "graph",
@@ -69,8 +101,7 @@
               "title": "Graph view"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -102,7 +133,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:#thinning",
+                "query": "",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -232,24 +263,33 @@
       "canvas:Create new canvas": false
     }
   },
-  "active": "8283495ab7051f5b",
+  "active": "74887a724fa9eb51",
   "lastOpenFiles": [
-    "Coarse-grained.md",
-    "papers/Abbe_Baccelli_Sankararaman_Community_Detection_on_Euclidean_Random_Graphs.md",
-    "Weak recovery.md",
-    "Main Project.md",
-    "papers/Erdos_Renyi_On_the_evolution_of_random_graphs.md",
-    "papers/Fortunato_Community_detection_in_graphs.md",
-    "papers/Abbe_Community_Detection_and_Stochastic_Block_Models_Recent_Developments.md",
-    "Exact Recovery.md",
-    "SBM.md",
-    "Distinguishability.md",
-    "papers/Gaudio_Guan_Niu_Wei_Exact_Label_Recovery_in_Euclidean_Random_Graphs.md",
+    "papers/Duchemin_DeCastro_Random_Geometric_Graph_Some_recent_devlopments.md",
+    "img/Set_model_random_graphs.png",
+    "img/Set_model_random_graphs.png",
+    "img",
+    "papers/Valdivia_DeCastro_Latent_Distance_Estimation_for_Random_Geometric.md",
+    "Plan.md",
     "Géométrie.md",
-    "Learnability.md",
+    "papers/Meliot_Asymptotic_representaiton_theory_and_the_spectrum_of_a_random_geometric_graph_on_a_compact_lie_group.md",
+    "papers/Higham_Rasajski_Przulj_Fitting_a_geometric_graph_to_a_protein–protein_interaction_network.md",
+    "papers/Gomez_Vasseur_Vergne_Martins_Decreusefond_Chen_A_Case_Study_On_Regularity_In_Cellular_Network_Deployment.md",
+    "papers/Gilbert_Random_plane_networks.md",
+    "papers/Gaudio_Guan_Niu_Wei_Exact_Label_Recovery_in_Euclidean_Random_Graphs.md",
+    "papers/Fortunato_Community_detection_in_graphs.md",
+    "papers/Erdos_Renyi_On_the_evolution_of_random_graphs.md",
+    "papers/Abbe_Community_Detection_and_Stochastic_Block_Models_Recent_Developments.md",
+    "papers/Abbe_Baccelli_Sankararaman_Community_Detection_on_Euclidean_Random_Graphs.md",
+    "papers/Penrose_Random_geometric_graphs.md",
     "Méthodes spectrales.md",
-    "Untitled.md",
-    "Untitled",
+    "Main Project.md",
+    "Learnability.md",
+    "SBM.md",
+    "Coarse-grained.md",
+    "Weak recovery.md",
+    "Exact Recovery.md",
+    "Distinguishability.md",
     "Gaudio_Guan_Niu_Wei_Exact_Label_Recovery_in_Euclidean_Random_Graphs",
     "papers/Gaudio_Guan_Niu_Wei_Exact_Label_Recovery_in_Euclidean_Random_Graphs",
     "papers",

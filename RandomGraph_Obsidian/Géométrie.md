@@ -21,7 +21,12 @@ Cet espace possède de bonnes propriété analytique : translation invariance of
 > However, we note that the sparse SBM enjoys certain advantages over the geometric random graph considered here, namely that of having low diameter. in agreement with the ‘small world’ phenomena observed in many real world networks (see [47]). Therefore a natural next step is to superimpose an SBM with the type of geometric graphs considered here to obtain both a lot of triangles and small diameter, i.e. a type of small world SBM. [[Abbe_Baccelli_Sankararaman_Community_Detection_on_Euclidean_Random_Graphs]] p.6
 
 ## Sphère, $\mathbb S^d$
+## Motivation
+> The choice of this latent space is motivated by both recent theoretical developments in this framework Bubeck et al. (2016), De Castroet al. (2020), Allen-Perkins (2018), Issartel et al. (2021) and by applications Pereda and Estrada (2019), Perry et al. (2020).[[Duchemin_DeCastro_Random_Geometric_Graph_Some_recent_devlopments]]
 
-[il y a un papier travaillant une sphère, à trouver + cette note va pas mal être modifiée]
+
+[[Valdivia_DeCastro_Latent_Distance_Estimation_for_Random_Geometric]]
+
+# Compact Lie group
 
 [Autre distance à considérer + motiver ]

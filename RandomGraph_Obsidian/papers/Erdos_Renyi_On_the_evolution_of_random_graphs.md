@@ -3,6 +3,7 @@ On ne va pas s'intéresser beaucoup à ce papier mais celui-ci a été écrit pa
 ---
 
 Il permet de connaître les limites théoriques du [[SBM]]. 
+C'est le null model du SBM.
 
 Le papier étudie les graphes aléatoires *(non spatiaux)* à $n$ sommets, notés $G_n(p)$, correspondant au modèle basique de graphe aléatoire. Chaque paire de nœuds est connectée indépendamment des autres avec une probabilité $p$ (dans notre notation ($f_{in}=f_{out}$). La probabilité $p$ peut dépendre de $n$.
 
@@ -14,4 +15,4 @@ A approfondir si nécessaire mais c'est loin de la problématique initiale.
 
 # Tags
 
-#paper
+#paper #noCommunity 

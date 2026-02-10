@@ -62,4 +62,4 @@ La méthode générale utilisée pour la preuve serait appelée (Raph l'a décid
 
 # Tag
 
-#paper #euclidien 
+#paper #euclidien #rgg
