@@ -59,6 +59,8 @@ La méthode générale utilisée pour la preuve serait appelée (Raph l'a décid
 
 + [[Abbe_Community_Detection_and_Stochastic_Block_Models_Recent_Developments]]
 + [[Fortunato_Community_detection_in_graphs]]
++ [[Penrose_Random_geometric_graphs]]
++ [[Galhotra_Mazumdar_Pal_Saha_The_geometric_block_model]]
 
 # Tag
 

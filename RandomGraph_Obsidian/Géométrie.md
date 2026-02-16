@@ -2,6 +2,7 @@ On parle pas de la géométrie du collège, le titre viendra certainement à cha
 L'idée sera de définir ce qu'on entend par **géométrie** ici. 
 On détaillera brièvement les différentes géométries et autre considérations rencontrée lors des différents papiers lus.
 
+D'ailleurs bien qu'on travaille sur des géométries définies, en pratique il n'est pas toujours évident de savoir dans quel ccas on est ni la distance à utiliser! Il faudrait investiguer lorsque la géométrie pertinente est latente (similarité, obstacles, mesures incomplètes). D’où l’intérêt d’algorithmes robustes aux variables géométriques non observées et aux moyens de remplacer/substituer ces variables essentielles. 
 ##  Espace Euclidien, $\mathbb R^d$
 
 On choisit la distance Euclidienne.
@@ -26,6 +27,7 @@ Cet espace possède de bonnes propriété analytique : translation invariance of
 
 
 [[Valdivia_DeCastro_Latent_Distance_Estimation_for_Random_Geometric]]
+[[Galhotra_Mazumdar_Pal_Saha_The_geometric_block_model]]
 
 # Compact Lie group
 

@@ -18,6 +18,9 @@ Le modèle le plus simple c'est le SBM symétrique avec 2 communautés. Dans ce 
 Nous avons un papier, bien cité, d'un chercheur (Abbe) réputé dans le domaine qui en parle [[Abbe_Community_Detection_and_Stochastic_Block_Models_Recent_Developments]], il semble, exhaustivement donc je pense que c'est pas la peine de sortir plus de référence que nécessaire. 
 Dans ce même papier, il aborde le fait que localement le graphe a l'allure d'un arbre et que les cycles sont très court.
 
+# Algorithm
+> Efficient algorithms that solve [[Weak recovery]] in the sparse SBM (such as message passing algorithm, convex relaxation or spectral methods) deeply rely on the local tree-like structure [[Duchemin_DeCastro_Random_Geometric_Graph_Some_recent_devlopments]] 
+
 ## Motivation
 
 >  we note that the sparse SBM enjoys certain advantages  [...] namely that of having low diameter. in agreement with the ‘small world’ phenomena observed in many real world networks (see [Jeffrey Travers and Stanley Milgram. The small world problem. Phychology Today, 1(1):61–67, 1967.])
