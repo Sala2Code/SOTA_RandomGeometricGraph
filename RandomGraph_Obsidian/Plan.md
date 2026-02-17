@@ -29,14 +29,14 @@ Parlé du premier modèle, riche en littérature, de détection de communautés 
 
 + [[Abbe_Community_Detection_and_Stochastic_Block_Models_Recent_Developments]]
 + [[Bordenave_Lelarge_Massoulié_Non-backtracking_spectrum_of_random_graphs]]
-+ 
+
 
 # Random Geometric Graphs (RGGs)
 Expliquer l'utilité d'ajouter des positions aux noeuds du graphes : triangles, metric constraints, spatial locality, distance-dependent information. 
 On a une grande discussion sur les différentes géométries possibles, conditions sur la positions des points, la fonctions de connections qui est à présent distance-dependent. 
 
 ## Fixed positions
-
++ [[Chen_Kamath_Suh_Tse_Community_Recovery_in_graphs_with_locality]]
 
 ## Random positions
 Les points sont considérés aléatoires. Cela fait intervenir les (Poissons) Points Process, Palm Process.
@@ -46,6 +46,7 @@ Géométrie Euclidienne, Sphères, Groupe de Lie compact$\dots$; L'étude des co
 + [[Valdivia_DeCastro_Latent_Distance_Estimation_for_Random_Geometric]]
 + [[Meliot_Asymptotic_representaiton_theory_and_the_spectrum_of_a_random_geometric_graph_on_a_compact_lie_group]]
 + [[Liu_Mohanty_Schramm_Yang_Testing_Threshold_for_highdimensional_sparse_random_geometric_graphs]]
++ [[Eldan_Mikulincer_Pieters_Community_Detection_and_percolation_of_information_in_a_geometric_setting]]
 
 ### Communautés
 + [[Abbe_Baccelli_Sankararaman_Community_Detection_on_Euclidean_Random_Graphs]]
@@ -55,5 +56,6 @@ Géométrie Euclidienne, Sphères, Groupe de Lie compact$\dots$; L'étude des co
 + [[Péché_Perchet_Robustness_of_Community_Detection_to_Random]]
 + [[Avrachenkov_Bobu_Dreveton_Higher-Order_Spectral_Clustering_for_Geometric_Graphs]]
 + [[Avrachenkov_Kumar_Leskela_Community_Detection_on_Block_Models_with_Geometric_Kernels]]
-+ [[Chen_Kamath_Suh_Tse_Community_Recovery_in_graphs_with_locality]]
 + [[Chien_Tulino_LLorca_Active_Learning_in_the_geometric_block_model]]
++ [[Bruno_Sousa_Gursoy_Serafino_Vianello_Vranic_Boguna_Community_Detection_in_the_hyperbolic_space]]
++ [[Guarino_Torre_Mastrostefano_Random_Hyperbolic_Graphs_with_Arbitrary_Mesoscale_Structures]]

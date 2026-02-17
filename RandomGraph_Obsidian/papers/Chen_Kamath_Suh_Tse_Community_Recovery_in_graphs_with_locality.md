@@ -1,5 +1,6 @@
 Ce papier parle d'une thématique qui est différente de ce que l'on cherche, mais il est intéressant de le noter !
 L'idée est que l'on a une géométrie locale (voir l'image ci-dessous), chaque noeuds peut savoir s'il est de la même communauté ou non que ses voisins (avec bruit !). Donc on observe pas s'il y a une arête ou non mais on mesure les arêtes. Dis comme ça, on dirait que c'est un cas particulier à notre sujet mais à confirmer.
+La position des noeuds semble donc prédéfinies, fixes.
 
 Application envers la biologie pour les haplotypes.
 
