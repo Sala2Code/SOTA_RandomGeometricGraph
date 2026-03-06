@@ -31,6 +31,9 @@ Parlé du premier modèle, riche en littérature, de détection de communautés 
 + [[Bordenave_Lelarge_Massoulié_Non-backtracking_spectrum_of_random_graphs]]
 
 
+---
+# TODO : ANNOTER 
+
 # Random Geometric Graphs (RGGs)
 Expliquer l'utilité d'ajouter des positions aux noeuds du graphes : triangles, metric constraints, spatial locality, distance-dependent information. 
 On a une grande discussion sur les différentes géométries possibles, conditions sur la positions des points, la fonctions de connections qui est à présent distance-dependent. 
@@ -50,8 +53,8 @@ Géométrie Euclidienne, Sphères, Groupe de Lie compact$\dots$; L'étude des co
 + [[Bubeck_Eldan_The_KL_gap_for_Erdos_Renyi_random_graphs_with_given_expected_degrees]]
 
 ### Communautés
-+ [[Abbe_Baccelli_Sankararaman_Community_Detection_on_Euclidean_Random_Graphs]]
-+ [[Gaudio_Guan_Niu_Wei_Exact_Label_Recovery_in_Euclidean_Random_Graphs]]
++ X [[Abbe_Baccelli_Sankararaman_Community_Detection_on_Euclidean_Random_Graphs]]
++ X [[Gaudio_Guan_Niu_Wei_Exact_Label_Recovery_in_Euclidean_Random_Graphs]]
 + [[Duchemin_DeCastro_Random_Geometric_Graph_Some_recent_devlopments]]
 + [[Galhotra_Mazumdar_Pal_Saha_The_geometric_block_model]]
 + [[Péché_Perchet_Robustness_of_Community_Detection_to_Random]]
@@ -60,3 +63,4 @@ Géométrie Euclidienne, Sphères, Groupe de Lie compact$\dots$; L'étude des co
 + [[Chien_Tulino_LLorca_Active_Learning_in_the_geometric_block_model]]
 + [[Bruno_Sousa_Gursoy_Serafino_Vianello_Vranic_Boguna_Community_Detection_in_the_hyperbolic_space]]
 + [[Guarino_Torre_Mastrostefano_Random_Hyperbolic_Graphs_with_Arbitrary_Mesoscale_Structures]]
++ [[Mao_Wu_Xu_Random_geometric_graphs_with_smooth_kernels_sharp_detection_threshold_and_a_spectral_conjecture.pdf]]

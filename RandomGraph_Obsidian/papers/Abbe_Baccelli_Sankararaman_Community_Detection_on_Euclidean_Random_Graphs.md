@@ -1,3 +1,14 @@
+## Annotation
+
+Détection de communautés sur des graphes euclidiens aléatoires géométriques où chaque point a un label de communautés binaire. La position des points est décidée selon a Poisson Point Process (PPP). 
+
+Ils considèrent les problématiques suivantes:
++ Récupération Exacte,  ils établissent une transition de phase pour le régime logarithmique. Le seuil est encadré et sa valeur exacte est conjecturée. L'analyse est un test entre vecteurs de Poisson et en utilisant des résultats de grandes déviations.
++ Récupération Partielle, ils établissent une transition de phase pour le régime sparse. Ils fournissent un algorithme (Good-Bad-Grid). L'analyse utilise des processus de percolations et et l'Information Flow from Infinity.
++ Distinction, aucune transition de phase. Il est toujours possible de savoir si l'on est en présence d'un null model ou non. L'analyse est dans le régime sparse par un test consistant utilisant des statistiques sur les cycles courts. 
+
+---
+
 C'est un des 2 papiers que O. Moritz a proposé.
 Le lien arXiv si besoin : https://arxiv.org/pdf/1706.09942
 
@@ -10,6 +21,9 @@ L'analyse ne se fait pas sur $\mathbb R^d$ directement mais sur $B_n = [-n^{1/d}
 On suppose que la position des nœuds est connue parfaitement (page 6).
 On suppose que $f_{in}$ et $f_{out}$ sont connues (page 6).
 L'algorithme **GBG** peut être modifié s'il on ne connaît pas $f_{in}$ et $f_{out}$ (mais il faut tout de même connaître $R$, une longueur où la différence entre ces $2$ fonctions est de mesure positive) en utilisant des [[Méthodes spectrales]] (page 18).
+
+
+> show that the threshold of the distinguishability problem, i.e., the testing between our model and the null model without community labels exhibits no phase-transition and in particular, does not match the weak recovery threshold (in contrast to the SBM).
 
 ## Contribution 
 Voir pages 3 et 4.
