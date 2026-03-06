@@ -1,4 +1,11 @@
 
+# Annotation
+
+Premier papier à introduire un modèle de graphe aléatoire géométrique pour la détection de communautés. Les points sont placés uniformément sur la sphère unité (bien que l'analyse se fait sur le cercle, en deux dimensions).
+
+Ils développent un algorithme basé sur le comptage de triangles et de voisins communs. Il est presque optimal (optimal à une constante près) dans le régime logarithmique pour la Récupération Exacte. Ils prouvent une condition suffisante mais ne caractérisent pas le seuil information-théorique exact. L'algorithme a été testé positivement sur de vraies données.
+
+---
 
 [[Géométrie]] sphérique : $\mathbb S^{t-1}$.
 Chaque noeud a un label. 
@@ -17,8 +24,11 @@ Pour des graphes de plus hautes dimensions, ou à plusieurs communautés, la pro
 
 > GBM accurately represents (more so than SBM) many real world networks.
 
+> The geometric block model generalizes the random geometric graphs in the same way that the well-studied stochastic block model generalizes the Erdos-Renyi random graph
+
 # Ref
 + [[Penrose_Random_geometric_graphs]]
++ [[Bubeck_Ding_Eldan_Racz_Testing_for_high-dimensional_geometry_in_random_graphs]]
 
 ---
 #paper 
