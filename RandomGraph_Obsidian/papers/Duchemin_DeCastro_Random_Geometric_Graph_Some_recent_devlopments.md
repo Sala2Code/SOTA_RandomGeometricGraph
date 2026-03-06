@@ -1,6 +1,17 @@
 ---
 
 ---
+# Annotation
+
+Ce papier décrit l'avancée (<2022) des graphes aléatoires géométriques. C'est l'unique, non-exhaustif, point d'entrée bibliographique.
+
+Les sections 3,4 et 5 portent principalement sur la détection de géométrie et l'estimation non-paramétrique. Ils considèrent la sphère en haute dimension comme espace latent. 
+
+La section 6 traite de la détection de communautés. Ils soulignent la fortes dépendances locales de modèles comme GSBM ou encore Geometric Block Model, comparée au SBM. 
+Puis, il décrivent les approches utilisées telles que le comptage de motifs/voisins en commun ou l'analyse spectrale sous perturbations géométriques. Enfin, ils listent de potentielles directions à explorer : positions inconnues/bruitées, estimation des fonctions de connexion, robustesse. 
+
+---
+
 
 Décrit l'avancé récente (<2022) des RGG (pas nécessairement à propos uniquement de la détection de communautés).
 

@@ -2,7 +2,7 @@
 
 Détection de communautés sur des graphes euclidiens aléatoires géométriques où chaque point a un label de communautés binaire. La position des points est décidée selon a Poisson Point Process (PPP). 
 
-Ils considèrent les problématiques suivantes:
+Ils considèrent les problématiques suivantes pour leur modèle GSBM :
 + Récupération Exacte,  ils établissent une transition de phase pour le régime logarithmique. Le seuil est encadré et sa valeur exacte est conjecturée. L'analyse est un test entre vecteurs de Poisson et en utilisant des résultats de grandes déviations.
 + Récupération Partielle, ils établissent une transition de phase pour le régime sparse. Ils fournissent un algorithme (Good-Bad-Grid). L'analyse utilise des processus de percolations et et l'Information Flow from Infinity.
 + Distinction, aucune transition de phase. Il est toujours possible de savoir si l'on est en présence d'un null model ou non. L'analyse est dans le régime sparse par un test consistant utilisant des statistiques sur les cycles courts. 
