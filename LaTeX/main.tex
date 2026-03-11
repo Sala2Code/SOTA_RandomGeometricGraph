@@ -9,27 +9,93 @@
 \usepackage[a4paper,margin=2.5cm]{geometry}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage{graphicx}
+\usepackage[authoryear]{natbib}
 \usepackage{hyperref}
+\usepackage{xcolor}
 
-\title{Titre du document}
-\author{Nom Prénom}
+% Make \cite default to an author-year parenthetical cite
+\let\cite\citep
+
+\title{Aperçu des avancées récentes sur la détection de
+communautés dans les graphes aléatoires géométriques}
+\author{SALA Raphaël, TOOD}
 \date{\today}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Résumé (optionnel).
+TODO
 \end{abstract}
 
 \tableofcontents
 \clearpage
 
-\input{sections/introduction}
+\section{Introduction}\
+\textcolor{orange}{les titres des paragraphes partiront, c'est pour aider à structurer le rapport}
+\textcolor{orange}{Les parties, la structure, les idées, les références ne sont pas du tout fixes.
+Ce sont des propositions.}
+
+\paragraph{Quel est l'objet ? (informel)}
+
+
+\paragraph{Motivation par application réelle}
+Très bref, parler des réseaux sociaux, embedding word (IA), biologie, wireless newtork,
+physique des matériaux (?)
+\cite{sankararaman2020comhapdet}
+\cite{higham2008fitting}
+\cite{gomez2015case}
+
+\paragraph{Motivation théorique (RGG)}
+\cite{penrose2003random}
+\cite{gilbert1961random}
+
+
+Détection de géométrie (et pas de communauté) (Detectiion problem) 
+\cite{mao2026randomgeometricgraphssmooth}
+
+
+\paragraph{Motivation géométrique (comparé à SBM)}
+\cite{abbe2018community}
+
+\paragraph{Problématiques}
+Définition et interprétation
+\begin{itemize}
+    \item Distinguabilité \cite{sankararaman2018community}
+    \item Récupération partielle (weak recovery)
+    \item Récupération presque exacte (almost exact recovery)
+    \item Récupération exacte (exact recovery) 
+\end{itemize}
+
+\section{\textcolor{red}{Modèle}}
+
+\begin{itemize}
+    \item espace latent (ou pas)
+    \item sphère, espace euclidien ?
+    \item hard-RGG, soft-RGG
+    \item motivation : bien que les modèles ne soient pas les mêmes, ils n'ont pas pour but
+    de comprendre tous ceux possible mais qu'à travers chaque classe voir les mécanismes. 
+    Exemplse : passer du local au global puis raffinement, les quantités utilisées, ... 
+\end{itemize}
+
+\section{\textcolor{red}{Seuil théorique information}}
+
+\textcolor{orange}{Faire le rapport dans l'ordre chronologique je pense}
+
+\begin{itemize}
+    \item \cite{galhotra2018geometric} (Geometric Block Model, GBM)
+    \item \cite{sankararaman2018community} \& \cite{abbe2021community} (Geometric SBM)
+    \item \cite{gaudio2024exact} (Geometric Hidden Community Model, GHCM)
+    \item \cite{gaudio2025sharpexactrecoverythreshold} (GHCM)
+    \item \cite{gaudio2026exact} (GHCM)
+\end{itemize}
+
+\section{\textcolor{red}{Algorithme}}
+
 
 \clearpage
-\nocite{*}
-\bibliographystyle{plain}
-\bibliography{bibliography/references}
+
+\bibliographystyle{plainnat}
+\bibliography{../pdf/refs_filtered}
 
 \end{document}
