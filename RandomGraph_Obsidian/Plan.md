@@ -51,6 +51,7 @@ Géométrie Euclidienne, Sphères, Groupe de Lie compact$\dots$; L'étude des co
 + [[Liu_Mohanty_Schramm_Yang_Testing_Threshold_for_highdimensional_sparse_random_geometric_graphs]]
 + [[Eldan_Mikulincer_Pieters_Community_Detection_and_percolation_of_information_in_a_geometric_setting]]
 + [[Bubeck_Eldan_The_KL_gap_for_Erdos_Renyi_random_graphs_with_given_expected_degrees]]
++ X [[Mao_Wu_Xu_Random_geometric_graphs_with_smooth_kernels_sharp_detection_threshold_and_a_spectral_conjecture.pdf]]
 
 ### Communautés
 + X [[Abbe_Baccelli_Sankararaman_Community_Detection_on_Euclidean_Random_Graphs]]
@@ -63,4 +64,5 @@ Géométrie Euclidienne, Sphères, Groupe de Lie compact$\dots$; L'étude des co
 + [[Chien_Tulino_LLorca_Active_Learning_in_the_geometric_block_model]]
 + [[Bruno_Sousa_Gursoy_Serafino_Vianello_Vranic_Boguna_Community_Detection_in_the_hyperbolic_space]]
 + [[Guarino_Torre_Mastrostefano_Random_Hyperbolic_Graphs_with_Arbitrary_Mesoscale_Structures]]
-+ [[Mao_Wu_Xu_Random_geometric_graphs_with_smooth_kernels_sharp_detection_threshold_and_a_spectral_conjecture.pdf]]
++ X [[Gaudio_Jin_Exact_Recovery_in_the_Geometric_Hidden_Community_Model]]
++ [[Gaudio_Guan_Sharp_Exact_Recovery_Threshold_for_two_community_euclidian_random_graphs]]
