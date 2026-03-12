@@ -46,6 +46,9 @@ On a une grande discussion sur les différentes géométries possibles, conditio
 ## Fixed positions
 + X [[Chen_Kamath_Suh_Tse_Community_Recovery_in_graphs_with_locality]]
 
+# IA (Jan)
++ X [[He_Song_Jin_Feng_Zhang_Yiu_Community_centrinc_graph_convolutional_network for_unsupervised_community_detection]]
++ [[Li_Sha_Huang_Zhang_Community_Detection_in_Attributed_Graphs_An Embedding_Approach]]
 ## Random positions
 Les points sont considérés aléatoires. Cela fait intervenir les (Poissons) Points Process, Palm Process.
 Géométrie Euclidienne, Sphères, Groupe de Lie compact$\dots$; L'étude des communautés se fait directement mais c'est un "nouveau" sujet de recherche, donc certains étudie uniquement ce qu'on appelle *null model*, sans communautés ou encore latent géométrie, c'est-à-dire trouver la géométrie (espace + métrique) sous jacente à un graphe afin de comprendre sa structure. C'est aux futurs chercheurs d'ajouter des communautés à l'aide d'outil déjà créés. Détection de géométrie.
