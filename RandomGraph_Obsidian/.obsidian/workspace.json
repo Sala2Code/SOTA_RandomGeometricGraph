@@ -22,7 +22,7 @@
             }
           },
           {
-            "id": "a438f9d95311e1f9",
+            "id": "d9180d60dc27fe61",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -36,7 +36,7 @@
             }
           },
           {
-            "id": "b7a47c5dfdc70dd4",
+            "id": "555aaf574225b97c",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -212,17 +212,18 @@
       "bases:Créer une nouvelle base": false
     }
   },
-  "active": "b7a47c5dfdc70dd4",
+  "active": "555aaf574225b97c",
   "lastOpenFiles": [
-    "SBM.md",
-    "papers/Gaudio_Jin_Exact_Recovery_in_the_Geometric_Hidden_Community_Model.md",
-    "papers/Gaudio_Guan_Sharp_Exact_Recovery_Threshold_for_two_community_euclidian_random_graphs.md",
-    "papers/Gaudio_Guan_Niu_Wei_Exact_Label_Recovery_in_Euclidean_Random_Graphs.md",
-    "Plan.md",
-    "papers/Galhotra_Mazumdar_Pal_Saha_The_geometric_block_model.md",
     "papers/Guarino_Torre_Mastrostefano_Random_Hyperbolic_Graphs_with_Arbitrary_Mesoscale_Structures.md",
-    "papers/Mao_Wu_Xu_Random_geometric_graphs_with_smooth_kernels_sharp_detection_threshold_and_a_spectral_conjecture.pdf.md",
+    "papers/Gomez_Vasseur_Vergne_Martins_Decreusefond_Chen_A_Case_Study_On_Regularity_In_Cellular_Network_Deployment.md",
     "papers/Abbe_Baccelli_Sankararaman_Community_Detection_on_Euclidean_Random_Graphs.md",
+    "Plan.md",
+    "SBM.md",
+    "papers/Gaudio_Guan_Sharp_Exact_Recovery_Threshold_for_two_community_euclidian_random_graphs.md",
+    "papers/Gaudio_Jin_Exact_Recovery_in_the_Geometric_Hidden_Community_Model.md",
+    "papers/Gaudio_Guan_Niu_Wei_Exact_Label_Recovery_in_Euclidean_Random_Graphs.md",
+    "papers/Galhotra_Mazumdar_Pal_Saha_The_geometric_block_model.md",
+    "papers/Mao_Wu_Xu_Random_geometric_graphs_with_smooth_kernels_sharp_detection_threshold_and_a_spectral_conjecture.pdf.md",
     "papers/Abbe_Community_Detection_and_Stochastic_Block_Models_Recent_Developments.md",
     "Weak recovery.md",
     "Distinguishability.md",
@@ -232,7 +233,6 @@
     "papers/Bubeck_Ding_Eldan_Racz_Testing_for_high-dimensional_geometry_in_random_graphs.md",
     "papers/Duchemin_DeCastro_Random_Geometric_Graph_Some_recent_devlopments.md",
     "papers/Gilbert_Random_plane_networks.md",
-    "papers/Gomez_Vasseur_Vergne_Martins_Decreusefond_Chen_A_Case_Study_On_Regularity_In_Cellular_Network_Deployment.md",
     "papers/Eldan_Mikulincer_Pieters_Community_Detection_and_percolation_of_information_in_a_geometric_setting.md",
     "papers/Chen_Kamath_Suh_Tse_Community_Recovery_in_graphs_with_locality.md",
     "papers/Avrachenkov_Bobu_Dreveton_Higher-Order_Spectral_Clustering_for_Geometric_Graphs.md",
