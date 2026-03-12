@@ -39,7 +39,7 @@ Expliquer l'utilité d'ajouter des positions aux noeuds du graphes : triangles, 
 On a une grande discussion sur les différentes géométries possibles, conditions sur la positions des points, la fonctions de connections qui est à présent distance-dependent. 
 
 ## Fixed positions
-+ [[Chen_Kamath_Suh_Tse_Community_Recovery_in_graphs_with_locality]]
++ X [[Chen_Kamath_Suh_Tse_Community_Recovery_in_graphs_with_locality]]
 
 ## Random positions
 Les points sont considérés aléatoires. Cela fait intervenir les (Poissons) Points Process, Palm Process.

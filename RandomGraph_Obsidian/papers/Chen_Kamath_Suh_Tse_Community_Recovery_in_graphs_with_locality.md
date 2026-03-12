@@ -1,3 +1,10 @@
+## Annotation
+Cet article aborde le problème de la détection de communautés dans des graphes où les mesures (bruitées) reliant les nœuds sont soumises à des contraintes de localité. Dans les modèles  classiques comme  SBM, on suppose que la probabilité d'obtenir une mesure entre deux nœuds est uniforme à travers tout le réseau mais dans la réalité, il est souvent beaucoup plus probable d'observer des relations entre des nœuds voisins qu'entre des nœuds éloignés.
+
+les auteurs proposent deux algorithmes (Spectral-Expanding et Spectral-Stitching) de complexité presque linéaire en le nombre de mesures, capables d’atteindre les limites informationnelles de récupération exacte sur une large classe de graphes locaux. ils prouvent  aussi que la présence de contraintes de localité n'engendre pas de barrière calculatoire supplémentaire.
+
+
+------
 Ce papier parle d'une thématique qui est différente de ce que l'on cherche, mais il est intéressant de le noter !
 L'idée est que l'on a une géométrie locale (voir l'image ci-dessous), chaque noeuds peut savoir s'il est de la même communauté ou non que ses voisins (avec bruit !). Donc on observe pas s'il y a une arête ou non mais on mesure les arêtes. Dis comme ça, on dirait que c'est un cas particulier à notre sujet mais à confirmer.
 La position des noeuds semble donc prédéfinies, fixes.
