@@ -18,14 +18,14 @@
 
 \title{Aperçu des avancées récentes sur la détection de
 communautés dans les graphes aléatoires géométriques}
-\author{SALA Raphaël, TOOD}
+\author{SALA Raphaël, \textcolor{red}{TODO}}
 \date{\today}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-TODO
+\textcolor{red}{TODO}
 \end{abstract}
 
 \tableofcontents
@@ -36,27 +36,32 @@ TODO
 \textcolor{orange}{Les parties, la structure, les idées, les références ne sont pas du tout fixes.
 Ce sont des propositions.}
 
-\paragraph{Quel est l'objet ? (informel)}
+\paragraph{Motivation théorique (RGG)}
+Def informelle : Detection de communautés + spatial graph
+Expliquer ce qu'est une communauté
+(ensembles de points grandement interconnectés et
+faiblement (dans une certaine mesure)connecté intra-communauté )
 
+Origine : \cite{penrose2003random} \cite{gilbert1961random}
+
+Détection de géométrie (et pas de communauté) (Detection problem que l'on abordera pas plus en détail) 
+
+
+
+\paragraph{Motivation géométrique (comparé à SBM)}
+Propriétés issues des réseaux : sparse \cite{Del_Genio_2011}, la propriété "small world" \cite{watts1998collective}
+
+Survey : \cite{abbe2018community}
 
 \paragraph{Motivation par application réelle}
 Très bref, parler des réseaux sociaux, embedding word (IA), biologie, wireless newtork,
-physique des matériaux (?)
+physique des matériaux (?), propagation d'information (?)
 \cite{sankararaman2020comhapdet}
 \cite{higham2008fitting}
 \cite{gomez2015case}
 
-\paragraph{Motivation théorique (RGG)}
-\cite{penrose2003random}
-\cite{gilbert1961random}
-
-
-Détection de géométrie (et pas de communauté) (Detectiion problem) 
 \cite{mao2026randomgeometricgraphssmooth}
 
-
-\paragraph{Motivation géométrique (comparé à SBM)}
-\cite{abbe2018community}
 
 \paragraph{Problématiques}
 Définition et interprétation, récupération à permutation près
@@ -99,8 +104,12 @@ Raffinement, propagation.
 \section{Ouvertures}
 \begin{itemize}
     \item Considérer des modèles hyperboliques, pas seulement labels \& distance-dependant,
-    car ceux-ci captent mieux les propriétés habituelles des réseaux. En particulier la 
-    structure mésoscopique \cite{guarino2025random}
+    car ceux-ci captent mieux les propriétés habituelles des réseaux 
+    \begin{itemize}
+        \item Clustering \cite{Krioukov_2016}
+        \item Degre inhomogène \cite{Baraba_si_1999}
+        \item "Communities with specific mixing patterns" (mesoscale) \cite{Toivonen_2006} 
+    \end{itemize} + definition d'un modele \cite{guarino2025random}
 \end{itemize}
 
 \clearpage

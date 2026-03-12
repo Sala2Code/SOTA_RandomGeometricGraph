@@ -2,7 +2,7 @@ Voici un plan proposé. L'idée est de structurer les idées en spécifiant l'or
 
 # Introduction
 Parler en très bref de la thématique (on verra ça en temps réel).
-Citer les applications de ce modèles :
+## Applications
 + Réseaux biologiques
 	+ [[Higham_Rasajski_Przulj_Fitting_a_geometric_graph_to_a_protein–protein_interaction_network]]
 	+ [[Sankararaman_Vikalo_Baccelli_ComHapDet_A_Spatial_Community_Detection_Algorithm_for_Haplotype_Assembly]]
@@ -10,7 +10,7 @@ Citer les applications de ce modèles :
 	+ Wireless networks and random geometric graphs. (Pdf introuvable)
 	+ [[Gomez_Vasseur_Vergne_Martins_Decreusefond_Chen_A_Case_Study_On_Regularity_In_Cellular_Network_Deployment]]
 
-# Intérêt historique
+## Intérêt historique
 Courte section.
 + Modèles historiques de graphes aléatoires
 + Propriétés intéressantes : transition de phase, locally tree like, résultat probabiliste (w.h.p.), sparse VS dense, $\dots$ 
@@ -18,7 +18,12 @@ Courte section.
 + [[Gilbert_Random_plane_networks]]
 + [[Penrose_Random_geometric_graphs]] (introduit pas d'objets historiques, mais les développe en profondeur).
 
-
+## Autres
++ [[Genio_Gross_Bassler_All_scale_free-networks_are_sparse]]
++ [[Watts_Strogatz_CollectiveDynamicsOfSmallWorldNetworks_ScientificCommunicationAsSequentialArt]]
++ [[Toivonen_Onnela_Saramaki_Hyvonen_Kaski_A_Model_for_Social_Networks]]
++ [[Barabasi_Albert_Emergence_of_Scaling_in_Random_Networks]]
++ [[Krioukov_Clustering_implies_geometry_in_networks]]
 # Stochastique Block Model
 Introduire ce qu'est la détection de communautés.
 + [[Fortunato_Community_detection_in_graphs]]
