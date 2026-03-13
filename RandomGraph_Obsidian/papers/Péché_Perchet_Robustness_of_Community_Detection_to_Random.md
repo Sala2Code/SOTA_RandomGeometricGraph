@@ -1,4 +1,19 @@
+## Annotations
 
+Dans cet article, les auteurs vérifient si les méthodes spectrales classiques de détection de caumunautés restent fiables si on les appliquent à un graphe qui n'est pas un SBM mais un SBM pollué par une componsanté géométrique( ils prenent un sbm classique et lui ajouent une perturbaion géométrique latente).
+
+pour détecter les caumunautés, on utilise couramment l'analysedu spectre de la matrice 'adjacence (dans un modèle sbm le deuxième vecteur propre permet généralement de séparer proprement les deux communautés). l4article fournit donc deux preuves:
+ - La corrélation élevée (le deuxième vecteur propre reste corrrélé au veritable vecteur des caumunautés)
+
+ - Ils montrent que les valeurs propres issues de la géométrie ne viennent pas "noyer" la valeur propre principale issue de la structure en communautés, à condition que la dimension de l'espace géométrique et la densité du graphe respectent certains seuils.
+
+
+
+
+
+
+
+-------------
 Les points du graphes sont soumis à du bruit, de la **perturbation**.
 Analyse à travers la théorie #spectrale 
 

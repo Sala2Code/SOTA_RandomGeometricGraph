@@ -66,7 +66,7 @@ Géométrie Euclidienne, Sphères, Groupe de Lie compact$\dots$; L'étude des co
 + X [[Gaudio_Guan_Niu_Wei_Exact_Label_Recovery_in_Euclidean_Random_Graphs]]
 + X [[Duchemin_DeCastro_Random_Geometric_Graph_Some_recent_devlopments]]
 + X [[Galhotra_Mazumdar_Pal_Saha_The_geometric_block_model]]
-+ [[Péché_Perchet_Robustness_of_Community_Detection_to_Random]]
++ X [[Péché_Perchet_Robustness_of_Community_Detection_to_Random]]
 + [[Avrachenkov_Bobu_Dreveton_Higher-Order_Spectral_Clustering_for_Geometric_Graphs]]
 + [[Avrachenkov_Kumar_Leskela_Community_Detection_on_Block_Models_with_Geometric_Kernels]]
 + [[Chien_Tulino_LLorca_Active_Learning_in_the_geometric_block_model]]
