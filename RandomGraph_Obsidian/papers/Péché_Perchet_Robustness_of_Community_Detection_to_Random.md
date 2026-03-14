@@ -1,14 +1,12 @@
 ## Annotations
 
-Dans cet article, les auteurs vérifient si les méthodes spectrales classiques de détection de caumunautés restent fiables si on les appliquent à un graphe qui n'est pas un SBM mais un SBM pollué par une componsanté géométrique( ils prenent un sbm classique et lui ajouent une perturbaion géométrique latente).
+Ils vérifient si les méthodes spectrales classiques de détection de communautés restent fiables sur un SBM perturbé par une componsante géométrique, un kernel gaussien. Les points vivent dans un espace latent, R^2, disposés de manière gaussienne.  
 
-pour détecter les caumunautés, on utilise couramment l'analysedu spectre de la matrice 'adjacence (dans un modèle sbm le deuxième vecteur propre permet généralement de séparer proprement les deux communautés). l4article fournit donc deux preuves:
- - La corrélation élevée (le deuxième vecteur propre reste corrrélé au veritable vecteur des caumunautés)
+Ce cadre ne se veut pas général mais viable à l'analyse. Ils traitent le régime dense. Aucun seuil limite informationelle n'est donnée.
 
- - Ils montrent que les valeurs propres issues de la géométrie ne viennent pas "noyer" la valeur propre principale issue de la structure en communautés, à condition que la dimension de l'espace géométrique et la densité du graphe respectent certains seuils.
+Des condtions suffisantes spectrales sont données pour la Récupération Partielle, asymptotiquement Exacte et également Soft, selon si l'on connait les probabilités des blocs.
 
-
-
+Pour cette dernière, ils utilisent la corrélation élevée (le deuxième vecteur propre de la matrice d'adjacence reste corrrélé au veritable vecteur des communautés.
 
 
 
