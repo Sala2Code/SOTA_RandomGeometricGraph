@@ -1,35 +1,32 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass[runningheads]{llncs}
 
 % Encodage / langue (pdfLaTeX)
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage[french]{babel}
 
-% Mise en page / maths / liens
-\usepackage[a4paper,margin=2.5cm]{geometry}
-\usepackage{amsmath,amssymb,amsthm}
+% Maths / figures / liens
+\usepackage{amsmath,amssymb}
 \usepackage{graphicx}
-\usepackage[authoryear]{natbib}
-\usepackage{hyperref}
 \usepackage{xcolor}
+\usepackage{hyperref}
 
-% Make \cite default to an author-year parenthetical cite
-\let\cite\citep
+\usepackage[authoryear]{natbib}
 
-\title{Aperçu des avancées récentes sur la détection de
-communautés dans les graphes aléatoires géométriques}
-\author{SALA Raphaël, \textcolor{red}{TODO}}
-\date{\today}
+
+\title{Recent advances in community detection in geometric graphs}
+\titlerunning{Community detection in geometric graphs} 
+\author{Raphaël Sala}
+\authorrunning{R. Sala}
+\institute{Affiliation à renseigner\\ \email{raphael.sala@utoulouse.fr}}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
 \textcolor{red}{TODO}
+\keywords{Community detection, geometric graphs, random geometric graphs, exact/partial recovery, spectral methods}
 \end{abstract}
-
-\tableofcontents
-\clearpage
 
 \section{Introduction}\
 \textcolor{orange}{les titres des paragraphes partiront, c'est pour aider à structurer le rapport}
@@ -42,34 +39,35 @@ Expliquer ce qu'est une communauté
 (ensembles de points grandement interconnectés et
 faiblement (dans une certaine mesure)connecté intra-communauté )
 
-Origine : \cite{penrose2003random} \cite{gilbert1961random}
+Origine : \citep{penrose2003random} \citep{gilbert1961random}
 
-Détection de géométrie (et pas de communauté) (Detection problem que l'on abordera pas plus en détail) 
+Détection de géométrie (et pas de communauté)
+(Detection problem que l'on abordera pas plus en détail \citep{mao2026randomgeometricgraphssmooth}
+) 
 
 
 
 \paragraph{Motivation géométrique (comparé à SBM)}
-Propriétés issues des réseaux : sparse \cite{Del_Genio_2011}, la propriété "small world" \cite{watts1998collective}
+Propriétés issues des réseaux : sparse \citep{Del_Genio_2011}, la propriété "small world" \citep{watts1998collective}
 
-Survey : \cite{abbe2018community}
+Survey : \citep{abbe2018community}
 
 \paragraph{Motivation par application réelle}
 Très bref, parler des réseaux sociaux, embedding word (IA), biologie, wireless newtork,
 physique des matériaux (?), propagation d'information (?)
-\cite{sankararaman2020comhapdet}
-\cite{higham2008fitting}
-\cite{gomez2015case}
+\citep{sankararaman2020comhapdet}
+\citep{higham2008fitting}
+\citep{gomez2015case}
 
-\cite{mao2026randomgeometricgraphssmooth}
 
 
 \paragraph{Problématiques}
 Définition et interprétation, récupération à permutation près
 \begin{itemize}
-    \item Distinguabilité \cite{sankararaman2018community}
+    \item Distinguabilité \citep{sankararaman2018community}
     \item Récupération partielle (weak recovery)
     \item Récupération presque exacte (almost exact recovery)
-    \item Récupération exacte (exact recovery) \cite{gaudio2024exact}
+    \item Récupération exacte (exact recovery) \citep{gaudio2024exact}
 \end{itemize}
 
 \section{\textcolor{red}{Modèle}}
@@ -88,14 +86,20 @@ Définition et interprétation, récupération à permutation près
 \textcolor{orange}{Faire le rapport dans l'ordre chronologique je pense}
 
 \begin{itemize}
-    \item \cite{galhotra2018geometric} (Geometric Block Model, GBM)
-    \item \cite{sankararaman2018community} \& \cite{abbe2021community} (Geometric SBM)
-    \item \cite{gaudio2024exact} (Geometric Hidden Community Model, GHCM)
-    \item \cite{gaudio2025sharpexactrecoverythreshold} (GHCM)
-    \item \cite{gaudio2026exact} (GHCM)
+    \item \citep{galhotra2018geometric} (Geometric Block Model, GBM)
+    \item \citep{sankararaman2018community} \& \citep{abbe2021community} (Geometric SBM)
+    \item \citep{gaudio2024exact} (Geometric Hidden Community Model, GHCM)
+    \item \citep{gaudio2025sharpexactrecoverythreshold} (GHCM)
+    \item \citep{gaudio2026exact} (GHCM)
 \end{itemize}
 
+
+\section{\textcolor{red}{Autre}}
+
+Méthode spectrale + Robustesse \citep{peche2020robustness}
+
 \section{\textcolor{red}{Algorithme}}
+\textcolor{red}{Ne pas se prendre la tête, cette partie va partir}
 \textcolor{orange}{A voir selon la taille du rapport.}
 Partionner l'espaces
 Différentes méthodes : compter les voisins en communs, les triangles, les cycles, etc... 
@@ -106,14 +110,13 @@ Raffinement, propagation.
     \item Considérer des modèles hyperboliques, pas seulement labels \& distance-dependant,
     car ceux-ci captent mieux les propriétés habituelles des réseaux 
     \begin{itemize}
-        \item Clustering \cite{Krioukov_2016}
-        \item Degre inhomogène \cite{Baraba_si_1999}
-        \item "Communities with specific mixing patterns" (mesoscale) \cite{Toivonen_2006} 
-    \end{itemize} + definition d'un modele \cite{guarino2025random}
+        \item Clustering \citep{Krioukov_2016}
+        \item Degre inhomogène \citep{Baraba_si_1999}
+        \item "Communities with specific mixing patterns" (mesoscale) \citep{Toivonen_2006} 
+    \end{itemize} + definition d'un modele \citep{guarino2025random}
 \end{itemize}
 
-\clearpage
-
+% Springer author-year bibliography style
 \bibliographystyle{plainnat}
 \bibliography{../pdf/refs_filtered}
 
