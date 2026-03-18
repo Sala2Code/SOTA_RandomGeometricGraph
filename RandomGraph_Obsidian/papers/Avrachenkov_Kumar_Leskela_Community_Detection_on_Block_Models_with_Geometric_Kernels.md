@@ -1,4 +1,12 @@
+# Annotation
 
+Détection de communautés dans un modèle géométrique à noyau (GKBM) en dimension 1 (pour une analyse simple), avec deux communautés et positions observées sur le tore.
+
+Le papier généralise le GSBM (Geometric Stochastic Block Model) à seuil dur vers un cadre soft-RGG. Les auteurs obtiennent un seuil théorique pour le régime logarithmique pour la Récupération Exacte. Ils généralisent une quantité d’information issue du GSBM et la lie à une condition géométrique de connectivité pour établir le seuil.
+
+Ils proposent un algorithme linéaire en le nombre d’arêtes.
+
+---
 
 Une [[Géométrie]] de tore 1D où l'on connait la position des noeuds. 
 > We believe that most of the techniques carry over to higher dimensions as well.
