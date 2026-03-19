@@ -31,5 +31,8 @@ Ils proposent un modèle pour justifier que la géométrie uniquement ne permet 
 
 Ils définissent un modèle basé sur le max entropie et expérience numérique. Pas de preuve, pas de conjecture, uniquement intuition.
 
+# Ref
++ [[Guarino_Torre_Mastrostefano_Random_Hyperbolic_Graphs_with_Arbitrary_Mesoscale_Structures]]
+
 ---
 #paper #hyperbolic 

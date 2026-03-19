@@ -14,7 +14,7 @@
 \usepackage[authoryear]{natbib}
 
 
-\title{Recent advances in community detection in geometric graphs}
+\title{Community detection in geometric graphs: Recent advances until 2026}
 \titlerunning{Community detection in geometric graphs} 
 \author{Raphaël Sala}
 \authorrunning{R. Sala}
@@ -69,6 +69,10 @@ Définition et interprétation, récupération à permutation près
     \item Récupération exacte (exact recovery) \citep{gaudio2024exact}
 \end{itemize}
 
+Détection de géométrie (et pas de communauté)
+(Detection problem que l'on abordera pas plus en détail \citep{mao2026randomgeometricgraphssmooth}
+) 
+
 \section{\textcolor{red}{Modèle}}
 
 \begin{itemize}
@@ -101,12 +105,9 @@ Définition et interprétation, récupération à permutation près
 Méthode spectrale sur Soft Geometric Block Model (SGBM) (Generalisation de Geomemetric SBM)
 \citep{avrachenkov2021higher}
 
-Méthode spectrale + Robustess (la perturbation est géométrique) \citep{peche2020robustness}
+Méthode spectrale + Robustesse (la perturbation est géométrique) \citep{peche2020robustness}
 
 
-Détection de géométrie (et pas de communauté)
-(Detection problem que l'on abordera pas plus en détail \citep{mao2026randomgeometricgraphssmooth}
-) 
 
 \section{\textcolor{red}{Algorithme}}
 \textcolor{red}{Ne pas se prendre la tête, cette partie va partir}
@@ -123,7 +124,17 @@ Raffinement, propagation.
         \item Clustering \citep{Krioukov_2016}
         \item Degre inhomogène \citep{Baraba_si_1999}
         \item "Communities with specific mixing patterns" (mesoscale) \citep{Toivonen_2006} 
-    \end{itemize} + definition d'un modele \citep{guarino2025random}
+    \end{itemize} 
+    Communautés apparaissent dans un espace hyperbolique latent \citep{bruno2019community}
+    Réponse 6ans plus tard : pas toujours ! + definition d'un modele pour "régler" ça
+    \citep{guarino2025random}
+% Bruno et al. : 
+% “les communautés peuvent émerger dans un embedding hyperbolique appris” ;
+% Guarino et al. :
+% “oui, mais la géométrie hyperbolique pure ne suffit pas toujours à expliquer la
+% structure mésoscopique ; il faut parfois ajouter une vraie composante de blocs.”
+
+
 \end{itemize}
 
 % Springer author-year bibliography style

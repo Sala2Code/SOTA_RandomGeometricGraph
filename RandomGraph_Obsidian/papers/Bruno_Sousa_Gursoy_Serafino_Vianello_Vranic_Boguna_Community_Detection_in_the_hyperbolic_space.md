@@ -1,3 +1,10 @@
+# Annotation
+
+Papier heuristique où ils détectent des communautés après un embedding dans un espace latent hyperbolique. Ils utilisent Mercator pour la projection et cherchent dans "l’organisation angulaire des nœuds".
+
+Ils testent deux heuristiques de clustering et les comparent à Louvain sur des graphes synthétiques et réels. Ils montrent que l’espace hyperbolique peut servir de représentation intermédiaire utile pour faire émerger des communautés. 
+
+---
 
 Papier empirique, pas de garantie théorique. Ils partent d'une matrice d'adjacence puis ils supposent que géométrie hyperbolique lient les points, la [[Géométrie]] est latente. A partir de cette supposition, ils obtiennent des points sur une sphère (ou autre, je suis allé vite sur la lecture de celui-ci) et ils trouvent les communautés en cherchant des clusters angulaires.
 > We first apply the Mercator package to real-world networks describing social interactions, then partition the embedded networks into communities using several heuristics

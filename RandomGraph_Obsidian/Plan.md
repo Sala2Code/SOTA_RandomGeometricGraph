@@ -70,7 +70,7 @@ Géométrie Euclidienne, Sphères, Groupe de Lie compact$\dots$; L'étude des co
 + X [[Avrachenkov_Bobu_Dreveton_Higher-Order_Spectral_Clustering_for_Geometric_Graphs]]
 + X [[Avrachenkov_Kumar_Leskela_Community_Detection_on_Block_Models_with_Geometric_Kernels]]
 + [[Chien_Tulino_LLorca_Active_Learning_in_the_geometric_block_model]]
-+ [[Bruno_Sousa_Gursoy_Serafino_Vianello_Vranic_Boguna_Community_Detection_in_the_hyperbolic_space]]
++ X [[Bruno_Sousa_Gursoy_Serafino_Vianello_Vranic_Boguna_Community_Detection_in_the_hyperbolic_space]]
 + X [[Guarino_Torre_Mastrostefano_Random_Hyperbolic_Graphs_with_Arbitrary_Mesoscale_Structures]]
 + X [[Gaudio_Jin_Exact_Recovery_in_the_Geometric_Hidden_Community_Model]]
 + X [[Gaudio_Guan_Sharp_Exact_Recovery_Threshold_for_two_community_euclidian_random_graphs]]
