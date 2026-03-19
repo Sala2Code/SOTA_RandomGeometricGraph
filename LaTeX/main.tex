@@ -35,7 +35,7 @@ Ce sont des propositions.}
 
 \paragraph{Motivation théorique (RGG)}
 Def informelle : Detection de communautés + spatial graph
-Expliquer ce qu'est une communauté
+Expliquer ce qu'est une communauté. Cas particulier du graph clustering
 (ensembles de points grandement interconnectés et
 faiblement (dans une certaine mesure)connecté intra-communauté )
 
@@ -43,11 +43,22 @@ Origine : \citep{penrose2003random} \citep{gilbert1961random}
 
 
 
-
 \paragraph{Motivation géométrique (comparé à SBM)}
-Propriétés issues des réseaux : sparse \citep{Del_Genio_2011}, la propriété "small world" \citep{watts1998collective}
+SBM généralisation de Erdos-Renyi \citep{erdHos1960evolution}
+Propriétés issues des réseaux : sparse \citep{Del_Genio_2011},
+la propriété "small world", transitivité (friend of a friend is a friend) \citep{watts1998collective}
 
 Survey : \citep{abbe2018community}
+
+\paragraph{Hypergraph}
+Out of scope + si la transitivite est intéressante alors pourquoi pas hyper-graph
+\citep{Ruggeri_2023} \citep{Kov_cs_2025}
+% Des extensions aux interactions d’ordre supérieur
+% ont été proposées via les hypergraphes, avec des modèles probabilistes
+% permettant la détection de communautés dans des structures de grande taille
+% (Ruggeri et al., 2023). Certaines approches récentes explorent également des
+% mécanismes plus structuraux ou géométriques, par exemple via des processus de
+% percolation sur hyperarêtes (Kovács et al., 2025)
 
 \paragraph{Motivation par application réelle}
 Detection de communautés en général \citep{fortunato2010community}.
@@ -83,6 +94,8 @@ Détection de géométrie (et pas de communauté)
     de comprendre tous ceux possible mais qu'à travers chaque classe voir les mécanismes. 
     Exemplse : passer du local au global puis raffinement, les quantités utilisées, ... 
 \end{itemize}
+\textcolor{orange}{Le but est de faire des notaitons claires, concises et générales pour pouvori expliquer tous les modèles ffff
+sans avoir à se perdre dans la notation.}
 
 \section{\textcolor{red}{Seuil théorique information}}
 
@@ -91,6 +104,7 @@ Détection de géométrie (et pas de communauté)
 \begin{itemize}
     \item \citep{galhotra2018geometric} (Geometric Block Model, GBM)
     \item \citep{sankararaman2018community} \& \citep{abbe2021community} (Geometric SBM)
+    \item \citep{chien2020active}
     \item \citep{avrachenkov2024community} (Geometric Kernel Block Model, GKBM)
     \item \citep{gaudio2024exactcommunityrecoverygeometric} (Geometric SBM)
     \item \citep{gaudio2024exact} (Geometric Hidden Community Model, GHCM)
@@ -98,23 +112,23 @@ Détection de géométrie (et pas de communauté)
     \item \citep{gaudio2026exact} (GHCM)
 \end{itemize}
 
+\subsection{\textcolor{red}{Geometric Block Model (GBM)}}
+\citep{galhotra2018geometric} \citep{chien2020active}
 
+\subsection{\textcolor{red}{Geometric Stochastic Block Model (GSBM) (quid du GKBM ?)}}
+\citep{sankararaman2018community} \citep{abbe2021community}
+\citep{avrachenkov2024community} 
+\subsection{\textcolor{red}{Geometric Hidden Community Model (GHCM)}}
 
+\citep{gaudio2024exactcommunityrecoverygeometric} \citep{gaudio2024exact}
+\citep{gaudio2025sharpexactrecoverythreshold}
+\citep{gaudio2026exact} 
 \section{\textcolor{red}{Autre}}
 
 Méthode spectrale sur Soft Geometric Block Model (SGBM) (Generalisation de Geomemetric SBM)
 \citep{avrachenkov2021higher}
 
 Méthode spectrale + Robustesse (la perturbation est géométrique) \citep{peche2020robustness}
-
-
-
-\section{\textcolor{red}{Algorithme}}
-\textcolor{red}{Ne pas se prendre la tête, cette partie va partir}
-\textcolor{orange}{A voir selon la taille du rapport.}
-Partionner l'espaces
-Différentes méthodes : compter les voisins en communs, les triangles, les cycles, etc... 
-Raffinement, propagation.
 
 \section{Ouvertures}
 \begin{itemize}

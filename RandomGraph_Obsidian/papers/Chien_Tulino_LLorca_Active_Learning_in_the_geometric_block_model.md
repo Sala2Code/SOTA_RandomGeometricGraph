@@ -1,3 +1,11 @@
+# Annotation
+
+L'espace est latent et avec 2 communautés.  Ils font de l'active learning dans le Geometric Block Model (GBM). Ils demandent à un oracle idéal des labels, choisis intelligemment, cela permet d'obtenir la Récupération Exacte dans des régimes où le motif-counting (algorithme optimal du GBM) échoue. 
+
+Ils procèdent en deux phases : nettoyage de triangles, limiter les connections inter-communautaires, et demande l'oracle par l'algorithme S^2. Ils montrent qu'un nombre sous-linéaire de requêtes suffit.
+
+---
+
 $2$ communautés avec du hard-RGG où les points vivent dans un tore de $[0,1]$. La position est latente. 
 
 Le papier propose une approche plus réaliste/applicative : active learning.
@@ -13,6 +21,9 @@ Leur idée/algorithme reprend principalement celle [[Galhotra_Mazumdar_Pal_Saha_
 Ils parlent en bref et citent pas mal de papiers à propos des [[Hypergraphes]]
 > Finally, we note that while out of the scope of this paper, the use of hypergraphs provides another way to model transitivity, and that recent works have studied the generalization of the SBM in the hypergraph setting.
 
+> Interestingly, as we illustrate in Section 2.1, such limit is much higher than in the SBM, showing that clustering in the GBMs fundamentally harder than in the SBM, and hence that in many practical settings, unsupervised methods will not be sufficient to accurately cluster real-world networks
+
+Stein–Chen (TODO à développer son utilisation)
 # Ref
 + [[Abbe_Community_Detection_and_Stochastic_Block_Models_Recent_Developments]]
 + [[Fortunato_Community_detection_in_graphs]]
