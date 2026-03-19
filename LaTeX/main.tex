@@ -50,7 +50,7 @@ la propriété "small world", transitivité (friend of a friend is a friend) \ci
 
 Survey : \citep{abbe2018community}
 
-\paragraph{Hypergraph}
+\paragraph{Poubelle (hypergraph \& attribut)}
 Out of scope + si la transitivite est intéressante alors pourquoi pas hyper-graph
 \citep{Ruggeri_2023} \citep{Kov_cs_2025}
 % Des extensions aux interactions d’ordre supérieur
@@ -59,6 +59,9 @@ Out of scope + si la transitivite est intéressante alors pourquoi pas hyper-gra
 % (Ruggeri et al., 2023). Certaines approches récentes explorent également des
 % mécanismes plus structuraux ou géométriques, par exemple via des processus de
 % percolation sur hyperarêtes (Kovács et al., 2025)
+graphe d'attribut \citep{liu2022testing}
+%au-delà des graphes géométriques, d’autres extensions de la détection de communautés exploitent une information supplémentaire, comme les attributs de nœuds.
+
 
 \paragraph{Motivation par application réelle}
 Detection de communautés en général \citep{fortunato2010community}.
@@ -87,6 +90,7 @@ Détection de géométrie (et pas de communauté)
 \section{\textcolor{red}{Modèle}}
 
 \begin{itemize}
+    \item pas de boucle, pas dirige, pas de communautés chevauchantes, etc...
     \item espace latent (ou pas)
     \item sphère, espace euclidien ?
     \item hard-RGG, soft-RGG

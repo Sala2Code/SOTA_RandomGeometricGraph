@@ -41,26 +41,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "papers/Krioukov_Clustering_implies_geometry_in_networks.md",
+                "file": "papers/Li_Sha_Huang_Zhang_Community_Detection_in_Attributed_Graphs_An Embedding_Approach.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Krioukov_Clustering_implies_geometry_in_networks"
-            }
-          },
-          {
-            "id": "1122ccc12b35ec61",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Plan.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Plan"
+              "title": "Li_Sha_Huang_Zhang_Community_Detection_in_Attributed_Graphs_An Embedding_Approach"
             }
           },
           {
@@ -106,7 +92,7 @@
             }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -268,10 +254,18 @@
       "bases:Créer une nouvelle base": false
     }
   },
-  "active": "1122ccc12b35ec61",
+  "active": "c07e2b0f8405b478",
   "lastOpenFiles": [
-    "papers/Galhotra_Mazumdar_Pal_Saha_Connectivity_in_Random_Annulus_Graphs_and_the_Geometric_Block_Model.md",
+    "papers/Liu_Mohanty_Schramm_Yang_Testing_Threshold_for_highdimensional_sparse_random_geometric_graphs.md",
     "Plan.md",
+    "papers/Bubeck_Eldan_The_KL_gap_for_Erdos_Renyi_random_graphs_with_given_expected_degrees.md",
+    "papers/Li_Sha_Huang_Zhang_Community_Detection_in_Attributed_Graphs_An Embedding_Approach.md",
+    "papers/Valdivia_DeCastro_Latent_Distance_Estimation_for_Random_Geometric.md",
+    "papers/Meliot_Asymptotic_representaiton_theory_and_the_spectrum_of_a_random_geometric_graph_on_a_compact_lie_group.md",
+    "papers/Eldan_Mikulincer_Pieters_Community_Detection_and_percolation_of_information_in_a_geometric_setting.md",
+    "papers/Galhotra_Mazumdar_Pal_Saha_Connectivity_in_Random_Annulus_Graphs_and_the_Geometric_Block_Model.md",
+    "papers/Krioukov_Clustering_implies_geometry_in_networks.md",
+    "papers/Bordenave_Lelarge_Massoulié_Non-backtracking_spectrum_of_random_graphs.md",
     "papers/Galhotra_Mazumdar_Pal_Saha_The_geometric_block_model.md",
     "papers/Gaudio_Guan_Niu_Wei_Exact_Label_Recovery_in_Euclidean_Random_Graphs.md",
     "papers/Gaudio_Guan_Sharp_Exact_Recovery_Threshold_for_two_community_euclidian_random_graphs.md",
@@ -282,21 +276,13 @@
     "papers/Genio_Gross_Bassler_All_scale_free-networks_are_sparse.md",
     "papers/Chien_Tulino_LLorca_Active_Learning_in_the_geometric_block_model.md",
     "papers/Kovacs_Benedek_Palla_Community_detection_in_hypergraphs_through.md",
-    "papers/Krioukov_Clustering_implies_geometry_in_networks.md",
     "papers/Watts_Strogatz_CollectiveDynamicsOfSmallWorldNetworks_ScientificCommunicationAsSequentialArt.md",
     "papers/Ruggeri_Contisciani_Battiston_DeBacco_Community_Detection_in_Large_Hypergraphs.md",
     "papers/Bruno_Sousa_Gursoy_Serafino_Vianello_Vranic_Boguna_Community_Detection_in_the_hyperbolic_space.md",
     "papers/He_Song_Jin_Feng_Zhang_Yiu_Community_centrinc_graph_convolutional_network for_unsupervised_community_detection.md",
     "papers/Mao_Wu_Xu_Random_geometric_graphs_with_smooth_kernels_sharp_detection_threshold_and_a_spectral_conjecture.pdf.md",
     "papers/Avrachenkov_Bobu_Dreveton_Higher-Order_Spectral_Clustering_for_Geometric_Graphs.md",
-    "papers/Avrachenkov_Kumar_Leskela_Community_Detection_on_Block_Models_with_Geometric_Kernels.md",
-    "papers/Péché_Perchet_Robustness_of_Community_Detection_to_Random.md",
-    "papers/Li_Sha_Huang_Zhang_Community_Detection_in_Attributed_Graphs_An Embedding_Approach.md",
-    "papers/Chen_Kamath_Suh_Tse_Community_Recovery_in_graphs_with_locality.md",
     "papers/Community-Centric Graph Convolutional Network for Unsupervised Community Detection",
-    "papers/Barabasi_Albert_Emergence_of_Scaling_in_Random_Networks.md",
-    "papers/Toivonen_Onnela_Saramaki_Hyvonen_Kaski_A_Model_for_Social_Networks.md",
-    "Learnability.md",
     "img/examples_graphs.png",
     "img/Set_model_random_graphs.png",
     "img/Set_model_random_graphs.png",
