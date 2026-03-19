@@ -74,4 +74,4 @@ Géométrie Euclidienne, Sphères, Groupe de Lie compact$\dots$; L'étude des co
 + X [[Guarino_Torre_Mastrostefano_Random_Hyperbolic_Graphs_with_Arbitrary_Mesoscale_Structures]]
 + X [[Gaudio_Jin_Exact_Recovery_in_the_Geometric_Hidden_Community_Model]]
 + X [[Gaudio_Guan_Sharp_Exact_Recovery_Threshold_for_two_community_euclidian_random_graphs]]
-+ [[Gaudio_Niu_Wei_Exact_Community_Recovery_in_the_geometric_SBM]] 
++ X [[Gaudio_Niu_Wei_Exact_Community_Recovery_in_the_geometric_SBM]] 
