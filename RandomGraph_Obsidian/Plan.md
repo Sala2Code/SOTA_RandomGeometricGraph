@@ -57,7 +57,7 @@ Géométrie Euclidienne, Sphères, Groupe de Lie compact$\dots$; L'étude des co
 
 ### Sans communautés 
 + X[[Valdivia_DeCastro_Latent_Distance_Estimation_for_Random_Geometric]]
-+ [[Meliot_Asymptotic_representaiton_theory_and_the_spectrum_of_a_random_geometric_graph_on_a_compact_lie_group]]
++ X[[Meliot_Asymptotic_representaiton_theory_and_the_spectrum_of_a_random_geometric_graph_on_a_compact_lie_group]]
 + [[Liu_Mohanty_Schramm_Yang_Testing_Threshold_for_highdimensional_sparse_random_geometric_graphs]]
 + [[Eldan_Mikulincer_Pieters_Community_Detection_and_percolation_of_information_in_a_geometric_setting]]
 + [[Bubeck_Eldan_The_KL_gap_for_Erdos_Renyi_random_graphs_with_given_expected_degrees]]
