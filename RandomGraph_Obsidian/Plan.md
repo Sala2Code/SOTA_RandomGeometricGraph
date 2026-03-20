@@ -56,7 +56,7 @@ Les points sont considérés aléatoires. Cela fait intervenir les (Poissons) Po
 Géométrie Euclidienne, Sphères, Groupe de Lie compact$\dots$; L'étude des communautés se fait directement mais c'est un "nouveau" sujet de recherche, donc certains étudie uniquement ce qu'on appelle *null model*, sans communautés ou encore latent géométrie, c'est-à-dire trouver la géométrie (espace + métrique) sous jacente à un graphe afin de comprendre sa structure. C'est aux futurs chercheurs d'ajouter des communautés à l'aide d'outil déjà créés. Détection de géométrie.
 
 ### Sans communautés 
-+ [[Valdivia_DeCastro_Latent_Distance_Estimation_for_Random_Geometric]]
++ X[[Valdivia_DeCastro_Latent_Distance_Estimation_for_Random_Geometric]]
 + [[Meliot_Asymptotic_representaiton_theory_and_the_spectrum_of_a_random_geometric_graph_on_a_compact_lie_group]]
 + [[Liu_Mohanty_Schramm_Yang_Testing_Threshold_for_highdimensional_sparse_random_geometric_graphs]]
 + [[Eldan_Mikulincer_Pieters_Community_Detection_and_percolation_of_information_in_a_geometric_setting]]
