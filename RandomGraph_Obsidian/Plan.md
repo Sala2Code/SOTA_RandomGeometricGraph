@@ -26,6 +26,7 @@ Courte section.
 + [[Krioukov_Clustering_implies_geometry_in_networks]]
 + [[Ruggeri_Contisciani_Battiston_DeBacco_Community_Detection_in_Large_Hypergraphs]]
 + [[Kovacs_Benedek_Palla_Community_detection_in_hypergraphs_through]]
++ [[DeCastro_Lacour_PhamNgoc_Adaptive_Estimation_of_Nonparametric_geometric_graphs]]
 # Stochastique Block Model
 Introduire ce qu'est la détection de communautés.
 + [[Fortunato_Community_detection_in_graphs]]
@@ -77,4 +78,5 @@ Géométrie Euclidienne, Sphères, Groupe de Lie compact$\dots$; L'étude des co
 + X [[Gaudio_Jin_Exact_Recovery_in_the_Geometric_Hidden_Community_Model]]
 + X [[Gaudio_Guan_Sharp_Exact_Recovery_Threshold_for_two_community_euclidian_random_graphs]]
 + X [[Gaudio_Niu_Wei_Exact_Community_Recovery_in_the_geometric_SBM]] 
-+ [[Galhotra_Mazumdar_Pal_Saha_Connectivity_in_Random_Annulus_Graphs_and_the_Geometric_Block_Model]]
++ X [[Galhotra_Mazumdar_Pal_Saha_Connectivity_in_Random_Annulus_Graphs_and_the_Geometric_Block_Model]]
++ X [[Galhotra_Mazumdar_Pal_Saha_Community_Recovery_in_the_Geometric_Block_Model]]
