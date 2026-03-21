@@ -1,4 +1,5 @@
-## Annotation
+# Annotation
+
 Cet article aborde le problème de la détection de communautés dans des graphes où les mesures (bruitées) reliant les nœuds sont soumises à des contraintes de localité. Dans les modèles  classiques comme  SBM, on suppose que la probabilité d'obtenir une mesure entre deux nœuds est uniforme à travers tout le réseau mais dans la réalité, il est souvent beaucoup plus probable d'observer des relations entre des nœuds voisins qu'entre des nœuds éloignés.
 
 les auteurs proposent deux algorithmes (Spectral-Expanding et Spectral-Stitching) de complexité presque linéaire en le nombre de mesures, capables d’atteindre les limites informationnelles de récupération exacte sur une large classe de graphes locaux. ils prouvent  aussi que la présence de contraintes de localité n'engendre pas de barrière calculatoire supplémentaire.

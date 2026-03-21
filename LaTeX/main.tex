@@ -84,16 +84,24 @@ Définition et interprétation, récupération à permutation près
 \end{itemize}
 
 Détection de géométrie (et pas de communauté)
-(Detection problem que l'on abordera pas plus en détail \citep{mao2026randomgeometricgraphssmooth}
-) 
+Detection problem que l'on abordera pas plus en détail
+\citep{bubeck2016testing}
+\citep{liu2022testing}
+\citep{mao2026randomgeometricgraphssmooth}
+
+Reconstruction de la géométriqe chose qu'on ne fera pas non plus
+\citep{valdivia2019latent}
+\citep{eldan2022community}
+
 
 \section{\textcolor{red}{Modèle}}
 
 \begin{itemize}
     \item pas de boucle, pas dirige, pas de communautés chevauchantes, etc...
-    \item espace latent (ou pas)
+    \item espace latent (ou pas) \citep{decastro2020adaptiveestimationnonparametricgeometric}
     \item sphère, espace euclidien ?
-    \item hard-RGG, soft-RGG
+    \item régime : dense, logarithmique, sparse
+    \item hard-RGG, soft-RGG \citep{duchemin2023random}
     \item motivation : bien que les modèles ne soient pas les mêmes, ils n'ont pas pour but
     de comprendre tous ceux possible mais qu'à travers chaque classe voir les mécanismes. 
     Exemplse : passer du local au global puis raffinement, les quantités utilisées, ... 
@@ -109,6 +117,8 @@ sans avoir à se perdre dans la notation.}
     \item \citep{galhotra2018geometric} (Geometric Block Model, GBM)
     \item \citep{sankararaman2018community} \& \citep{abbe2021community} (Geometric SBM)
     \item \citep{chien2020active}
+    \item \citep{galhotra2020connectivityrandomannulusgraphs} (GBM)
+    \item \citep{galhotra2023communityrecoverygeometricblock} (GBM)
     \item \citep{avrachenkov2024community} (Geometric Kernel Block Model, GKBM)
     \item \citep{gaudio2024exactcommunityrecoverygeometric} (Geometric SBM)
     \item \citep{gaudio2024exact} (Geometric Hidden Community Model, GHCM)
@@ -117,7 +127,12 @@ sans avoir à se perdre dans la notation.}
 \end{itemize}
 
 \subsection{\textcolor{red}{Geometric Block Model (GBM)}}
-\citep{galhotra2018geometric} \citep{chien2020active}
+\citep{galhotra2018geometric} 
+\citep{galhotra2020connectivityrandomannulusgraphs}
+\citep{galhotra2023communityrecoverygeometricblock}
+
+\citep{chien2020active}
+
 
 \subsection{\textcolor{red}{Geometric Stochastic Block Model (GSBM) (quid du GKBM ?)}}
 \citep{sankararaman2018community} \citep{abbe2021community}
@@ -127,12 +142,20 @@ sans avoir à se perdre dans la notation.}
 \citep{gaudio2024exactcommunityrecoverygeometric} \citep{gaudio2024exact}
 \citep{gaudio2025sharpexactrecoverythreshold}
 \citep{gaudio2026exact} 
-\section{\textcolor{red}{Autre}}
+
+\section{\textcolor{red}{Spectral}}
+(A confirmer) \citep{chen2016community}
+
+(papier SBM mais théorie intéressante) \citep{bordenave2015non}
+
+Cadre spectral intéressant pour certains espaces \citep{meliot2019asymptotic}
+
+Méthode spectrale + Robustesse (la perturbation est géométrique) \citep{peche2020robustness}
 
 Méthode spectrale sur Soft Geometric Block Model (SGBM) (Generalisation de Geomemetric SBM)
 \citep{avrachenkov2021higher}
 
-Méthode spectrale + Robustesse (la perturbation est géométrique) \citep{peche2020robustness}
+
 
 \section{Ouvertures}
 \begin{itemize}
@@ -151,6 +174,13 @@ Méthode spectrale + Robustesse (la perturbation est géométrique) \citep{peche
 % Guarino et al. :
 % “oui, mais la géométrie hyperbolique pure ne suffit pas toujours à expliquer la
 % structure mésoscopique ; il faut parfois ajouter une vraie composante de blocs.”
+
+\citep{Li_Sha_Huang_Zhang_2018}
+% au-delà des graphes géométriques, d’autres travaux incorporent
+% des informations latentes non topologiques, par exemple
+% des attributs de nœuds, souvent via des approches
+% d'embedding ou de factorisation non négative
+
 
 
 \end{itemize}

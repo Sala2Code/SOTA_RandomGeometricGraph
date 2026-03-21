@@ -50,7 +50,6 @@ On a une grande discussion sur les différentes géométries possibles, conditio
 + X [[Chen_Kamath_Suh_Tse_Community_Recovery_in_graphs_with_locality]]
 
 # IA (Jan)
-+ X [[He_Song_Jin_Feng_Zhang_Yiu_Community_centrinc_graph_convolutional_network for_unsupervised_community_detection]]
 + X [[Li_Sha_Huang_Zhang_Community_Detection_in_Attributed_Graphs_An Embedding_Approach]]
 ## Random positions
 Les points sont considérés aléatoires. Cela fait intervenir les (Poissons) Points Process, Palm Process.
@@ -60,7 +59,7 @@ Géométrie Euclidienne, Sphères, Groupe de Lie compact$\dots$; L'étude des co
 + X[[Valdivia_DeCastro_Latent_Distance_Estimation_for_Random_Geometric]]
 + X[[Meliot_Asymptotic_representaiton_theory_and_the_spectrum_of_a_random_geometric_graph_on_a_compact_lie_group]]
 + X[[Liu_Mohanty_Schramm_Yang_Testing_Threshold_for_highdimensional_sparse_random_geometric_graphs]]
-+ [[Eldan_Mikulincer_Pieters_Community_Detection_and_percolation_of_information_in_a_geometric_setting]]
++ X [[Eldan_Mikulincer_Pieters_Community_Detection_and_percolation_of_information_in_a_geometric_setting]]
 + [[Bubeck_Eldan_The_KL_gap_for_Erdos_Renyi_random_graphs_with_given_expected_degrees]]
 + X [[Mao_Wu_Xu_Random_geometric_graphs_with_smooth_kernels_sharp_detection_threshold_and_a_spectral_conjecture.pdf]]
 
