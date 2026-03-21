@@ -1,19 +1,8 @@
 ## Annotation
 
+Dans le papier, on prend un groupe de Lie compact ou plus largement,  certains espaces symétriques compacts (comme SU(n),USp(n) ou Spin(n)), on y tire 𝑁 points aléatoires selon la mesure de Haar, puis on connecte deux points si leur distance géodésique est inférieure à un seuil 𝐿 et on cherche à comprendre ce  que devient le spectre de ce graphe quand $N\rightarrow \infty$ et on montre que la réponse dépend fortement du régime dans lequel on fait tendre L.
 
-
-Dans le papier, on prend un groupe de Lie compact ou plus largement,  certains espaces symétriques compacts (comme SU(n),USp(n) ou Spin(n)), on y tire 𝑁 points aléatoires selon la mesure de Haar, puis on connecte deux points si leur distance géodésique est inférieure à un seuil 𝐿 et on cherche à comprendre ce  que devient le spectre de ce graphe quandd $N\rightarrow \infty$ et on montre que la réponse dépend fortement du régime dans lequel on fait tendre L.
-
-
-
-
-
-
-
-
-
-
-
+Il cherche à comprendre, par la théorie des représentations, la structure spectrale des RGG sur des groupes de Lie compacts à la fois dans un régime dense et dans un régime sparse.
 
 ------------------------------------------------------------------
 
