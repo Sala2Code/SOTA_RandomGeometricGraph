@@ -79,3 +79,4 @@ Géométrie Euclidienne, Sphères, Groupe de Lie compact$\dots$; L'étude des co
 + X [[Gaudio_Niu_Wei_Exact_Community_Recovery_in_the_geometric_SBM]] 
 + X [[Galhotra_Mazumdar_Pal_Saha_Connectivity_in_Random_Annulus_Graphs_and_the_Geometric_Block_Model]]
 + X [[Galhotra_Mazumdar_Pal_Saha_Community_Recovery_in_the_Geometric_Block_Model]]
++ [[Allem_Avrachenkov_Hoppen_Manjunath_Siviero_Multi-community_spectral_clustering_for_geometric_graphs]]
