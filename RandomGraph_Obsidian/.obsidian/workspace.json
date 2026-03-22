@@ -34,9 +34,37 @@
               "icon": "lucide-file",
               "title": "Plan"
             }
+          },
+          {
+            "id": "44ce5617da3b4101",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "papers/Valdivia_DeCastro_Latent_Distance_Estimation_for_Random_Geometric.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Valdivia_DeCastro_Latent_Distance_Estimation_for_Random_Geometric"
+            }
+          },
+          {
+            "id": "005dc0bf2978530e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Plan.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Plan"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -198,10 +226,18 @@
       "bases:Créer une nouvelle base": false
     }
   },
-  "active": "20332929eba1aec6",
+  "active": "005dc0bf2978530e",
   "lastOpenFiles": [
-    "Allem_Avrachenkov_Hoppen_Manjunath_Siviero_Multi-community_spectral_clustering_for_geometric_graphs.md",
+    "papers/Gomez_Vasseur_Vergne_Martins_Decreusefond_Chen_A_Case_Study_On_Regularity_In_Cellular_Network_Deployment.md",
+    "Holland_Laskey_Leinhardt_Stochastic_blockmodels_first_steps.md",
+    "papers/Valdivia_DeCastro_Latent_Distance_Estimation_for_Random_Geometric.md",
+    "papers/Bubeck_Ding_Eldan_Racz_Testing_for_high-dimensional_geometry_in_random_graphs.md",
+    "papers/Bubeck_Eldan_The_KL_gap_for_Erdos_Renyi_random_graphs_with_given_expected_degrees.md",
+    "papers/Liu_Mohanty_Schramm_Yang_Testing_Threshold_for_highdimensional_sparse_random_geometric_graphs.md",
+    "papers/Li_Sha_Huang_Zhang_Community_Detection_in_Attributed_Graphs_An Embedding_Approach.md",
+    "papers/Higham_Rasajski_Przulj_Fitting_a_geometric_graph_to_a_protein–protein_interaction_network.md",
     "Plan.md",
+    "Allem_Avrachenkov_Hoppen_Manjunath_Siviero_Multi-community_spectral_clustering_for_geometric_graphs.md",
     "papers/Galhotra_Mazumdar_Pal_Saha_Community_Recovery_in_the_Geometric_Block_Model.md",
     "papers/Galhotra_Mazumdar_Pal_Saha_The_geometric_block_model.md",
     "papers/Galhotra_Mazumdar_Pal_Saha_Connectivity_in_Random_Annulus_Graphs_and_the_Geometric_Block_Model.md",
@@ -212,20 +248,12 @@
     "papers/Gaudio_Jin_Exact_Recovery_in_the_Geometric_Hidden_Community_Model.md",
     "papers/Gaudio_Guan_Sharp_Exact_Recovery_Threshold_for_two_community_euclidian_random_graphs.md",
     "papers/He_Song_Jin_Feng_Zhang_Yiu_Community_centrinc_graph_convolutional_network for_unsupervised_community_detection.md",
-    "papers/Li_Sha_Huang_Zhang_Community_Detection_in_Attributed_Graphs_An Embedding_Approach.md",
-    "papers/Valdivia_DeCastro_Latent_Distance_Estimation_for_Random_Geometric.md",
     "papers/Sankararaman_Vikalo_Baccelli_ComHapDet_A_Spatial_Community_Detection_Algorithm_for_Haplotype_Assembly.md",
     "papers/Penrose_Random_geometric_graphs.md",
     "papers/Péché_Perchet_Robustness_of_Community_Detection_to_Random.md",
     "papers/Meliot_Asymptotic_representaiton_theory_and_the_spectrum_of_a_random_geometric_graph_on_a_compact_lie_group.md",
     "papers/Mao_Wu_Xu_Random_geometric_graphs_with_smooth_kernels_sharp_detection_threshold_and_a_spectral_conjecture.pdf.md",
     "papers/Guarino_Torre_Mastrostefano_Random_Hyperbolic_Graphs_with_Arbitrary_Mesoscale_Structures.md",
-    "papers/Gomez_Vasseur_Vergne_Martins_Decreusefond_Chen_A_Case_Study_On_Regularity_In_Cellular_Network_Deployment.md",
-    "papers/Fortunato_Community_detection_in_graphs.md",
-    "papers/Erdos_Renyi_On_the_evolution_of_random_graphs.md",
-    "papers/Eldan_Mikulincer_Pieters_Community_Detection_and_percolation_of_information_in_a_geometric_setting.md",
-    "papers/Duchemin_DeCastro_Random_Geometric_Graph_Some_recent_devlopments.md",
-    "papers/DeCastro_Lacour_PhamNgoc_Adaptive_Estimation_of_Nonparametric_geometric_graphs.md",
     "papers/Community-Centric Graph Convolutional Network for Unsupervised Community Detection",
     "img/examples_graphs.png",
     "img/Set_model_random_graphs.png",

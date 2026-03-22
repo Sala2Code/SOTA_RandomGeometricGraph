@@ -29,52 +29,40 @@
 \end{abstract}
 
 \section{Introduction}\
-\textcolor{orange}{les titres des paragraphes partiront, c'est pour aider à structurer le rapport}
-\textcolor{orange}{Les parties, la structure, les idées, les références ne sont pas du tout fixes.
-Ce sont des propositions.}
 
-\paragraph{Motivation théorique (RGG)}
-Def informelle : Detection de communautés + spatial graph
-Expliquer ce qu'est une communauté. Cas particulier du graph clustering
-(ensembles de points grandement interconnectés et
-faiblement (dans une certaine mesure)connecté intra-communauté )
+\paragraph{General idea}
 
-Origine : \citep{penrose2003random} \citep{gilbert1961random}
+Community detection consists to find clusters in a graph where nodes share more connections with nodes of the same cluster
+than with nodes of other clusters. This large topic is detailled in general by \citep{fortunato2010community}. In this 
+report we focus on random geometric graphs (RGG). The specificity to add spatial information allows us to consider
+local information based on real or abstract proximity.  % The probability of connection between two nodes depends on their distance.
+In social networks, two individuals are more susceptible to be friends if they are geographically near
+or if they have similar terms of interests, age, $\dots$
+For more concrete examples of RGG can be find for wireless networks from \citep{gomez2015case}, biology \citep{higham2008fitting}
+and in particular an application of detection of communities \citep{sankararaman2020comhapdet}
+\textcolor{red}{ word embedding, physic, ...}.
 
+\paragraph{Why geometric} The main model for community detection is the Stochastic Block Model (SBM)
+\citep{holland1983stochastic}. Each node carries a hidden community label
+and edge probabilities depend on whether two nodes belong to the same community or not.
+This model comes from the Erdos-Renyi graph, where each node connect with the same probability
+to others nodes \citep{erdHos1960evolution}. This model is nowadays well understood,
+see \citep{abbe2018community}. Nonetheless, it suffers to some drawbacks because its 
+unrealistic to think that every nodes can connected to others with the same probability rate.
+At the same time than Erdos-Renyi, the RGG was introduced by \citep{gilbert1961random}.
+Add geometric information allows us to mimic some emergent behaviour from real network,
+like sparsity \citep{Del_Genio_2011}, the "small world" property \citep{watts1998collective}
+or even transitivity "friend of a friend is a friend" \textcolor{red}{Ref ?}.
 
+\paragraph{Context of the problem}
+RGG and its properties are well studied, see \citep{penrose2003random}. 
+When we add community structure, we are in a different setting.
+We observe the graph, and sometimes also the node locations,
+while the community labels remain hidden. 
+Naturally, we want to know if we can recover the latent labels, what is the best accuracy we can achieve,
+and which algorithms can reach it.
 
-\paragraph{Motivation géométrique (comparé à SBM)}
-SBM généralisation de Erdos-Renyi \citep{erdHos1960evolution}
-Propriétés issues des réseaux : sparse \citep{Del_Genio_2011},
-la propriété "small world", transitivité (friend of a friend is a friend) \citep{watts1998collective}
-
-Survey : \citep{abbe2018community}
-
-\paragraph{Poubelle (hypergraph \& attribut)}
-Out of scope + si la transitivite est intéressante alors pourquoi pas hyper-graph
-\citep{Ruggeri_2023} \citep{Kov_cs_2025}
-% Des extensions aux interactions d’ordre supérieur
-% ont été proposées via les hypergraphes, avec des modèles probabilistes
-% permettant la détection de communautés dans des structures de grande taille
-% (Ruggeri et al., 2023). Certaines approches récentes explorent également des
-% mécanismes plus structuraux ou géométriques, par exemple via des processus de
-% percolation sur hyperarêtes (Kovács et al., 2025)
-graphe d'attribut \citep{liu2022testing}
-%au-delà des graphes géométriques, d’autres extensions de la détection de communautés exploitent une information supplémentaire, comme les attributs de nœuds.
-
-
-\paragraph{Motivation par application réelle}
-Detection de communautés en général \citep{fortunato2010community}.
-
-Très bref, parler des réseaux sociaux, embedding word (IA), biologie, wireless newtork,
-physique des matériaux (?), propagation d'information (?)
-\citep{sankararaman2020comhapdet}
-\citep{higham2008fitting}
-\citep{gomez2015case}
-
-
-
-\paragraph{Problématiques}
+\textcolor{red}{TODO
 Définition et interprétation, récupération à permutation près
 \begin{itemize}
     \item Distinguabilité \citep{sankararaman2018community}
@@ -82,16 +70,40 @@ Définition et interprétation, récupération à permutation près
     \item Récupération presque exacte (almost exact recovery)
     \item Récupération exacte (exact recovery) \citep{gaudio2024exact}
 \end{itemize}
+}
+Thus, in this report, community detection is not only understood as
+producing a convenient partition of the observed graph, but rather as
+recovering latent community labels under a probabilistic geometric model,
+up to permutation.
 
-Détection de géométrie (et pas de communauté)
-Detection problem que l'on abordera pas plus en détail
+
+\paragraph{What we don't do}
+Precedently we enhance properties RGG share with real networks due
+to the geometric information. However,
+we can get for instance transitivity, and surely more, thanks to attribute based models
+\citep{Li_Sha_Huang_Zhang_2018} or 
+hyper-graph \citep{Ruggeri_2023} and even with its geometric variant
+\citep{Kov_cs_2025}.
+We will not consider these models to focus on the geometric aspect.
+Moreover, we presented problems we are interested about. From them, one
+is \textit{Distinguability} to not confond with the
+\textit{Detection Problem} we don't treat.
+This last one ask generally 
+condition on parameters, defining the RGG, to be distinguable to 
+an Erdos-Renyi graph. Hence, this hasn't link to community.
+Refer to 
 \citep{bubeck2016testing}
 \citep{liu2022testing}
-\citep{mao2026randomgeometricgraphssmooth}
+\citep{mao2026randomgeometricgraphssmooth}.
+Finally, at the beginning of the literature,
+some works were interested to recover the latent position of nodes in the geometric space,
+and consider it as a Community detection problem, \citep{valdivia2019latent}
+\citep{eldan2022community}.
+This is a different problem than the one we are interested in,
+and it is more difficult because we want to recover the position (contnue label)
+of each node rather than community (discrete label).
 
-Reconstruction de la géométriqe chose qu'on ne fera pas non plus
-\citep{valdivia2019latent}
-\citep{eldan2022community}
+
 
 
 \section{\textcolor{red}{Modèle}}

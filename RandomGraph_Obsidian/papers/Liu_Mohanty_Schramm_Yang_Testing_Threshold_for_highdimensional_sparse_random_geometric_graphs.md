@@ -1,4 +1,4 @@
-## Annotation
+	 ## Annotation
 
 les auteurs étudient le problème de distinguer  un graphe géométrique aléatoire de haute dimension d’un graphe d’Erdős–Rényi ayant la même densité d’arêtes. Dans le modèle géométrique, les sommets correspondent à des points aléatoires sur la sphère $\mathbb{S}^{d-1}$, et deux sommets sont reliés si leur produit scalaire dépasse un seuil choisi de façon à ce que la probabilité marginale d’arête soit $p$, comme dans $G(n,p)$.
 
@@ -22,7 +22,7 @@ Le résultat principal du papier est qu’en régime sparse, il suffit que $𝑑
 
 
 
-Ce papier est théorique. Il ne considère pas de communautés. Il se pose la problématique [[Distinguishability]].  La géométrie considérée est sur la sphère. 
+Ce papier est théorique. Il ne considère pas de communautés. La géométrie considérée est sur la sphère. 
 
 Je rappelle la motivation de cette problématique, malgré l'absence de communautés : Est-ce qu’on peut seulement détecter qu’il y a une géométrie latente ou est-ce que ça ressemble statistiquement à un graphe de Erdos-Renyi (ER) ? 
 
