@@ -30,11 +30,9 @@
 
 \section{Introduction}\
 
-\paragraph{General idea}
-
-Community detection consists to find clusters in a graph where nodes share more connections with nodes of the same cluster
-than with nodes of other clusters. This broad topic is detailled in \citep{fortunato2010community}. In this 
-report we focus on random geometric graphs (RGG). The specificity of adding spatial information allows us to consider
+Community detection consists in finding clusters in a graph where nodes share more connections with nodes of the same cluster
+than with nodes of other clusters. This broad topic is detailed in \citep{fortunato2010community}. In this 
+report, we focus on random geometric graphs (RGG). Adding spatial information allows us to consider
 local information based on real or abstract proximity.  % The probability of connection between two nodes depends on their distance.
 In social networks, two individuals are more likely to be friends if they are geographically close,
 or if they share similar interests, age, $\dots$
@@ -42,39 +40,34 @@ More concrete examples of RGG can be found in wireless networks \citep{gomez2015
 and also in community detection problems \citep{sankararaman2020comhapdet}
 \textcolor{red}{ word embedding, physic, ...}.
 
-\paragraph{Why geometric} The main reference model for community detection is the Stochastic Block Model (SBM)
+The main reference model for community detection is the Stochastic Block Model (SBM)
 \citep{holland1983stochastic}. Each node carries a hidden community label and edge probabilities depend on whether two nodes belong to the same community or not.
 This model comes from the Erd\H{o}s-R\'enyi graph, where each node connects to others with the same probability \citep{erdHos1960evolution}. This model is now well understood,
-see \citep{abbe2018community}. Nonetheless, it has some drawbacks, since it is unrealistic to think that every nodes can connect to every other one with the same probability scale.
-At roughly the same period as Erd\H{o}s-R\'enyi, the RGG was introduced by \citep{gilbert1961random}.
+see \citep{abbe2018community}. Nonetheless, it has some drawbacks, since it is unrealistic to think that every node can connect to every other one with the same probability scale.
+Around the same time as Erd\H{o}s-R\'enyi, the RGG was introduced by \citep{gilbert1961random}.
 Add geometric information allows us to mimic some emergent behaviours of real networks,
 such as sparsity \citep{Del_Genio_2011}, the "small-world" property \citep{watts1998collective}
 or transitivity, namely the idea that a friend of a friend is more likely to be a friend.
 
-\paragraph{Context of the problem}
+
 RGG and its properties are well studied, see \citep{penrose2003random}. 
 When we add community structure, we are in a different setting.
 We observe the graph, and sometimes also the node locations,
 while the community labels remain hidden. 
-Naturally, we want to know if we can recover the latent labels, what is the best accuracy we can achieve,
-and which algorithms can reach it.
-
-\textcolor{red}{TODO
-Définition et interprétation, récupération à permutation près
+The natural question is then whether the latent structure can be detected, and if so, how accurately the labels can be recovered.
+We are interested in several levels of inference.
+First, \textit{distinguishability} asks whether the observed graph comes from a geometric model with communities or from a null model without community structure. This is a testing problem. It aims to distinguish the presence of a community structure, not to recover the labels. Then, if recovery is possible, one can ask how accurate it can be.
 \begin{itemize}
-    \item Distinguabilité \citep{sankararaman2018community}
-    \item Récupération partielle (weak recovery)
-    \item Récupération presque exacte (almost exact recovery)
-    \item Récupération exacte (exact recovery) \citep{gaudio2024exact}
+    \item \textit{Weak/partial recovery}: detecting communities better than random guessing
+    \item \textit{Almost exact recovery}: the fraction of misclassified vertices vanishes as the number of nodes grows.
+    \item \textit{Exact recovery}: all community labels are correctly recovered, up to permutation.
 \end{itemize}
-}
 Thus, in this report, community detection is not only understood as
 producing a convenient partition of the observed graph, but rather as
-recovering latent community labels under a probabilistic geometric model,
-up to permutation.
+recovering latent community labels under a probabilistic geometric model.
+% up to permutation.
 
 
-\paragraph{What we don't do}
 Previously, we emphasized properties that RGG share with real networks due
 to the geometric information. However,
 one can also obtain transitivity, and surely more, with attribute-based models
@@ -82,15 +75,15 @@ one can also obtain transitivity, and surely more, with attribute-based models
 hypergraphs \citep{Ruggeri_2023} and even geometric hypergraphs
 \citep{Kov_cs_2025}.
 We will not consider these models here, in order to keep the focus on the geometric aspect.
-Moreover, among problems mentioned above, one is \textit{Distinguability} which should not be confused with the \textit{Detection Problem} that we do not study here.
+Moreover, among the problems mentioned above, one is \textit{Distinguishability} which should not be confused with the \textit{Detection Problem} that we do not study here.
 The latter usually asks for conditions on the parameters defining the RGG under which the model is distinguishable from 
 an Erd\H{o}s-R\'enyi graph. Hence, this is not directly a community question. See,
 \citep{bubeck2016testing}
 \citep{liu2022testing}
 \citep{mao2026randomgeometricgraphssmooth}.
 Finally, at the beginning of the literature,
-some works were interested to recover the latent position of nodes in the geometric space,
-and considered it as a community detection problem, \citep{valdivia2019latent}
+some works were interested in recovering the latent position of nodes in the geometric space,
+and considered this as a community detection problem, \citep{valdivia2019latent}
 \citep{eldan2022community}.
 This is a different problem from the one we are interested in,
 and it's in some sense harder, because one wants to recover the position (a continuous label) of each node rather than a community (a discrete label).
