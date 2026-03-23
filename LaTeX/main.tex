@@ -33,26 +33,23 @@
 \paragraph{General idea}
 
 Community detection consists to find clusters in a graph where nodes share more connections with nodes of the same cluster
-than with nodes of other clusters. This large topic is detailled in general by \citep{fortunato2010community}. In this 
-report we focus on random geometric graphs (RGG). The specificity to add spatial information allows us to consider
+than with nodes of other clusters. This broad topic is detailled in \citep{fortunato2010community}. In this 
+report we focus on random geometric graphs (RGG). The specificity of adding spatial information allows us to consider
 local information based on real or abstract proximity.  % The probability of connection between two nodes depends on their distance.
-In social networks, two individuals are more susceptible to be friends if they are geographically near
-or if they have similar terms of interests, age, $\dots$
-For more concrete examples of RGG can be find for wireless networks from \citep{gomez2015case}, biology \citep{higham2008fitting}
-and in particular an application of detection of communities \citep{sankararaman2020comhapdet}
+In social networks, two individuals are more likely to be friends if they are geographically close,
+or if they share similar interests, age, $\dots$
+More concrete examples of RGG can be found in wireless networks \citep{gomez2015case}, in biology \citep{higham2008fitting},
+and also in community detection problems \citep{sankararaman2020comhapdet}
 \textcolor{red}{ word embedding, physic, ...}.
 
-\paragraph{Why geometric} The main model for community detection is the Stochastic Block Model (SBM)
-\citep{holland1983stochastic}. Each node carries a hidden community label
-and edge probabilities depend on whether two nodes belong to the same community or not.
-This model comes from the Erdos-Renyi graph, where each node connect with the same probability
-to others nodes \citep{erdHos1960evolution}. This model is nowadays well understood,
-see \citep{abbe2018community}. Nonetheless, it suffers to some drawbacks because its 
-unrealistic to think that every nodes can connected to others with the same probability rate.
-At the same time than Erdos-Renyi, the RGG was introduced by \citep{gilbert1961random}.
-Add geometric information allows us to mimic some emergent behaviour from real network,
-like sparsity \citep{Del_Genio_2011}, the "small world" property \citep{watts1998collective}
-or even transitivity "friend of a friend is a friend" \textcolor{red}{Ref ?}.
+\paragraph{Why geometric} The main reference model for community detection is the Stochastic Block Model (SBM)
+\citep{holland1983stochastic}. Each node carries a hidden community label and edge probabilities depend on whether two nodes belong to the same community or not.
+This model comes from the Erd\H{o}s-R\'enyi graph, where each node connects to others with the same probability \citep{erdHos1960evolution}. This model is now well understood,
+see \citep{abbe2018community}. Nonetheless, it has some drawbacks, since it is unrealistic to think that every nodes can connect to every other one with the same probability scale.
+At roughly the same period as Erd\H{o}s-R\'enyi, the RGG was introduced by \citep{gilbert1961random}.
+Add geometric information allows us to mimic some emergent behaviours of real networks,
+such as sparsity \citep{Del_Genio_2011}, the "small-world" property \citep{watts1998collective}
+or transitivity, namely the idea that a friend of a friend is more likely to be a friend.
 
 \paragraph{Context of the problem}
 RGG and its properties are well studied, see \citep{penrose2003random}. 
@@ -78,33 +75,25 @@ up to permutation.
 
 
 \paragraph{What we don't do}
-Precedently we enhance properties RGG share with real networks due
+Previously, we emphasized properties that RGG share with real networks due
 to the geometric information. However,
-we can get for instance transitivity, and surely more, thanks to attribute based models
-\citep{Li_Sha_Huang_Zhang_2018} or 
-hyper-graph \citep{Ruggeri_2023} and even with its geometric variant
+one can also obtain transitivity, and surely more, with attribute-based models
+\citep{Li_Sha_Huang_Zhang_2018}, 
+hypergraphs \citep{Ruggeri_2023} and even geometric hypergraphs
 \citep{Kov_cs_2025}.
-We will not consider these models to focus on the geometric aspect.
-Moreover, we presented problems we are interested about. From them, one
-is \textit{Distinguability} to not confond with the
-\textit{Detection Problem} we don't treat.
-This last one ask generally 
-condition on parameters, defining the RGG, to be distinguable to 
-an Erdos-Renyi graph. Hence, this hasn't link to community.
-Refer to 
+We will not consider these models here, in order to keep the focus on the geometric aspect.
+Moreover, among problems mentioned above, one is \textit{Distinguability} which should not be confused with the \textit{Detection Problem} that we do not study here.
+The latter usually asks for conditions on the parameters defining the RGG under which the model is distinguishable from 
+an Erd\H{o}s-R\'enyi graph. Hence, this is not directly a community question. See,
 \citep{bubeck2016testing}
 \citep{liu2022testing}
 \citep{mao2026randomgeometricgraphssmooth}.
 Finally, at the beginning of the literature,
 some works were interested to recover the latent position of nodes in the geometric space,
-and consider it as a Community detection problem, \citep{valdivia2019latent}
+and considered it as a community detection problem, \citep{valdivia2019latent}
 \citep{eldan2022community}.
-This is a different problem than the one we are interested in,
-and it is more difficult because we want to recover the position (contnue label)
-of each node rather than community (discrete label).
-
-
-
+This is a different problem from the one we are interested in,
+and it's in some sense harder, because one wants to recover the position (a continuous label) of each node rather than a community (a discrete label).
 
 \section{\textcolor{red}{Modèle}}
 
