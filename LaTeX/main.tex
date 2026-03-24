@@ -25,7 +25,7 @@
 \maketitle
 
 \begin{abstract}
-\textcolor{red}{TODO}
+\textcolor{red}{TODO : introduction UGCM, presenter la litterature}
 \keywords{Community detection, geometric graphs, random geometric graphs, exact/partial recovery, spectral methods}
 \end{abstract}
 
@@ -88,10 +88,14 @@ and considered this as a community detection problem, \citep{valdivia2019latent}
 \citep{eldan2022community}.
 This is a different problem from the one we are interested in,
 and it's in some sense harder, because one wants to recover the position (a continuous label) of each node rather than a community (a discrete label).
+\textcolor{red}{TODO : parler des gaussian-mixture model + trouver ref ; voir commentaire latex !}
+% chatGPT exemple. L'idée est de recentré le probleme et de rediriger le lecteur (2-3 refs c'est bien) : A related but distinct line of work considers mixture-based latent position models, such as the Gaussian Mixture Block Model, in which the node positions themselves depend on the community label. This differs from the geometric block models considered here, where geometry affects the pairwise interaction law rather than the marginal distribution of node locations. We therefore do not include these models in the core of this survey.
 
-\section{Notations, inference problems and models}
 
-Formally, we observe a graph \(G \coloneqq (V,E)\), where \(V\) is the vertex set and \(E\) is the set of edges between vertices. Following results are asymptotics in \( n \coloneqq |V|\), the number of nodes. We consider a simple undirected graph \textcolor{red}{Une remarque là dessus ? Pourquoi non-orienté est classique comme hypothese ?}, without self-loops. The vertices are partitioned into \(k\) communities \(C_1,\dots,C_k\), so
+
+\section{Notations, inference problems and UGCM}
+
+Formally, we observe a graph \(G \coloneqq (V,E)\), where \(V\) is the vertex set and \(E\) is the set of edges between vertices. Throughout this report, asymptotic statements are understood with respect to \(n \coloneqq |V|\), the number of observed vertices. We consider a simple undirected graph \textcolor{red}{Une remarque là dessus ? Pourquoi non-orienté est classique comme hypothese ?}, without self-loops. The vertices are partitioned into \(k\) communities \(C_1,\dots,C_k\), so
 \(V=\bigsqcup_{i=1}^k C_i\). We denote by \(\sigma^\star:V\to [k]\) the ground-truth community label function, defined by \(\sigma^\star(v)=i\) whenever \(v\in C_i\). The community structure is hidden, and our goal is to recover it from the observed data.
 
 An estimator is therefore a function of the observations. Depending on the model, the observations may consist only of the graph \(G\), or of the graph together with the node locations \(X=(X_v)_{v\in V}\). Accordingly, we write the estimator as \(\hat{\sigma}=\hat{\sigma}(G)\) or \(\hat{\sigma}=\hat{\sigma}(G,X)\), and we view \(\hat{\sigma}:V\to [k]\) as an estimated labeling.
@@ -117,8 +121,7 @@ We now give more formal definitions of the problems introduced in Section~\ref{s
 % \]
 Following \citep{sankararaman2018community}, distinguishability is a hypothesis testing problem.
 Let \((\mathbb P_n)_{n\ge 1}\) be the laws of a geometric random graph model with community structure and let \((\mathbb Q_n)_{n\ge 1}\) be the laws of a null geometric model without communities, both defined
-on the same observation space. A test is a measurable function
-\(\varphi_n:\mathcal{X} \to\{0,1\}\) where \(\varphi_n=1\) means that we decide in favor of the community model.
+on the same observation space. Let \(\Omega_n\) be the observation space. A test is a measurable function \(\varphi_n: \Omega_n \to\{0,1\}\) where \(\varphi_n=1\) means that we decide in favor of the community model.
 We say that \((\mathbb P_n)\) and \((\mathbb Q_n)\) are distinguishable if there exist tests
 \((\varphi_n)_{n\ge 1}\) and a constant \(\gamma>0\) such that, under the uniform prior on
 \(\{\mathbb P_n,\mathbb Q_n\}\),
@@ -144,27 +147,37 @@ We say that exact recovery is achievable if there exists a sequence of estimator
 \mathbb P\bigl(A_n(\hat{\sigma}_n,\sigma^\star)=1\bigr)\xrightarrow[n\to\infty]{} 1
 \]
 
-Most works in the literature focus on the case \(k=2\). Although several ideas extend beyond this setting, this is also the framework that we adopt in the following, except specify otherwise. In that case, it is convenient to encode the labels by \(\{-1,+1\}\), instead of \([2] = \{1,2\}\). Then “up to permutation” reduces to a global sign flip.
+Most works in the literature focus on the case \(k=2\). Although several ideas extend beyond this setting, this is also the framework that we adopt in the following, except when specified otherwise. In that case, it is convenient to encode the labels by \(\{-1,+1\}\), instead of \([2] = \{1,2\}\). Then “up to permutation” reduces to a global sign flip.
 
 Each vertex also belongs to a space \(\mathcal X\). In the following, we specify each time whether this space is latent or observed. For theoretical analysis, \(\mathcal{X}\) is often chosen for mathematical convenience. The Euclidean space \(\mathbb{R}^d\) is a natural reference because of its symmetry, homogeneity, isotropy, and direct geometric interpretation. See \citep{abbe2021community}, \textcolor{red}{Citer ceux qui sont euclidiens}
 We also encounter the torus, mainly to avoid boundary effects and to focus on the core ideas of the proofs, \textcolor{red}{Todo citer}. Lastly, for latent models, the high-dimensional unit sphere \(\mathbb{S}^{d}\) is a standard reference space to model similarity, and it also provides convenient spectral properties \citep{decastro2020adaptiveestimationnonparametricgeometric}. A summary of theoretical works on \(\mathbb{S}^d\) is given in \citep{duchemin2023random}.
 
-\textcolor{red}{Régime, hard/soft-RGG, definition model}
+In Section~\ref{sec:models} we present models used throughout the literature. Hence, we suggest a model to unify them while remaining close to the notation used in the papers. We call it the \textit{Unified Geometric Community Model} (UGCM) and it is defined as,
+\[
+\mathrm{UGCM} \left( \mathcal X, \rho, W_n, \mu_n, Z, \pi, \mathcal Y, K_n \right)
+\] 
+where \( \mathcal X \) is the space where nodes live. \(\rho\) its metric. \(W_n \subset \mathcal X\) the window where nodes are sampled at the scale $n$.  \( \mu_n \) governs the spatial sampling mechanism, usually its \(n\) i.i.d. points with uniform law \(
+\mu_n\) or a PPP on \(W_n\) with intensity measure \(\mu_n\). \(Z\) the set of labels. \(\pi = (\pi_i)_{i \in Z} \) the distribution of labels. For all \(u \in V\) and independently, \( \sigma^\star(u) \sim \pi\). \(\mathcal Y\) the space of pairwise observation. Let \(\mathcal P(\mathcal Y)\) denote the set of probability distributions on \(\mathcal Y\), we consider the kernel observation,
+\[
+K_n : \mathcal{X} \times \mathcal{X} \times Z \times Z \to \mathcal P(\mathcal Y)
+\]
+and for each unordered pair of vertices \(u,v\), we observe, 
+\[
+Y_{uv}\mid (X,\sigma^\star)\sim K_n\bigl(X_u,X_v,\sigma^\star(u),\sigma^\star(v)\bigr)
+\]
+The kernel is the core of the model. We note that Soft-RGG introduced by \citep{Penrose_2016} and developed in \citep{duchemin2023random} can be seen as a special case of UGCM where there exists a function \(f_n : \mathbb{R}^+ \to [0,1]\) such that for every \(x,y\in\mathcal{X}\) and \(z,z'\in Z\), \(K_n(x,y,z,z') = \text{Ber}(f_n(\rho(x,y))) \). Moreover, a particular case of Soft-RGG are the usual random geometric graph, i.e. the hard-threshold special case, when \(f_n\) is an indicator function, i.e. there exists \(r_n>0\) such that  \(K_n(x,y,z,z') = \delta_{\mathbf{1}\{\rho(x,y)\le r_n\}}\). Then, this framework also accommodates weighted graphs, since the observation space \(\mathcal Y\) is not necessarily binary.
 
-\begin{itemize}
-    \item pas de boucle, pas dirige, pas de communautés chevauchantes, etc...
-    \item espace latent (ou pas) \citep{decastro2020adaptiveestimationnonparametricgeometric}
-    \item sphère, espace euclidien ?
-    \item régime : dense, logarithmique, sparse
-    \item hard-RGG, soft-RGG \citep{duchemin2023random}
-    \item motivation : bien que les modèles ne soient pas les mêmes, ils n'ont pas pour but
-    de comprendre tous ceux possible mais qu'à travers chaque classe voir les mécanismes. 
-    Exemplse : passer du local au global puis raffinement, les quantités utilisées, ... 
-\end{itemize}
+\textcolor{red}{TODO : Regime pour l'analyse \& motivation de ces regimes}
+% \begin{itemize}
+%     \item régime : dense, logarithmique, sparse
+%     \item motivation : bien que les modèles ne soient pas les mêmes, ils n'ont pas pour but
+%     de comprendre tous ceux possible mais qu'à travers chaque classe voir les mécanismes. 
+%     Exemplse : passer du local au global puis raffinement, les quantités utilisées, ... 
+% \end{itemize}
 
 
 
-\section{\textcolor{red}{Seuil théorique information}}
+\section{\textcolor{red}{Seuil théorique information}}\label{sec:models}
 
 \textcolor{orange}{Faire le rapport dans l'ordre chronologique je pense}
 

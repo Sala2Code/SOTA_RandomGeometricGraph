@@ -28,6 +28,7 @@ Courte section.
 + [[Kovacs_Benedek_Palla_Community_detection_in_hypergraphs_through]]
 + [[DeCastro_Lacour_PhamNgoc_Adaptive_Estimation_of_Nonparametric_geometric_graphs]]
 + [[Holland_Laskey_Leinhardt_Stochastic_blockmodels_first_steps]]
++ [[Penrose_Connectivity_of_soft_random_geometric_graphs]]
 # Stochastique Block Model
 Introduire ce qu'est la détection de communautés.
 + [[Fortunato_Community_detection_in_graphs]]
