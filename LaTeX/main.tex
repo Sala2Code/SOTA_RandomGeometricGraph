@@ -149,8 +149,8 @@ We say that exact recovery is achievable if there exists a sequence of estimator
 
 Most works in the literature focus on the case \(k=2\). Although several ideas extend beyond this setting, this is also the framework that we adopt in the following, except when specified otherwise. In that case, it is convenient to encode the labels by \(\{-1,+1\}\), instead of \([2] = \{1,2\}\). Then “up to permutation” reduces to a global sign flip.
 
-Each vertex also belongs to a space \(\mathcal X\). In the following, we specify each time whether this space is latent or observed. For theoretical analysis, \(\mathcal{X}\) is often chosen for mathematical convenience. The Euclidean space \(\mathbb{R}^d\) is a natural reference because of its symmetry, homogeneity, isotropy, and direct geometric interpretation. See \citep{abbe2021community}, \textcolor{red}{Citer ceux qui sont euclidiens}
-We also encounter the torus, mainly to avoid boundary effects and to focus on the core ideas of the proofs, \textcolor{red}{Todo citer}. Lastly, for latent models, the high-dimensional unit sphere \(\mathbb{S}^{d}\) is a standard reference space to model similarity, and it also provides convenient spectral properties \citep{decastro2020adaptiveestimationnonparametricgeometric}. A summary of theoretical works on \(\mathbb{S}^d\) is given in \citep{duchemin2023random}.
+Each vertex also belongs to a space \(\mathcal X\). In the following, we specify each time whether this space is latent or observed. For theoretical analysis, \(\mathcal{X}\) is often chosen for mathematical convenience. The Euclidean space \(\mathbb{R}^{d-1}\) is a natural reference because of its symmetry, homogeneity, isotropy, and direct geometric interpretation. See \citep{abbe2021community}, \textcolor{red}{Citer ceux qui sont euclidiens}. \textcolor{red}{In the following, \(d\) is an integer.}
+We also encounter the torus, mainly to avoid boundary effects and to focus on the core ideas of the proofs, \textcolor{red}{Todo citer}. Lastly, for latent models, the high-dimensional unit sphere \(\mathbb{S}^{d-1}\) is a standard reference space to model similarity, and it also provides convenient spectral properties \citep{decastro2020adaptiveestimationnonparametricgeometric}. A summary of theoretical works on \(\mathbb{S}^{d-1}\) is given in \citep{duchemin2023random}.
 
 In Section~\ref{sec:models} we present models used throughout the literature. Hence, we suggest a model to unify them while remaining close to the notation used in the papers. We call it the \textit{Unified Geometric Community Model} (UGCM) and it is defined as,
 \[
@@ -200,11 +200,20 @@ Finally, the \emph{dense regime} corresponds to the easiest setting, the graph c
     \item \citep{gaudio2026exact} (GHCM)
 \end{itemize}
 
-\subsection{\textcolor{red}{Geometric Block Model (GBM)}}
-\citep{galhotra2018geometric} 
+\subsection{Geometric Block Model (GBM)}
+
+Historically, the first random geometric graph for community detection is defined as the Geometric Block Model (GBM) in \citep{galhotra2018geometric}. They focus on \(2\) symmetric communities. Its defined as a hard-RGG on the unit sphere on high dimension for the Euclidian distance where vertices are placed uniformly on it. For \(d \in \mathbb{N} \backslash \{0,1\}, \ r_{in}, r_{out} \in [-1,1]\) and \(r_{ij} \coloneqq  r_{in}\delta_{ij} + r_{out}(1-\delta_{ij}) \)
+\[
+\mathrm{GBM}(d, r) \coloneqq \mathrm{UGCM}(\mathbb{S}^{d-1}, \|\cdot\|_2, \mathbb{S}^{d-1}, \mathrm{Unif}(\mathbb{S}^{d-1}), \{-1,+1\}, \text{Ber}(1/2), \{0,1\}, K_n)
+\]
+with \(K_n(X_u, X_v, Z_i, Z_j) = \mathbf{1}\{\langle X_u, X_v \rangle \geq r_{Z_iZ_j}\} \). They specified \(r_{in} > r_{out}\), if its equal we can't distinguish communities and we impose greater to get higher edge density inside communities than across the communities. The recovery is done only from the adjency matrix, so the space \(S^{d-1}\) is assumed latent.
+\textcolor{red}{parler du régime (car omega log(n)/n), c'est quel régime pour moi, degré moyen ? parler de leur algorithme et résultat.}
+
+\textcolor{red}{Second paragraphe : RAG, amélioration résultat}
 \citep{galhotra2020connectivityrandomannulusgraphs}
 \citep{galhotra2023communityrecoverygeometricblock}
 
+\textcolor{red}{Troisième paragraphe : Active learning, approche originale et la seule actuelle. Pessimisme preuve théorique.}
 \citep{chien2020active}
 
 
