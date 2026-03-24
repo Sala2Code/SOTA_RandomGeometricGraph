@@ -36,7 +36,7 @@ than with nodes of other clusters. This broad topic is detailed in \citep{fortun
 report, we focus on random geometric graphs (RGG). Adding spatial information allows us to consider
 local information based on real or abstract proximity.  % The probability of connection between two nodes depends on their distance.
 In social networks, two individuals are more likely to be friends if they are geographically close,
-or if they share similar interests, age,\(\dots\)
+or if they share similar interests, age, etc.
 More concrete examples of RGG can be found in wireless networks \citep{gomez2015case}, in biology \citep{higham2008fitting},
 and also in community detection problems \citep{sankararaman2020comhapdet}
 \textcolor{red}{ word embedding, physic, ...}.
@@ -46,7 +46,7 @@ The main reference model for community detection is the Stochastic Block Model (
 This model comes from the Erd\H{o}s-R\'enyi graph, where each node connects to others with the same probability \citep{erdHos1960evolution}. This model is now well understood,
 see \citep{abbe2018community}. Nonetheless, it has some drawbacks, since it is unrealistic to think that every node can connect to every other one with the same probability scale.
 Around the same time as Erd\H{o}s-R\'enyi, the RGG was introduced by \citep{gilbert1961random}.
-Add geometric information allows us to mimic some emergent behaviours of real networks,
+Adding geometric information allows us to mimic some emergent behaviours of real networks,
 such as sparsity \citep{Del_Genio_2011}, the "small-world" property \citep{watts1998collective}
 or transitivity, namely the idea that a friend of a friend is more likely to be a friend.
 
@@ -93,9 +93,9 @@ and it's in some sense harder, because one wants to recover the position (a cont
 
 
 
-\section{Notations, inference problems and UGCM}
+\section{Problem setting and inference tasks}\label{sec:setting}
 
-Formally, we observe a graph \(G \coloneqq (V,E)\), where \(V\) is the vertex set and \(E\) is the set of edges between vertices. Throughout this report, asymptotic statements are understood with respect to \(n \coloneqq |V|\), the number of observed vertices. We consider a simple undirected graph \textcolor{red}{Une remarque là dessus ? Pourquoi non-orienté est classique comme hypothese ?}, without self-loops. The vertices are partitioned into \(k\) communities \(C_1,\dots,C_k\), so
+Formally, we observe a graph \(G \coloneqq (V,E)\), where \(V\) is the vertex set and \(E\) is the set of edges between vertices. Throughout the report, \(n\) denotes the asymptotic scaling parameter. Depending on the model, the observed number of vertices may be either deterministic or random, but is of order \(n\). We consider a simple undirected graph \textcolor{red}{Une remarque là dessus ? Pourquoi non-orienté est classique comme hypothese ?}, without self-loops. The vertices are partitioned into \(k\) communities \(C_1,\dots,C_k\), so
 \(V=\bigsqcup_{i=1}^k C_i\). We denote by \(\sigma^\star:V\to [k]\) the ground-truth community label function, defined by \(\sigma^\star(v)=i\) whenever \(v\in C_i\). The community structure is hidden, and our goal is to recover it from the observed data.
 
 An estimator is therefore a function of the observations. Depending on the model, the observations may consist only of the graph \(G\), or of the graph together with the node locations \(X=(X_v)_{v\in V}\). Accordingly, we write the estimator as \(\hat{\sigma}=\hat{\sigma}(G)\) or \(\hat{\sigma}=\hat{\sigma}(G,X)\), and we view \(\hat{\sigma}:V\to [k]\) as an estimated labeling.
@@ -132,7 +132,7 @@ We say that \((\mathbb P_n)\) and \((\mathbb Q_n)\) are distinguishable if there
 \]
 
 \paragraph{Weak/Partial recovery.}
-We say that weak/partial recovery is achievable if there exists a sequence of estimators \((\hat{\sigma}_n)_{n\geq 1}\) and a constant \(\alpha>1/k\) such that,
+We say that weak/partial recovery is achievable if the estimator performs better than random guessing, that's to say in the symmetric case, if there exists a sequence of estimators \((\hat{\sigma}_n)_{n\geq 1}\) and a constant \(\alpha>1/k\) such that,
 \[
 \mathbb P\bigl(A_n(\hat{\sigma}_n,\sigma^\star)\geq \alpha\bigr)\xrightarrow[n\to\infty]{} 1
 \]
@@ -156,8 +156,9 @@ In Section~\ref{sec:models} we present models used throughout the literature. He
 \[
 \mathrm{UGCM} \left( \mathcal X, \rho, W_n, \mu_n, Z, \pi, \mathcal Y, K_n \right)
 \] 
-where \( \mathcal X \) is the space where nodes live. \(\rho\) its metric. \(W_n \subset \mathcal X\) the window where nodes are sampled at the scale $n$.  \( \mu_n \) governs the spatial sampling mechanism, usually its \(n\) i.i.d. points with uniform law \(
-\mu_n\) or a PPP on \(W_n\) with intensity measure \(\mu_n\). \(Z\) the set of labels. \(\pi = (\pi_i)_{i \in Z} \) the distribution of labels. For all \(u \in V\) and independently, \( \sigma^\star(u) \sim \pi\). \(\mathcal Y\) the space of pairwise observation. Let \(\mathcal P(\mathcal Y)\) denote the set of probability distributions on \(\mathcal Y\), we consider the kernel observation,
+where \( \mathcal X \) is the ambient space and \(\rho\) is its metric. \(W_n \subset \mathcal X\) is the window where nodes are sampled at the scale $n$.  
+\(\mu_n\) governs the spatial sampling mechanism. Usually, the vertices are sampled either as \(n\) i.i.d. points in \(W_n\) with law \(\mu_n\) or as a Poisson Point Process (PPP) on \(W_n\)  with intensity measure \( \mu_n \). We denote by \(Z\) the label set, and by \(\pi=(\pi_i)_{i\in Z} \) the distribution of the labels.
+For all \(u \in V\) and independently, \( \sigma^\star(u) \sim \pi\). \(\mathcal Y\) the space of pairwise observation. Let \(\mathcal P(\mathcal Y)\) denote the set of probability distributions on \(\mathcal Y\), we consider the kernel observation,
 \[
 K_n : \mathcal{X} \times \mathcal{X} \times Z \times Z \to \mathcal P(\mathcal Y)
 \]
@@ -167,17 +168,22 @@ Y_{uv}\mid (X,\sigma^\star)\sim K_n\bigl(X_u,X_v,\sigma^\star(u),\sigma^\star(v)
 \]
 The kernel is the core of the model. We note that Soft-RGG introduced by \citep{Penrose_2016} and developed in \citep{duchemin2023random} can be seen as a special case of UGCM where there exists a function \(f_n : \mathbb{R}^+ \to [0,1]\) such that for every \(x,y\in\mathcal{X}\) and \(z,z'\in Z\), \(K_n(x,y,z,z') = \text{Ber}(f_n(\rho(x,y))) \). Moreover, a particular case of Soft-RGG are the usual random geometric graph, i.e. the hard-threshold special case, when \(f_n\) is an indicator function, i.e. there exists \(r_n>0\) such that  \(K_n(x,y,z,z') = \delta_{\mathbf{1}\{\rho(x,y)\le r_n\}}\). Then, this framework also accommodates weighted graphs, since the observation space \(\mathcal Y\) is not necessarily binary.
 
-\textcolor{red}{TODO : Regime pour l'analyse \& motivation de ces regimes}
-% \begin{itemize}
-%     \item régime : dense, logarithmique, sparse
-%     \item motivation : bien que les modèles ne soient pas les mêmes, ils n'ont pas pour but
-%     de comprendre tous ceux possible mais qu'à travers chaque classe voir les mécanismes. 
-%     Exemplse : passer du local au global puis raffinement, les quantités utilisées, ... 
-% \end{itemize}
+As we will see, several phase-transition phenomena depend on the connectivity scale of the graph, which is usually measured through the average degree. Let \(D_n\) denote the degree of a vertex chosen uniformly at random. We can distinguish three regimes of connectivity, depending on the growth of \(\mathbb E(D_n) \) as \(n\to\infty\).
+The most realistic but also the most delicate regime is the \emph{sparse regime}. Each vertex only carries a finite amount of local information, the expected degree remains bounded,
+\[
+\mathbb E(D_n)=\Theta(1)
+\]
+In the \emph{logarithmic regime}, the graph becomes sufficiently connected for exact recovery to become meaningful, 
+\[
+\mathbb E(D_n)=\Theta(\log n)
+\]
+Finally, the \emph{dense regime} corresponds to the easiest setting, the graph carries a lot of information,
+\[
+\mathbb E(D_n)=\Theta(n)
+\] 
 
 
-
-\section{\textcolor{red}{Seuil théorique information}}\label{sec:models}
+\section{Geometric community models and recovery thresholds}\label{sec:models}
 
 \textcolor{orange}{Faire le rapport dans l'ordre chronologique je pense}
 
