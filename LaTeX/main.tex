@@ -223,10 +223,10 @@ with \(K_n(X_u, X_v, Z_i, Z_j) = \mathbf{1}\{\langle X_u, X_v \rangle \geq r_{Z_
 
 
 The \emph{Geometric Stochastic Block Model} (GSBM), introduced in \citep{sankararaman2018community} and further developed in \citep{abbe2018community},
-extends the classical SBM by incorporating a latent geometric structure. The vertices are embedded in a Euclidean space \(\mathbb{R}^d\), typically according to a Poisson point process, and each vertex is assigned a 
+extends the classical SBM by incorporating a latent \textcolor{red}{il est pas latent et c'est un des premiers à ne pas le considerer ainsi} geometric structure. The vertices are embedded in a Euclidean space \(\mathbb{R}^d\), typically according to a Poisson point process, and each vertex is assigned a 
 hidden label \( \sigma^\star(u)\in\{-1,+1\} \). An edge between \(u\) and \(v\) is then drawn with a probability that depends both on their distance \( r=\|X_u-X_v\|_2 \) and on their labels: one typically 
-writes \( p_{\mathrm{in}}^{(n)}(r) \) if \( \sigma^\star(u)=\sigma^\star(v) \), and \( p_{\mathrm{out}}^{(n)}(r) \) otherwise, with in general \( p_{\mathrm{in}}^{(n)}(r)>p_{\mathrm{out}}^{(n)}(r) \).
- So the model can be naturally written in the UGCM framework as
+writes \( p_{\mathrm{in}}^{(n)}(r) \) if \( \sigma^\star(u)=\sigma^\star(v) \), and \( p_{\mathrm{out}}^{(n)}(r) \) otherwise, with in general \( p_{\mathrm{in}}^{(n)}(r)>p_{\mathrm{out}}^{(n)}(r) \). \textcolor{red}{trop chatGPT dans la definition}
+ So the model can be naturally \textcolor{red}{naturally c'est quand meme fort car on a fait expres de definir UGCM pour unifier.}written in the UGCM framework as
 \[
 \mathrm{GSBM} (d,r)
 =
@@ -244,17 +244,19 @@ p_{\mathrm{out}}^{(n)}(\|x-y\|)\mathbf 1_{\{z\neq z'\}}
 \]
 
 The foundational works of Sankararaman \citep{sankararaman2018community} and \citep{abbe2021community} show that geometry profoundly alters the recovery thresholds. In the sparse regime,
-\(\mathbb{E}[D_n]=\Theta(1)\), each vertex carries only a finite amount of local information, which makes partial recovery difficult. In the logarithmic regime,
-\(\mathbb{E}[D_n]=\Theta(\log n)\), exact recovery becomes the natural objective. In this setting, they obtain the necessary condition
+\(\mathbb{E}[D_n]=\Theta(1)\), each vertex carries only a finite amount of local information, which makes partial recovery difficult. \textcolor{red}{ca repete beaucoup ce qui est dit dans le sprecedents paragraphes et ajoute aucune plus value} In the logarithmic regime,
+\(\mathbb{E}[D_n]=\Theta(\log n)\), exact recovery becomes the natural objective. In this setting, they obtain the necessary condition \textcolor{red}{ce résultat est que pour un cas de fonction particulier}
 \[
 \lambda \nu_d\!\left(1-\sqrt{ab}-\sqrt{(1-a)(1-b)}\right)<1
 \]
 where \(\lambda\) is the intensity of the Poisson point process, \(\nu_d\) is the volume of the unit ball in \(\mathbb{R}^d\), and \(a,b\) are the within- and between-community connection parameters in the simple threshold model. 
 They also introduce the \emph{Good-Bad-Grid} algorithm, which partitions the space into cells, identifies sufficiently regular regions, and then propagates community information locally. 
 
-More recently,\citep{gaudio2024exactcommunityrecoverygeometric}  showed that this threshold can actually be achieved by a linear-time algorithm built in two stages: a local propagation step producing an almost-exact labeling, 
+\textcolor{red}{pas mal, à voir plus tard}More recently,\citep{gaudio2024exactcommunityrecoverygeometric}  showed that this threshold can actually be achieved by a linear-time algorithm built in two stages: a local propagation step producing an almost-exact labeling, 
 followed by a vertex-wise refinement based on a Poisson test. 
 Finally, \citep{gaudio2024exactcommunityrecoverygeometric} extended this perspective to more general Euclidean random graphs, in which the GSBM appears as a special case, and expressed the exact recovery threshold in terms of a Chernoff--Hellinger divergence.
+
+\textcolor{red}{conclusion : l'idée est là, mais c'est trop chatGPT. Pas assez centré sur ce qui est essentiel. C'est LE papier (ou modèle) de la litterature, il est pas du tout assez mis en avant ni détaillé. Le régime sparse est bien trop vite écarté, un paragraphe est mériéé pour lui. Il faut aussi parler de la partie "distinguishability" qui est très intéressante et qui a été oubliée alors qu ec'est le seul papier qui en parle dans la litterature. }
 
 \subsection{\textcolor{red}{(Geometric Kernel Block Model, GKBM)}}
 \citep{avrachenkov2024community} 
