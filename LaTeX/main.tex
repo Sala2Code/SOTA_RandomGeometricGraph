@@ -11,6 +11,8 @@
 \usepackage{graphicx}
 \usepackage{xcolor}
 \usepackage{hyperref}
+\usepackage{svg}
+\usepackage{float}
 
 \usepackage[authoryear]{natbib}
 
@@ -185,36 +187,64 @@ Finally, the \emph{dense regime} corresponds to the easiest setting, the graph c
 
 \section{Geometric community models and recovery thresholds}\label{sec:models}
 
-\textcolor{orange}{Faire le rapport dans l'ordre chronologique je pense}
-
-\begin{itemize}
-    \item \citep{galhotra2018geometric} (Geometric Block Model, GBM)
-    \item \citep{sankararaman2018community} \& \citep{abbe2021community} (Geometric SBM)
-    \item \citep{chien2020active}
-    \item \citep{galhotra2020connectivityrandomannulusgraphs} (GBM)
-    \item \citep{galhotra2023communityrecoverygeometricblock} (GBM)
-    \item \citep{avrachenkov2024community} (Geometric Kernel Block Model, GKBM)
-    \item \citep{gaudio2024exactcommunityrecoverygeometric} (Geometric SBM)
-    \item \citep{gaudio2024exact} (Geometric Hidden Community Model, GHCM)
-    \item \citep{gaudio2025sharpexactrecoverythreshold} (GHCM)
-    \item \citep{gaudio2026exact} (GHCM)
-\end{itemize}
-
 \subsection{Geometric Block Model (GBM)}
 
-Historically, the first random geometric graph for community detection is defined as the Geometric Block Model (GBM) in \citep{galhotra2018geometric}. They focus on \(2\) symmetric communities. Its defined as a hard-RGG on the unit sphere on high dimension for the Euclidian distance where vertices are placed uniformly on it. For \(d \in \mathbb{N} \backslash \{0,1\}, \ r_{in}, r_{out} \in [-1,1]\) and \(r_{ij} \coloneqq  r_{in}\delta_{ij} + r_{out}(1-\delta_{ij}) \)
+Historically, one of the earliest geometric models for community detection is the Geometric Block Model (GBM) introduced in \citep{galhotra2018geometric}. They mainly study the case of two symmetric communities. In its general form, the model places each vertex at a latent position on the unit sphere \(\mathcal X \coloneqq \mathbb S^{d-1}\), sampled uniformly, and edges are drawn through a hard geometric rule. For \(d \in \mathbb{N} \backslash \{0,1\}, \ r_{in}, r_{out} \in [-1,1]\), \(r_{ij} \coloneqq  r_{in}\delta_{ij} + r_{out}(1-\delta_{ij}) \), they define,
 \[
-\mathrm{GBM}(d, r) \coloneqq \mathrm{UGCM}(\mathbb{S}^{d-1}, \|\cdot\|_2, \mathbb{S}^{d-1}, \mathrm{Unif}(\mathbb{S}^{d-1}), \{-1,+1\}, \text{Ber}(1/2), \{0,1\}, K_n)
+\mathrm{GBM}(d, r_{in}, r_{out}) \coloneqq \mathrm{UGCM}(\mathcal X,\|\cdot\|_2,\ \mathcal X ,  \mathrm{Unif}( \mathcal X ),  \{-1,+1\},  \text{Ber}(1/2),  \{0,1\}, K_n)
 \]
-with \(K_n(X_u, X_v, Z_i, Z_j) = \mathbf{1}\{\langle X_u, X_v \rangle \geq r_{Z_iZ_j}\} \). They specified \(r_{in} > r_{out}\), if its equal we can't distinguish communities and we impose greater to get higher edge density inside communities than across the communities. The recovery is done only from the adjency matrix, so the space \(S^{d-1}\) is assumed latent.
-\textcolor{red}{parler du régime (car omega log(n)/n), c'est quel régime pour moi, degré moyen ? parler de leur algorithme et résultat.}
+with \(K_n(X_u, X_v, Z_u, Z_v) = \mathbf{1}\{\langle X_u, X_v \rangle \geq r_{Z_uZ_v}\} \). The condition
+\(r_{in}>r_{out}\) ensures that edges within communities are denser than across community ones. The space \(\mathcal X\) is assumed latent so the recovery is done only from the adjacency matrix.
 
-\textcolor{red}{Second paragraphe : RAG, amélioration résultat}
-\citep{galhotra2020connectivityrandomannulusgraphs}
-\citep{galhotra2023communityrecoverygeometricblock}
+They study the one-dimensional, \(d=2\), representation of the model in the regime
+\[
+r_{in} \coloneqq a\frac{\log n}{n} \qquad r_{out} \coloneqq b\frac{\log n}{n} \qquad a>b>0
+\]
+This corresponds to the logarithmic regime. This regime matches the connectivity scale of one-dimensional random geometric graphs. Their main algorithm is motif-based, that's to say for an observed edge \((u,v) \in E\), they count the number of common neighbors of \(u\) and \(v\), so the number of triangles containing this edge. Then they use this statistic to decide whether \(u\) and \(v\) belong to the same community. The geometry creates strong local dependence and transitivity, unlike in the SBM, triangles are informatives in the GBM. Still in this regime, the simple motif-counting procedure already yields exact recovery with high probability when \(r_{in}\ge 4r_{out}\). The algorithm is efficient, and the journal version later clarifies that this one-threshold guarantee from the conference paper is order-optimal up to constants but restricted to that parameter range \citep{galhotra2018geometric,galhotra2023communityrecoverygeometricblock}.
 
-\textcolor{red}{Troisième paragraphe : Active learning, approche originale et la seule actuelle. Pessimisme preuve théorique.}
+Firstly, \citep{galhotra2020connectivityrandomannulusgraphs} introduces the random annulus graph (RAG). Let \(I \coloneqq \left[b\left(\frac{\log n}{n}\right)^{1/d}, a\left(\frac{\log n}{n}\right)^{1/d}\right] \), they work on \(\mathbb S^d \) with \( RAG_d(n, I)\)
+a RGG where nodes are connected only if the distance between them fall inside \(I\), hence the name annulus graph. In dimension \(1\), they obtain a sharp connectivity threshold for RAG,
+the graph is connected with high probability if \(a>1\) and \(a-b>1/2\), and disconnected with high
+probability if \(a<1\) or \(a-b<1/2\). For \(d > 1\), they give only sufficient condition \citep{galhotra2020connectivityrandomannulusgraphs}.
+
+Secondly, the main algorithmic refinement is to replace the original one-threshold triangle rule by a two-threshold procedure. The reason is that, once one leaves the regime
+\(r_{in}\ge 4r_{out}\), a single threshold is no longer sufficient. For inter-community edges, the normalized
+triangle count is concentrated around \(2r_{out}\), whereas for intra-community edges it depends on the
+latent distance and may lie either above or below that value. They therefore define two thresholds
+\[
+E_S\coloneqq (2b+f_1)\frac{\log n}{n}
+\qquad
+E_D\coloneqq (2b-f_2)\frac{\log n}{n}
+\]
+where \(f_1\) and \(f_2\) are chosen from Chernoff-type large deviation inequalities. Edges whose triangle
+count falls inside the ambiguous interval \([E_D,E_S]\) are removed. This deletes all inter-community
+edges with high probability, while preserving enough informative intra-community edges. It remains to show that the surviving intra-community edges still connect each community, and this is exactly where the RAG connectivity results are used.
+
+As a consequence, they obtain exact recovery in dimension \(1\) with explicit conditions and an impossibility result when \(a<1\) or \(a-b<1/2\). However, the exact recovery threshold for the latent \(1\) dimensional GBM is still not fully characterized, see Figure~\ref{fig:GBM}. A useful contrast is that this gap disappears when the latent positions are revealed. In that case, the one-dimensional GBM has a sharp exact-recovery threshold recovery which coincides with the sharp connectivity threshold of the RAG.
+In higher dimension \(d>1\), they also prove a polynomial-time exact-recovery result
+at the correct order of magnitude
+\[
+r_{out}=\Theta\!\left(\left(\frac{\log n}{n}\right)^{1/d}\right)
+\quad\text{and}\quad
+r_{in}-r_{out}=\Theta\!\left(\left(\frac{\log n}{n}\right)^{1/d}\right)
+\]
+are sufficient, while recovery becomes impossible if one of these quantities is of smaller order \citep{galhotra2023communityrecoverygeometricblock}
+
+\begin{figure}[H]
+    \centering
+    \includesvg[inkscapearea=page,width=0.8\textwidth]{img/GBM_fig5.svg}
+\caption{Phase diagram for exact recovery in the one-dimensional latent GBM in the regime \(r_{in}=a\log n/n\) and \(r_{out}=b\log n/n\), reproduced from \citet{galhotra2023communityrecoverygeometricblock}, Figure~5. The red region corresponds to disconnected graphs so an impossibility result, the yellow region remains an open problem, the green region to the parameter range certified by Algorithm~1 (Theorem~8)}
+    \label{fig:GBM}
+\end{figure}
+
+\textcolor{red}{Quatireme paragraphe : Active learning, approche originale et la seule actuelle. Pessimisme preuve théorique.}
 \citep{chien2020active}
+
+
+
+
+
+
 
 
 \subsection{\textcolor{red}{Geometric Stochastic Block Model (GSBM)}}
