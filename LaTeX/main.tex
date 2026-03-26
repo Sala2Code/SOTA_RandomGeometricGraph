@@ -220,6 +220,42 @@ with \(K_n(X_u, X_v, Z_i, Z_j) = \mathbf{1}\{\langle X_u, X_v \rangle \geq r_{Z_
 \subsection{\textcolor{red}{Geometric Stochastic Block Model (GSBM)}}
 \citep{sankararaman2018community} \citep{abbe2021community}
 
+
+
+The \emph{Geometric Stochastic Block Model} (GSBM), introduced in \citep{sankararaman2018community} and further developed in \citep{abbe2018community},
+extends the classical SBM by incorporating a latent geometric structure. The vertices are embedded in a Euclidean space \(\mathbb{R}^d\), typically according to a Poisson point process, and each vertex is assigned a 
+hidden label \( \sigma^\star(u)\in\{-1,+1\} \). An edge between \(u\) and \(v\) is then drawn with a probability that depends both on their distance \( r=\|X_u-X_v\|_2 \) and on their labels: one typically 
+writes \( p_{\mathrm{in}}^{(n)}(r) \) if \( \sigma^\star(u)=\sigma^\star(v) \), and \( p_{\mathrm{out}}^{(n)}(r) \) otherwise, with in general \( p_{\mathrm{in}}^{(n)}(r)>p_{\mathrm{out}}^{(n)}(r) \).
+ So the model can be naturally written in the UGCM framework as
+\[
+\mathrm{GSBM} (d,r)
+=
+\mathrm{UGCM}\!\left(\mathbb{R}^d,\|\cdot\|_2,W_n,\mu_n,\{-1,+1\},\mathrm{Ber}(1/2),\{0,1\},K_n\right)
+\]
+Here, \(W_n \subset \mathbb{R}^d\) is the observation window and \(\mu_n=\lambda \mathbf{1}_{W_n}(x)\,dx\) is the intensity measure of a Poisson point process on \(W_n\). The observation kernel is Bernoulli and depends both on geometry and on the latent labels:
+\[
+K_n(x,y,z,z')
+=
+\mathrm{Ber}\!\left(
+p_{\mathrm{in}}^{(n)}(\|x-y\|)\mathbf 1_{\{z=z'\}}
++
+p_{\mathrm{out}}^{(n)}(\|x-y\|)\mathbf 1_{\{z\neq z'\}}
+\right)
+\]
+
+The foundational works of Sankararaman \citep{sankararaman2018community} and \citep{abbe2021community} show that geometry profoundly alters the recovery thresholds. In the sparse regime,
+\(\mathbb{E}[D_n]=\Theta(1)\), each vertex carries only a finite amount of local information, which makes partial recovery difficult. In the logarithmic regime,
+\(\mathbb{E}[D_n]=\Theta(\log n)\), exact recovery becomes the natural objective. In this setting, they obtain the necessary condition
+\[
+\lambda \nu_d\!\left(1-\sqrt{ab}-\sqrt{(1-a)(1-b)}\right)<1
+\]
+where \(\lambda\) is the intensity of the Poisson point process, \(\nu_d\) is the volume of the unit ball in \(\mathbb{R}^d\), and \(a,b\) are the within- and between-community connection parameters in the simple threshold model. 
+They also introduce the \emph{Good-Bad-Grid} algorithm, which partitions the space into cells, identifies sufficiently regular regions, and then propagates community information locally. 
+
+More recently,\citep{gaudio2024exactcommunityrecoverygeometric}  showed that this threshold can actually be achieved by a linear-time algorithm built in two stages: a local propagation step producing an almost-exact labeling, 
+followed by a vertex-wise refinement based on a Poisson test. 
+Finally, \citep{gaudio2024exactcommunityrecoverygeometric} extended this perspective to more general Euclidean random graphs, in which the GSBM appears as a special case, and expressed the exact recovery threshold in terms of a Chernoff--Hellinger divergence.
+
 \subsection{\textcolor{red}{(Geometric Kernel Block Model, GKBM)}}
 \citep{avrachenkov2024community} 
 \citep{allem2025multicommunityspectralclusteringgeometric}
@@ -274,6 +310,6 @@ Méthode spectrale sur Soft Geometric Block Model (SGBM) (Generalisation de Geom
 
 % Springer author-year bibliography style
 \bibliographystyle{plainnat}
-\bibliography{../pdf/refs_filtered}
+\bibliography{refs_filtered}
 
 \end{document}

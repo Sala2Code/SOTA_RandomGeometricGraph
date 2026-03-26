@@ -7,7 +7,7 @@ $pdflatex = 'pdflatex -interaction=nonstopmode -halt-on-error %O %S';
 $aux_dir = 'build';
 
 # Put PDFs in ../pdf
-$out_dir = '../pdf';
+$out_dir = '.';
 
 # Enable bibliography with bibtex when needed
 $bibtex = 'bibtex %O %B';
