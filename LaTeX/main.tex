@@ -191,7 +191,7 @@ Finally, the \emph{dense regime} corresponds to the easiest setting, the graph c
 
 Historically, one of the earliest geometric models for community detection is the Geometric Block Model (GBM) introduced in \citep{galhotra2018geometric}. They mainly study the case of two symmetric communities. In its general form, the model places each vertex at a latent position on the unit sphere \(\mathcal X \coloneqq \mathbb S^{d-1}\), sampled uniformly, and edges are drawn through a hard geometric rule. For \(d \in \mathbb{N} \backslash \{0,1\}, \ r_{in}, r_{out} \in [-1,1]\), \(r_{ij} \coloneqq  r_{in}\delta_{ij} + r_{out}(1-\delta_{ij}) \), they define
 \[
-\mathrm{GBM}(d, r_{in}, r_{out}) \coloneqq \mathrm{UGCM}(\mathcal X,\|\cdot\|_2,\ \mathcal X ,  \mathrm{Unif}( \mathcal X ),  \{-1,+1\},  \text{Ber}(1/2),  \{0,1\}, K_n)
+\mathrm{GBM}(r_{in}, r_{out}, d) \coloneqq \mathrm{UGCM}(\mathcal X,\|\cdot\|_2,\ \mathcal X ,  \mathrm{Unif}( \mathcal X ),  \{-1,+1\},  \text{Ber}(1/2),  \{0,1\}, K_n)
 \]
 with \(K_n(X_u, X_v, Z_u, Z_v) = \mathbf{1}\{\langle X_u, X_v \rangle \geq r_{Z_uZ_v}\} \).
 % In the circular case, this is equivalent after reparametrization to a threshold rule based either on the Euclidean distance or on the geodesic distance.
@@ -213,7 +213,7 @@ E_D\coloneqq (2b-f_2)\frac{\log n}{n}
 \]
 where \(f_1\) and \(f_2\) are chosen from Chernoff type large deviation inequalities. Edges whose triangle count falls inside the ambiguous interval \([E_D,E_S]\) are removed. This deletes all inter community edges with high probability, while preserving enough informative intra community edges. It remains to show that the surviving intra community edges still connect each community, and this is exactly where the RAG connectivity results are used.
 
-As a consequence, they obtain exact recovery in dimension \(1\) with explicit conditions and an impossibility result when \(a<1\) or \(a-b<1/2\). However, the exact recovery threshold for the latent one dimensional GBM is still not fully characterized, see Figure~\ref{fig:GBM}. A useful contrast is that this gap disappears when the latent positions are revealed. In that case, the one dimensional GBM has a sharp exact recovery threshold which coincides with the sharp connectivity threshold of the RAG. In higher dimension \(d>1\), they also prove a polynomial time exact recovery result at the correct order of magnitude:
+As a consequence, they obtain exact recovery in dimension \(1\) with explicit conditions and an impossibility result when \(a<1\) or \(a-b<1/2\). However, the exact recovery threshold for the latent one dimensional GBM is still not fully characterized, see Figure~\ref{fig:GBM}. A useful contrast is that this gap disappears when the latent positions are revealed. In that case, the one dimensional GBM has a sharp exact recovery threshold which coincides with the sharp connectivity threshold of the RAG. In higher dimension \(d>1\), they also prove a polynomial time exact recovery result at the correct order of magnitude,
 \[
 r_{out}=\Theta\!\left(\left(\frac{\log n}{n}\right)^{1/d}\right)
 \quad\text{and}\quad
@@ -231,46 +231,63 @@ are sufficient, while recovery becomes impossible if one of these quantities is 
 Finally, \citep{chien2020active} studies active learning in the latent GBM with two communities. The model is the same, but the learner is now allowed to query the labels of a small number of carefully chosen vertices to a perfect oracle. Their approach keeps the motif counting idea as a first step, in order to remove many inter community edges, and then uses label queries in a second step. They propose two algorithms. The first combines this pruning step with the graph based active learning procedure \(S^2\) \citep{dasarathy2015s2efficientgraphbased}, while the second is more aggressive and then queries one label per connected component. Their main result is that exact recovery becomes possible with high probability using only a sublinear number of queries, even in parameter regimes where the best known unsupervised guarantees fail. This gives a smooth trade off between the hardness of clustering and the query complexity. They do not prove any optimality result for this active setting. Moreover, the theoretical bounds seem somewhat pessimistic. Although the analysis favors the first algorithm, the paper notes that the second often uses fewer queries in practice, which suggests that the proof can likely be improved \citep{chien2020active}.
 
 
-\subsection{\textcolor{red}{Geometric Stochastic Block Model (GSBM)}}
-\citep{sankararaman2018community} \citep{abbe2021community}
+\subsection{Geometric Stochastic Block Model (GSBM)}
 
-
-
-The \emph{Geometric Stochastic Block Model} (GSBM), introduced in \citep{sankararaman2018community} and further developed in \citep{abbe2018community},
-extends the classical SBM by incorporating a latent \textcolor{red}{il est pas latent et c'est un des premiers à ne pas le considerer ainsi} geometric structure. The vertices are embedded in a Euclidean space \(\mathbb{R}^d\), typically according to a Poisson point process, and each vertex is assigned a 
-hidden label \( \sigma^\star(u)\in\{-1,+1\} \). An edge between \(u\) and \(v\) is then drawn with a probability that depends both on their distance \( r=\|X_u-X_v\|_2 \) and on their labels: one typically 
-writes \( p_{\mathrm{in}}^{(n)}(r) \) if \( \sigma^\star(u)=\sigma^\star(v) \), and \( p_{\mathrm{out}}^{(n)}(r) \) otherwise, with in general \( p_{\mathrm{in}}^{(n)}(r)>p_{\mathrm{out}}^{(n)}(r) \). \textcolor{red}{trop chatGPT dans la definition}
- So the model can be naturally \textcolor{red}{naturally c'est quand meme fort car on a fait expres de definir UGCM pour unifier.}written in the UGCM framework as
+In \citep{sankararaman2018community} introduces the Geometric Stochastic Block Model (GSBM) and presents in \citep{abbe2021community} in more detailed way their model. The geometric position are observed, the space \(\mathcal X\coloneqq \mathbb R^d\) is not latent. Here, \(n\) is a scaling parameter and not the number of nodes. Points are sampled as a PPP on a window \(W_n \coloneqq \left[-\frac{n^{1/d}}{2}, \frac{n^{1/d}}{2}\right]^d\) with intensity measure \(\mu_n \coloneqq \lambda \mathrm{Leb}_{\mid W_n}\) with \(\lambda > 0\). The window \(W_n\) has a volume \(n\). They study the case of two symmetric communities. Nodes are connected according to their distance and labels through \(f_{in}^{(n)}\) and \(f_{out}^{(n)}\). We assume for all \(r\geq 0\), \(1 \geq f_{in}^{(n)}(r) \geq f_{out}^{(n)}(r) \geq 0 \) and \(f_{in}^{(n)} \neq f_{out}^{(n)}\) upto Lebesgue measure \(0\). More assumptions on these functions are given according to the regime that we are interested. % We are in the framework of Soft-RGG. 
+The model is then defined as,
 \[
-\mathrm{GSBM} (d,r)
-=
-\mathrm{UGCM}\!\left(\mathbb{R}^d,\|\cdot\|_2,W_n,\mu_n,\{-1,+1\},\mathrm{Ber}(1/2),\{0,1\},K_n\right)
+\mathrm{GSBM}(f_{in}^{(n)}, f_{out}^{(n)},\lambda,d) \coloneqq 
+\mathrm{UGCM}(\mathcal X, \rho_n, W_n, \mu_n, \{-1,+1\}, \text{Ber}(1/2), \{0,1\}, K_n)
 \]
-Here, \(W_n \subset \mathbb{R}^d\) is the observation window and \(\mu_n=\lambda \mathbf{1}_{W_n}(x)\,dx\) is the intensity measure of a Poisson point process on \(W_n\). The observation kernel is Bernoulli and depends both on geometry and on the latent labels:
+where the metric is the Euclidean distance in the sparse regime, \(\rho_n \coloneqq \| \cdot \|_2 \), and toroïdal metric in the logarithmic regime, \(\rho_n \coloneqq \| \cdot \|_{T_n}\). The latter is to avoid boundary effects on \(W_n\) due to the infinity of neighbors a points can have, for the sparse regime this consideration is negligible. Moreover, the kernel is defined as,
 \[
-K_n(x,y,z,z')
-=
-\mathrm{Ber}\!\left(
-p_{\mathrm{in}}^{(n)}(\|x-y\|)\mathbf 1_{\{z=z'\}}
-+
-p_{\mathrm{out}}^{(n)}(\|x-y\|)\mathbf 1_{\{z\neq z'\}}
-\right)
+K_n: (x,y,z,z') \longmapsto \text{Ber}\left(f_{in}^{(n)}(\|x-y\|)\mathbf{1}\{z=z'\} + f_{out}^{(n)}(\|x-y\|)\mathbf{1}\{z\neq z'\}\right)
 \]
 
-The foundational works of Sankararaman \citep{sankararaman2018community} and \citep{abbe2021community} show that geometry profoundly alters the recovery thresholds. In the sparse regime,
-\(\mathbb{E}[D_n]=\Theta(1)\), each vertex carries only a finite amount of local information, which makes partial recovery difficult. \textcolor{red}{ca repete beaucoup ce qui est dit dans le sprecedents paragraphes et ajoute aucune plus value} In the logarithmic regime,
-\(\mathbb{E}[D_n]=\Theta(\log n)\), exact recovery becomes the natural objective. In this setting, they obtain the necessary condition \textcolor{red}{ce résultat est que pour un cas de fonction particulier}
+
+
+In the sparse regime, nodes have a finite expected degree. Accordingly, we assume that the connection functions do not depend on \(n\), namely, \(f_{in}^{(n)} = f_{in}\) and \(f_{out}^{(n)} = f_{out}\), and that
 \[
-\lambda \nu_d\!\left(1-\sqrt{ab}-\sqrt{(1-a)(1-b)}\right)<1
+\int_{\mathbb R^d} f_{in}(\|x\|_2) + f_{out}(\|x\|_2)\mathrm{d}x < \infty
 \]
-where \(\lambda\) is the intensity of the Poisson point process, \(\nu_d\) is the volume of the unit ball in \(\mathbb{R}^d\), and \(a,b\) are the within- and between-community connection parameters in the simple threshold model. 
-They also introduce the \emph{Good-Bad-Grid} algorithm, which partitions the space into cells, identifies sufficiently regular regions, and then propagates community information locally. 
+The metric is Euclidean, which allows the finite graphs to be viewed as restrictions of a single infinite random graph \citep{last2018lectures}. In this regime, the main question is weak recovery. 
+By monotonicity, there exists a critical value \(\lambda_c \in [0,\infty]\) separating the unsolvable and solvable phases. The first result is an impossibility criterion based on the auxiliary random connection model
+\(H_{\lambda,g(\cdot),d}\) defined on the same PPP of intensity \(\lambda\) where two points at distance \(r\) are connected independently with probability \(g(r)\). Denoting by \(\theta(H_{\lambda,g(\cdot),d})\) the percolation probability, the probability that the connected component of a typical node is infinite. They prove that if \(\theta(H_{\lambda,f_{in}-f_{out},d})=0\) then weak recovery is impossible. In other words, if the informative part \(f_{in}-f_{out}\) does not generate an infinite connected component, then the community information cannot propagate at long range. In particular, for \(d=1\), weak recovery is impossible for every \(\lambda>0\). For \(d\ge 2\), this yields the explicit lower bound
+\[
+\lambda \le \left(\int_{\mathbb R^d}\bigl(f_{in}(\|x\|_2)-f_{out}(\|x\|_2)\bigr)\,dx\right)^{-1}
+\quad\Longrightarrow\quad
+\text{weak recovery is impossible}
+\]
 
-\textcolor{red}{pas mal, à voir plus tard}More recently,\citep{gaudio2024exactcommunityrecoverygeometric}  showed that this threshold can actually be achieved by a linear-time algorithm built in two stages: a local propagation step producing an almost-exact labeling, 
-followed by a vertex-wise refinement based on a Poisson test. 
-Finally, \citep{gaudio2024exactcommunityrecoverygeometric} extended this perspective to more general Euclidean random graphs, in which the GSBM appears as a special case, and expressed the exact recovery threshold in terms of a Chernoff--Hellinger divergence.
+On the positive side, they introduce the Good Bad Grid (GBG) algorithm. Although the graph is globally sparse, it remains locally dense because geometry creates many short loops and common neighbors. Hence, for two nearby nodes, the number of common neighbors carries information on whether they belong to the same community. The algorithm first compares nearby pairs using such local statistics, then partitions the space into small cells and propagates consistent decisions across the grid. Its analysis relies on a coupling with a dependent site percolation process. They prove that if \(d\ge 2\) then there exists \(\lambda_{upper}<\infty\) such that weak recovery is solvable for all \(\lambda\ge \lambda_{upper}\). Combined with the lower bound above, this implies
+\(0<\lambda_c<\infty\) so the sparse regime exhibits a non-trivial phase transition \citep{abbe2021community}.
+In some special cases, they obtain a sharp characterization of the threshold. If connection functions are hard thresholds, that is, if there exist \(R_{in}, R_{out} \geq 0\) such that,
+\[
+f_{in}: r \mapsto \mathbf{1}_{\{r\le R_{in}\}}
+\qquad\text{and}\qquad
+f_{out}: r \mapsto \mathbf{1}_{\{r\le R_{out}\}}
+\qquad\text{and}\qquad
+R_{in}\ge R_{out}
+\]
+then weak recovery is solvable if and only if \(\theta(H_{\lambda,f_{in}-f_{out},d})>0\).
+So, in this hard threshold case, the phase transition is fully characterized. More generally, they also show a weak form of asymptotic optimality for GBG, when the signal is strong enough, the fraction of correctly classified vertices can be made arbitrarily close to \(1\). In our notation, this means that for every \(\varepsilon>0\), there exists \(\lambda_0>0\) such that for all \(\lambda\ge \lambda_0\),
+\[
+\lim_{n\to\infty}\mathbb P\!\left(
+A_n(\hat{\sigma}^{GBG, \lambda}_n,\sigma^\star)\ge 1-\varepsilon
+\right)=1
+\]
 
-\textcolor{red}{conclusion : l'idée est là, mais c'est trop chatGPT. Pas assez centré sur ce qui est essentiel. C'est LE papier (ou modèle) de la litterature, il est pas du tout assez mis en avant ni détaillé. Le régime sparse est bien trop vite écarté, un paragraphe est mériéé pour lui. Il faut aussi parler de la partie "distinguishability" qui est très intéressante et qui a été oubliée alors qu ec'est le seul papier qui en parle dans la litterature. }
+% This does not imply that GBG is optimal for every fixed \(\lambda\), and the exact characterization of the weak recovery threshold remains open beyond these special cases \citep{abbe2021community}.
+
+\textcolor{red}{paragraphe : Distinguablity}
+\textcolor{red}{paragrpahe: logarithmic}
+\textcolor{red}{paragrapeh ouverture}
+
+
+
+
+
+
 
 \subsection{\textcolor{red}{(Geometric Kernel Block Model, GKBM)}}
 \citep{avrachenkov2024community} 
