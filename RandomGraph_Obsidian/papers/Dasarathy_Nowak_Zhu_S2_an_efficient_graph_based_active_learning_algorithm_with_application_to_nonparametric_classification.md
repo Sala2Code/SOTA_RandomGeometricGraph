@@ -1,0 +1,1 @@
+Osef : S^2 algorithme utile pour [[Chien_Tulino_LLorca_Active_Learning_in_the_geometric_block_model]].
