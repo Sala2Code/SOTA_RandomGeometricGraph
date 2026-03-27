@@ -49,7 +49,8 @@ This model comes from the Erd\H{o}s-R\'enyi graph, where each node connects to o
 see \citep{abbe2018community}. Nonetheless, it has some drawbacks, since it is unrealistic to think that every node can connect to every other one with the same probability scale.
 Around the same time as Erd\H{o}s-R\'enyi, the RGG was introduced by \citep{gilbert1961random}.
 Adding geometric information allows us to mimic some emergent behaviours of real networks,
-such as sparsity \citep{Del_Genio_2011}, the "small-world" property \citep{watts1998collective}
+such as sparsity \citep{Del_Genio_2011},
+%the "small-world" property \citep{watts1998collective} % c'est pas du tout le cas pour les grpahes géométriques considérés !! (à ajouter pour hypeorblic dans Ouverture)
 or transitivity, namely the idea that a friend of a friend is more likely to be a friend.
 
 
@@ -233,15 +234,15 @@ Finally, \citep{chien2020active} studies active learning in the latent GBM with 
 
 \subsection{Geometric Stochastic Block Model (GSBM)}
 
-\citep{sankararaman2018community} introduce the Geometric Stochastic Block Model (GSBM) and later developed in full detail in \citep{abbe2021community}. The geometric positions are observed, the space \(\mathcal X\coloneqq \mathbb R^d\) is not latent. Here, \(n\) is a scaling parameter and not the number of nodes. Points are sampled as a PPP on a window \(W_n \coloneqq \left[-\frac{n^{1/d}}{2}, \frac{n^{1/d}}{2}\right]^d\) with intensity measure \(\mu_n \coloneqq \lambda \mathrm{Leb}_{\mid W_n}\) with \(\lambda > 0\). The window \(W_n\) has a volume \(n\). They study the case of two symmetric communities. Nodes are connected according to their distance and labels through \(f_{in}^{(n)}\) and \(f_{out}^{(n)}\). We assume for all \(r\geq 0\), \(1 \geq f_{in}^{(n)}(r) \geq f_{out}^{(n)}(r) \geq 0 \) and \(f_{in}^{(n)} \neq f_{out}^{(n)}\) upto Lebesgue measure \(0\). More assumptions on these functions are given according to the regime that we are interested. % We are in the framework of Soft-RGG. 
+\citep{sankararaman2018community} introduce the Geometric Stochastic Block Model (GSBM) which is later developed in full detail in \citep{abbe2021community}. The geometric positions are observed, the space \(\mathcal X\coloneqq \mathbb R^d\) is not latent. Here, \(n\) is a scaling parameter and not the number of nodes. Points are sampled as a PPP on a window \(W_n \coloneqq \left[-\frac{n^{1/d}}{2}, \frac{n^{1/d}}{2}\right]^d\) with intensity measure \(\mu_n \coloneqq \lambda \mathrm{Leb}_{\mid W_n}\) with \(\lambda > 0\). The window \(W_n\) has a volume \(n\). They study the case of two symmetric communities. Nodes are connected according to their distance and labels through \(f_{in}^{(n)}\) and \(f_{out}^{(n)}\). We assume for all \(r\geq 0\), \(1 \geq f_{in}^{(n)}(r) \geq f_{out}^{(n)}(r) \geq 0 \) and \(f_{in}^{(n)} \neq f_{out}^{(n)}\) up to Lebesgue measure \(0\). More assumptions on these functions are given according to the regime that we are interested. % We are in the framework of Soft-RGG. 
 The model is then defined as,
 \[
 \mathrm{GSBM}(f_{in}^{(n)}, f_{out}^{(n)},\lambda,d) \coloneqq 
 \mathrm{UGCM}(\mathcal X, \rho_n, W_n, \mu_n, \{-1,+1\}, \text{Ber}(1/2), \{0,1\}, K_n)
 \]
-where the metric is the Euclidean distance in the sparse regime, \(\rho_n \coloneqq \| \cdot \|_2 \), and toroïdal metric in the logarithmic regime, \(\rho_n \coloneqq \| \cdot \|_{T_n}\). The latter is to avoid boundary effects on \(W_n\) due to the infinity of neighbors a points can have, for the sparse regime this consideration is negligible. Moreover, the kernel is defined as,
+where the metric is the Euclidean distance in the sparse regime, \(\rho_n \coloneqq \| \cdot \|_2 \), and toroidal metric in the logarithmic regime, \(\rho_n \coloneqq \| \cdot \|_{T_n}\). The latter is to avoid boundary effects on \(W_n\) due to the infinity of neighbors a points can have, for the sparse regime this consideration is negligible. Moreover, the kernel is defined as,
 \[
-K_n: (x,y,z,z') \longmapsto \text{Ber}\left(f_{in}^{(n)}(\|x-y\|)\mathbf{1}\{z=z'\} + f_{out}^{(n)}(\|x-y\|)\mathbf{1}\{z\neq z'\}\right)
+K_n: (x,y,z,z') \longmapsto \text{Ber}\left(f_{in}^{(n)}(\rho_n(x-y))\mathbf{1}\{z=z'\} + f_{out}^{(n)}(\rho_n(x-y))\mathbf{1}\{z\neq z'\}\right)
 \]
 
 
@@ -252,14 +253,18 @@ In the sparse regime, nodes have a finite expected degree. Accordingly, we assum
 \]
 The metric is Euclidean, which allows the finite graphs to be viewed as restrictions of a single infinite random graph \citep{last2018lectures}. In this regime, the main question is weak recovery. 
 By monotonicity, there exists a critical value \(\lambda_c \in [0,\infty]\) separating the unsolvable and solvable phases. The first result is an impossibility criterion based on the auxiliary random connection model
-\(H_{\lambda,g(\cdot),d}\) defined on the same PPP of intensity \(\lambda\) where two points at distance \(r\) are connected independently with probability \(g(r)\). Denoting by \(\theta(H_{\lambda,g(\cdot),d})\) the percolation probability, the probability that the connected component of a typical node is infinite. They prove that if \(\theta(H_{\lambda,f_{in}-f_{out},d})=0\) then weak recovery is impossible. In other words, if the informative part \(f_{in}-f_{out}\) does not generate an infinite connected component, then the community information cannot propagate at long range. In particular, for \(d=1\), weak recovery is impossible for every \(\lambda>0\). For \(d\ge 2\), this yields the explicit lower bound
+\(H_{\lambda,g(\cdot),d}\) defined on the same PPP of intensity \(\lambda\) where two points at distance \(r\) are connected independently with probability \(g(r)\). Denoting by \(\theta(H_{\lambda,g(\cdot),d})\) the percolation probability, the probability that the connected component of a typical node is infinite. They prove that if \(\theta(H_{\lambda,f_{in}-f_{out},d})=0\) then weak recovery is impossible. In other words, if the informative part \(f_{in}-f_{out}\) does not generate an infinite connected component, then the community information cannot propagate at long range. In particular, for \(d=1\), weak recovery is impossible for every \(\lambda>0\).
+To prove the lower bound, they introduce an auxiliary problem called Information Flow from Infinity.
+%It asks whether one can estimate the label of a typical node better than random, given the graph, the node locations, and the true labels of nodes far away from it.
+They prove that this problem is easier than community detection, so its impossibility already implies the impossibility of weak recovery \citep{abbe2021community}.
+For \(d\ge 2\), this yields the explicit lower bound,
 \[
 \lambda \le \left(\int_{\mathbb R^d}\bigl(f_{in}(\|x\|_2)-f_{out}(\|x\|_2)\bigr)\,dx\right)^{-1}
 \quad\Longrightarrow\quad
 \text{weak recovery is impossible}
 \]
 
-On the positive side, they introduce the Good Bad Grid (GBG) algorithm. Although the graph is globally sparse, it remains locally dense because geometry creates many short loops and common neighbors. Hence, for two nearby nodes, the number of common neighbors carries information on whether they belong to the same community. The algorithm first compares nearby pairs using such local statistics, then partitions the space into small cells and propagates consistent decisions across the grid. Its analysis relies on a coupling with a dependent site percolation process. They prove that if \(d\ge 2\) then there exists \(\lambda_{upper}<\infty\) such that weak recovery is solvable for all \(\lambda\ge \lambda_{upper}\). Combined with the lower bound above, this implies
+On the positive side, they introduce the Good Bad Grid (GBG) algorithm, its complexity is \(O(n^2)\). Although the graph is globally sparse, it remains locally dense because geometry creates many short loops and common neighbors. Hence, for two nearby nodes, the number of common neighbors carries information on whether they belong to the same community. The algorithm first compares nearby pairs using such local statistics, then partitions the space into small cells and propagates consistent decisions across the grid. Its analysis relies on a coupling with a dependent site percolation process. They prove that if \(d\ge 2\) then there exists \(\lambda_{upper}<\infty\) such that weak recovery is solvable for all \(\lambda\ge \lambda_{upper}\). Combined with the lower bound above, this implies
 \(0<\lambda_c<\infty\) so the sparse regime exhibits a non-trivial phase transition \citep{abbe2021community}.
 In some special cases, they obtain a sharp characterization of the threshold. If connection functions are hard thresholds, that is, if there exist \(R_{in}, R_{out} \geq 0\) such that,
 \[
@@ -279,12 +284,35 @@ A_n(\hat{\sigma}^{GBG, \lambda}_n,\sigma^\star)\ge 1-\varepsilon
 
 % This does not imply that GBG is optimal for every fixed \(\lambda\), and the exact characterization of the weak recovery threshold remains open beyond these special cases \citep{abbe2021community}.
 
-A related question, well studied in the SBM, is whether a graph with communities can be distinguished from a null model without community structure. In \citep{abbe2021community}, the authors formulate the same testing problem for the GSBM. The null model is a random connection model without communities, with the same spatial distribution of nodes and connection function \((f_{in}+f_{out})/2\). Hence, the null and alternative models have the same average degree. They prove that, as soon as \(f_{in}\neq f_{out}\) on a set of positive Lebesgue measure, the two induced probability measures are mutually singular. Therefore, the distinguishability problem is solvable with probability \(1-o_n(1)\) for every \(\lambda>0\), so it exhibits no phase transition. They construct an explicit test based on local triangle profiles. A interesting fact is that, in the sparse regime, one may detect the presence of communities while still being unable to recover a partition better than random. This is in sharp contrast with the sparse SBM with two communities, where distinguishability and weak recovery coincide \citep{mossel2012stochasticblockmodelsreconstruction}.
-
-\textcolor{red}{paragrpahe: logarithmic}
-\textcolor{red}{paragrapeh ouverture}
+A related question, well studied in the SBM, is whether a graph with communities can be distinguished from a null model without community structure. In \citep{abbe2021community}, the authors formulate the same testing problem for the GSBM. The null model is a random connection model without communities, with the same spatial distribution of nodes and connection function \((f_{in}+f_{out})/2\). Hence, the null and alternative models have the same average degree. They prove that, as soon as \(f_{in}\neq f_{out}\) on a set of positive Lebesgue measure, the two induced probability measures are mutually singular. Therefore, the distinguishability problem is solvable with probability \(1-o_n(1)\) for every \(\lambda>0\), so it exhibits no phase transition. They construct an explicit test based on local triangle profiles. An interesting fact is that, in the sparse regime, one may detect the presence of communities while still being unable to recover a partition better than random. This is in contrast with the sparse SBM with two communities, where distinguishability and weak recovery coincide \citep{mossel2012stochasticblockmodelsreconstruction}.
 
 
+In the logarithmic regime, the connection functions now depend on \(n\) and satisfy for \(C_{in}>C_{out}\ge 0\),
+\[
+\int_{\mathbb R^d} f_{in}^{(n)}(\|x\|_{T_n})\,dx = C_{in}\log n
+\qquad
+\int_{\mathbb R^d} f_{out}^{(n)}(\|x\|_{T_n})\,dx = C_{out}\log n
+\]
+This is also the natural scale of connectivity for geometric graphs, which explains why exact recovery is studied in this regime. However, connectivity is not a necessary condition for exact recovery in the GSBM since the node locations are observed, isolated or weakly connected vertices may still be classified from their geometric position relative to the others.
+For the impossibility result, they introduce the genie estimator and the notion of a flip bad vertex, namely a vertex whose label is misclassified by the local likelihood test when all other labels are revealed. Writing \(N_n^{\mathrm{flip}}\) for the number of such vertices, they prove that if \(\mathbb E(N_n^{\mathrm{flip}})\xrightarrow[n\to\infty]{} \infty\) and if long range correlations between flip bad events are negligible, then \(N_n^{\mathrm{flip}}>0\) with high probability. Therefore exact recovery is impossible \citep{abbe2021community}.
+On the positive side, they adapt the GBG algorithm to this regime. The local pairwise tests become much more accurate, since the number of common neighbors is now of order \(\log n\), and the proof no longer relies on the existence of a giant good component. Instead, they show that when the signal is strong enough, every cell is good with high probability, which yields exact recovery \citep{abbe2021community}.
+
+They then focus on a particular logarithmic model, defined by
+\[
+f_{in}^{(n)}(r)=a\,\mathbf 1_{\{r\le (\log n)^{1/d}\}}
+\qquad
+f_{out}^{(n)}(r)=b\,\mathbf 1_{\{r\le (\log n)^{1/d}\}}
+\qquad 0\le b<a\le 1
+\]
+This should be viewed as a non trivial instance of the logarithmic regime. Denote by \(\nu_d\) the volume of the unit ball in \(\mathbb R^d\). In this case, they obtain an explicit necessary condition for exact recovery,
+\[
+\lambda \nu_d\Bigl(1-\sqrt{ab}-\sqrt{(1-a)(1-b)}\Bigr)<1
+\quad\Longrightarrow\quad
+\text{exact recovery is impossible}
+\]
+Then, they also prove that there exists \(C(a,b,d) \geq 0\) such that
+\(\lambda \nu_d\Bigl(1-\sqrt{ab}-\sqrt{(1-a)(1-b)}\Bigr)>C(a,b,d)\) 
+is sufficient for exact recovery by GBG. They conjecture that the lower bound is in fact sharp. This conjecture was later confirmed by \citep{gaudio2024exact}.
 
 
 
