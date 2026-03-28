@@ -92,6 +92,12 @@ and considered this as a community detection problem, \citep{valdivia2019latent}
 This is a different problem from the one we are interested in,
 and it's in some sense harder, because one wants to recover the position (a continuous label) of each node rather than a community (a discrete label).
 \textcolor{red}{TODO : parler des gaussian-mixture model + trouver ref ; voir commentaire latex !}
+A related but distinct line of work considers mixture-based latent position models, such as the Gaussian Mixture Block Model
+\citep{li2024spectralclusteringgaussianmixture}
+, where community labels determine node positions using gaussian distributions. See \citep{reynolds2009gaussian} \citep{NIPS1999_97d98119}.
+This differs from the geometric block models considered here where geometry modulates the pairwise interaction law rather than the node's spatial distribution.
+ We therefore do not include these models in the core of this survey.
+
 % chatGPT exemple. L'idée est de recentré le probleme et de rediriger le lecteur (2-3 refs c'est bien) : A related but distinct line of work considers mixture-based latent position models, such as the Gaussian Mixture Block Model, in which the node positions themselves depend on the community label. This differs from the geometric block models considered here, where geometry affects the pairwise interaction law rather than the marginal distribution of node locations. We therefore do not include these models in the core of this survey.
 
 
