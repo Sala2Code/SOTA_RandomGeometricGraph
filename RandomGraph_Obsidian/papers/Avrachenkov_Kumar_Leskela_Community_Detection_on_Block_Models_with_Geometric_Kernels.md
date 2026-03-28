@@ -18,6 +18,9 @@ Très bonne introduction qui explique les précédents travaux, leur configurati
 
 Ils considèrent 2 communautés sur un tore 1D dans le régime logarithmique (critical connectivity regime for soft random geometric graphs). 
 
+Je crois ils se sont trompés, [[Abbe_Baccelli_Sankararaman_Community_Detection_on_Euclidean_Random_Graphs]] n'étudient pas l'almost recovery pour le cas sparse.
+> For models involving geometric interactions, Abbe, Baccelli, and Sankararaman [2] investigate almost exact recovery in the sparse regime and exact recovery in the logarithmic regime
+
 # Ref
 + [[Abbe_Community_Detection_and_Stochastic_Block_Models_Recent_Developments]]
 + [[Abbe_Baccelli_Sankararaman_Community_Detection_on_Euclidean_Random_Graphs]]

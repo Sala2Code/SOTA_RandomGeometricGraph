@@ -194,7 +194,7 @@ Historically, one of the earliest geometric models for community detection is th
 \[
 \mathrm{GBM}(r_{in}, r_{out}, d) \coloneqq \mathrm{UGCM}(\mathcal X,\|\cdot\|_2,\ \mathcal X ,  \mathrm{Unif}( \mathcal X ),  \{-1,+1\},  \text{Ber}(1/2),  \{0,1\}, K_n)
 \]
-with \(K_n(X_u, X_v, Z_u, Z_v) = \mathbf{1}\{\langle X_u, X_v \rangle \geq r_{Z_uZ_v}\} \).
+with \(K_n : (x,y,z,z') \mapsto \mathbf{1}\{\langle x, y \rangle \geq r_{z,z'}\} \).
 % In the circular case, this is equivalent after reparametrization to a threshold rule based either on the Euclidean distance or on the geodesic distance.
 The condition \(r_{in}>r_{out}\) ensures that edges within communities are denser than across communities. The space \(\mathcal X\) is assumed latent, so recovery is done only from the adjacency matrix.
 
@@ -242,7 +242,7 @@ The model is then defined as,
 \]
 where the metric is the Euclidean distance in the sparse regime, \(\rho_n \coloneqq \| \cdot \|_2 \), and toroidal metric in the logarithmic regime, \(\rho_n \coloneqq \| \cdot \|_{T_n}\). The latter is to avoid boundary effects on \(W_n\) due to the infinity of neighbors a points can have, for the sparse regime this consideration is negligible. Moreover, the kernel is defined as,
 \[
-K_n: (x,y,z,z') \longmapsto \text{Ber}\left(f_{in}^{(n)}(\rho_n(x-y))\mathbf{1}\{z=z'\} + f_{out}^{(n)}(\rho_n(x-y))\mathbf{1}\{z\neq z'\}\right)
+K_n: (x,y,z,z') \longmapsto \text{Ber}\left(f_{in}^{(n)}(\rho_n(x,y))\mathbf{1}\{z=z'\} + f_{out}^{(n)}(\rho_n(x,y))\mathbf{1}\{z\neq z'\}\right)
 \]
 
 
@@ -299,17 +299,17 @@ On the positive side, they adapt the GBG algorithm to this regime. The local pai
 
 They then focus on a particular logarithmic model, defined by
 \[
-f_{in}^{(n)}(r)=a\,\mathbf 1_{\{r\le (\log n)^{1/d}\}}
+f_{in}^{(n)}: r \mapsto a\,\mathbf 1_{\{r\le (\log n)^{1/d}\}}
 \qquad
-f_{out}^{(n)}(r)=b\,\mathbf 1_{\{r\le (\log n)^{1/d}\}}
+f_{out}^{(n)}: r \mapsto b\,\mathbf 1_{\{r\le (\log n)^{1/d}\}}
 \qquad 0\le b<a\le 1
 \]
 This should be viewed as a non trivial instance of the logarithmic regime. Denote by \(\nu_d\) the volume of the unit ball in \(\mathbb R^d\). In this case, they obtain an explicit necessary condition for exact recovery,
-\[
-\lambda \nu_d\Bigl(1-\sqrt{ab}-\sqrt{(1-a)(1-b)}\Bigr)<1
-\quad\Longrightarrow\quad
-\text{exact recovery is impossible}
-\]
+\begin{equation}\label{eq:GBM_log_impossibility}
+    \lambda \nu_d\Bigl(1-\sqrt{ab}-\sqrt{(1-a)(1-b)}\Bigr)<1
+    \quad\Longrightarrow\quad
+    \text{exact recovery is impossible}
+\end{equation}
 Then, they also prove that there exists \(C(a,b,d) \geq 0\) such that
 \(\lambda \nu_d\Bigl(1-\sqrt{ab}-\sqrt{(1-a)(1-b)}\Bigr)>C(a,b,d)\) 
 is sufficient for exact recovery by GBG. They conjecture that the lower bound is in fact sharp. This conjecture was later confirmed by \citep{gaudio2024exact}.
@@ -317,10 +317,25 @@ is sufficient for exact recovery by GBG. They conjecture that the lower bound is
 
 
 
+\subsection{Geometric Kernel Block Model (GKBM)}
 
-\subsection{\textcolor{red}{(Geometric Kernel Block Model, GKBM)}}
-\citep{avrachenkov2024community} 
-\citep{allem2025multicommunityspectralclusteringgeometric}
+\citep{avrachenkov2024community} introduce the Geometric Kernel Block Model (GKBM). The geometric positions are observed, so the space \(\mathcal X \coloneqq  \left]-\frac12,\frac12 \right ] \) is not latent, and it is equipped with the toroidal metric \(\rho\). Here again, \(n\) is a scaling parameter and not the number of nodes.
+Points are sampled as a PPP on \(\mathcal{X}\) with intensity measure \(\mu_n \coloneqq \lambda n \mathrm{Leb}_{\mid \mathcal{X}}\) with \(\lambda > 0\). They focus in the one dimensional case with two symmetric communities, although the techniques may extend to higher dimensions. The link probabilities are defined according to \(\phi : \mathbb{R}^+ \to [0,1]\) measurable with a support bounded by \(\kappa >0\). Let \(a,b \in [0,1]\),
+\[
+\mathrm{GKBM}(\lambda,a,b,\phi)\coloneqq
+\mathrm{UGCM}(\mathcal X,\rho,\mathcal X,\mu_n,\{-1,+1\},\mathrm{Ber}(1/2),\{0,1\},K_n)
+\]
+Moreover they study the logarithmic regime so the kernel is set as,
+\[
+K_n:(x,y,z,z')\longmapsto \mathrm{Ber}\!\left(\bigl(a\mathbf 1\{z=z'\}+b\mathbf 1\{z\neq z'\}\bigr)\phi\!\left(\frac{n}{\log n}\rho(x,y)\right)\right)
+\]
+
+The hard threshold version of the logarithmic GSBM leads to the explicit bound \eqref{eq:GBM_log_impossibility}. For the GKBM, the authors replace this hard threshold by a more general kernel on their restricted one dimensional model, and introduce the information quantity
+\[
+I_\phi(a,b)\coloneqq 2\int_{\mathbb R_+}\left(1-\sqrt{ab}\,\phi(x)-\sqrt{(1-a\phi(x))(1-b\phi(x))}\right)\,dx
+\]
+This quantity plays the same role as in \citep{abbe2021community}. In fact, when \(\phi=\mathbf 1_{[0,1]}\), it reduces to the one dimensional hard threshold case. Their main result shows that exact recovery is impossible if \(\lambda \kappa<1\) or \(\lambda I_\phi(a,b)<1\). Conversely, if \(\lambda \kappa>1\) and \(\lambda I_\phi(a,b)>1\), then exact recovery is achievable under the additional assumption that \(\phi(x)>0\) for all \(x\in[0,\kappa]\) \citep{avrachenkov2024community}. They also propose a two phase algorithm, adapted from the recent GSBM exact recovery approach, where labels are first recovered on a small block and then propagated. The paper states that this procedure runs in time linear in the number of edges, this corresponds to a complexity of \(O(n\log n)\), in the logarithmic regime \citep{avrachenkov2024community}.
+
 
 \subsection{\textcolor{red}{Geometric Hidden Community Model (GHCM)}}
 
@@ -339,6 +354,8 @@ Méthode spectrale + Robustesse (la perturbation est géométrique) \citep{peche
 
 Méthode spectrale sur Soft Geometric Block Model (SGBM) (Generalisation de Geomemetric SBM)
 \citep{avrachenkov2021higher}
+
+\citep{allem2025multicommunityspectralclusteringgeometric}
 
 
 
@@ -366,6 +383,8 @@ Méthode spectrale sur Soft Geometric Block Model (SGBM) (Generalisation de Geom
 % des attributs de nœuds, souvent via des approches
 % d'embedding ou de factorisation non négative
 
+
+Nous devons estimer les paramètres des modèles. Dans le cas de Sankararamn et Baccelli, GBG peut être adapté.
 
 
 \end{itemize}
