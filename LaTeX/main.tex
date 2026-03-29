@@ -40,8 +40,7 @@ local information based on real or abstract proximity.  % The probability of con
 In social networks, two individuals are more likely to be friends if they are geographically close,
 or if they share similar interests, age, etc.
 More concrete examples of RGG can be found in wireless networks \citep{gomez2015case}, in biology \citep{higham2008fitting},
-and also in community detection problems \citep{sankararaman2020comhapdet}
-\textcolor{red}{ word embedding, physic, ...}.
+and also in community detection problems \citep{sankararaman2020comhapdet}.
 
 The main reference model for community detection is the Stochastic Block Model (SBM)
 \citep{holland1983stochastic}. Each node carries a hidden community label and edge probabilities depend on whether two nodes belong to the same community or not.
@@ -102,7 +101,7 @@ and it's in some sense harder, because one wants to recover the position (a cont
 
 \section{Problem setting and inference tasks}\label{sec:setting}
 
-Formally, we observe a graph \(G \coloneqq (V,E)\), where \(V\) is the vertex set and \(E\) is the set of edges between vertices. Throughout the report, \(n\) denotes the asymptotic scaling parameter. Depending on the model, the observed number of vertices may be either deterministic or random, but is of order \(n\). We consider a simple undirected graph \textcolor{red}{Une remarque là dessus ? Pourquoi non-orienté est classique comme hypothese ?}, without self-loops. The vertices are partitioned into \(k\) communities \(C_1,\dots,C_k\), so
+Formally, we observe a graph \(G \coloneqq (V,E)\), where \(V\) is the vertex set and \(E\) is the set of edges between vertices. Throughout the report, \(n\) denotes the asymptotic scaling parameter. Depending on the model, the observed number of vertices may be either deterministic or random, but is of order \(n\). We consider a simple undirected graph, without self-loops. The vertices are partitioned into \(k\) communities \(C_1,\dots,C_k\), so
 \(V=\bigsqcup_{i=1}^k C_i\). We denote by \(\sigma^\star:V\to [k]\) the ground-truth community label function, defined by \(\sigma^\star(v)=i\) whenever \(v\in C_i\). The community structure is hidden, and our goal is to recover it from the observed data.
 
 An estimator is therefore a function of the observations. Depending on the model, the observations may consist only of the graph \(G\), or of the graph together with the node locations \(X=(X_v)_{v\in V}\). Accordingly, we write the estimator as \(\hat{\sigma}=\hat{\sigma}(G)\) or \(\hat{\sigma}=\hat{\sigma}(G,X)\), and we view \(\hat{\sigma}:V\to [k]\) as an estimated labeling.
@@ -156,8 +155,12 @@ We say that exact recovery is achievable if there exists a sequence of estimator
 
 Most works in the literature focus on the case \(k=2\). Although several ideas extend beyond this setting, this is also the framework that we adopt in the following, except when specified otherwise. In that case, it is convenient to encode the labels by \(\{-1,+1\}\), instead of \([2] = \{1,2\}\). Then “up to permutation” reduces to a global sign flip.
 
-Each vertex also belongs to a space \(\mathcal X\). In the following, we specify each time whether this space is latent or observed. For theoretical analysis, \(\mathcal{X}\) is often chosen for mathematical convenience. The Euclidean space \(\mathbb{R}^{d-1}\) is a natural reference because of its symmetry, homogeneity, isotropy, and direct geometric interpretation. See \citep{abbe2021community}, \textcolor{red}{Citer ceux qui sont euclidiens}. \textcolor{red}{In the following, \(d\) is an integer.}
-We also encounter the torus, mainly to avoid boundary effects and to focus on the core ideas of the proofs, \textcolor{red}{Todo citer}. Lastly, for latent models, the high-dimensional unit sphere \(\mathbb{S}^{d-1}\) is a standard reference space to model similarity, and it also provides convenient spectral properties \citep{decastro2020adaptiveestimationnonparametricgeometric}. A summary of theoretical works on \(\mathbb{S}^{d-1}\) is given in \citep{duchemin2023random}.
+Each vertex also belongs to a space \(\mathcal X\). In the following, we specify each time whether this space is latent or observed. For theoretical analysis, \(\mathcal{X}\) is often chosen for mathematical convenience. The Euclidean space \(\mathbb{R}^{d}\) is a natural reference because of its symmetry, homogeneity, isotropy, and direct geometric interpretation.
+% See \citep{abbe2021community}, \textcolor{red}{Citer ceux qui sont euclidiens}.
+In the following, \(d\) is an integer.
+We also encounter the torus, mainly to avoid boundary effects and to focus on the core ideas of the proofs. 
+%\textcolor{red}{Todo citer}.
+Lastly, for latent models, the high-dimensional unit sphere \(\mathbb{S}^{d}\) is a standard reference space to model similarity, and it also provides convenient spectral properties \citep{decastro2020adaptiveestimationnonparametricgeometric}. A summary of theoretical works on \(\mathbb{S}^{d}\) is given in \citep{duchemin2023random}.
 
 In Section~\ref{sec:models} we present models used throughout the literature. Hence, we suggest a model to unify them while remaining close to the notation used in the papers. We call it the \textit{Unified Geometric Community Model} (UGCM) and it is defined as,
 \[
@@ -316,7 +319,7 @@ This should be viewed as a non trivial instance of the logarithmic regime. Denot
 \end{equation}
 Then, they also prove that there exists \(C(a,b,d) \geq 0\) such that
 \(\lambda \nu_d\Bigl(1-\sqrt{ab}-\sqrt{(1-a)(1-b)}\Bigr)>C(a,b,d)\) 
-is sufficient for exact recovery by GBG. They conjecture that the lower bound is in fact sharp. This conjecture was later confirmed by \citep{gaudio2024exact}.
+is sufficient for exact recovery by GBG. They conjecture that the lower bound is in fact sharp. This conjecture was later confirmed by \citep{gaudio2024exactcommunityrecoverygeometric}. The same sharp threshold also appears as a corollary of a more general model, GHCM, developed in \citep{gaudio2024exact}.
 
 More recently, \citep{gaudio2025exactrecoverygeometricsbm} extended this sharp result. They consider a model where edges are only possible if they are in a visibility radius \(r(\log n)^{1/d}\) with \(r>0\), and assume mild regularity conditions on the connection functions such as supported on \([0,r]\), a finite number of intersections between \(f_{in}\) and \(f_{out}\), and no interval on which the two functions remain arbitrarily close. This includes in particular the previous indicator case, but also broad classes of piecewise regular or continuous kernels. Their main result is a complete characterization of the exact recovery threshold through the information quantity
 \[
@@ -388,11 +391,12 @@ _+\) is the Chernoff-Hellinger divergence given by
 D_+(\theta_z,\theta_{z'})
 =
 1-\inf_{t\in[0,1]}
-\sum_{r\in Z}\pi_r \int p_{zr}(y)^t p_{z'r}(y)^{1-t}\,dy
+\sum_{r\in Z}\pi_r \int_{ \mathcal{Y} } p_{zr}(y)^t p_{z'r}(y)^{1-t}\,dy
 \]
 with the integral replaced by a sum in the discrete case. Above the threshold, exact recovery is achieved by a polynomial time algorithm in two phases under two main technical assumptions. The first phase success almost exact recovery using MAP estimator. % c'est quoi cet estimateur ??
 Then, the second phase refines the labeling and the model exhibits the same local to global amplification phenomenon as in the SBM \citep{abbe2018community}
-Both assumptions are a bounded log-likelihood ratio, and a distinctness condition requiring that for every \(z\in Z\), the laws \(P_{zi}\) and \(P_{zj}\) are different whenever \(i\neq j\). The latter is used for the first phase during the propagation.
+Both assumptions are a bounded log-likelihood ratio, and a distinctness condition requiring that for every \(z\in Z\), the laws \(P_{zi}\) and \(P_{zj}\) are different whenever \(i\neq j\). The first one can however be relaxed in some special cases, in particular for Gaussian variants such as \(\mathbb Z_2\)-synchronization \citep{gaudio2024exact}.
+The latter is used for the first phase during the propagation.
 In dimension \(1\), it requires the additional condition \(\lambda>1\). This extra assumption only appears when the model still has non trivial permissible relabelings, that is, when the set
 \[
 \Omega_{\pi,P}\coloneqq \{\omega:Z\to Z \text{ permutation}, \forall z,z'\in Z \\pi_z=\pi_{\omega(z)} \text{ and } P_{zz'}=P_{\omega(z)\omega(z')} \}
@@ -404,14 +408,30 @@ A subsequent work removes this distinctness assumption in a relevant two communi
 This asymmetric setting captures, for instance, geometric planted dense subgraph and geometric submatrix localization, where the goal is to identify one structured community against a homogeneous background. 
 The information theoretic threshold is not changed. The difficulty is to build the first phase without distinctness. To resolve this, informally, the propagation of label is made by a clever and adaptive way. This yields almost exact recovery when \(\pi_1\lambda \nu_d>1\), and then exact recovery above the usual threshold \citep{gaudio2025sharpexactrecoverythreshold}. About two community setting, the algorithm is robust to monotone semirandom perturbation, that's to say where an adversary is allowed to add intra community edges and delete inter community edges \citep{gaudio2024exact}.
 
+The last step is done in \citep{gaudio2026exact}, where the GHCM becomes fully distance dependent as in this definition.
+The information theoretic threshold then keeps the same form, but the Chernoff-Hellinger quantity must now average the information over all visible distances,
+\[
+\lambda \nu_d r^d \min_{z\neq z'} D_+(\theta_z,\theta_{z'};\pi,g)=1
+\qquad\text{with}\qquad
+g:t\mapsto \frac{d\,t^{d-1}}{r^d}\mathbf 1_{[0,r]}(t)
+\]
+where \(\theta_z(t)\coloneqq (p_{z1}(\cdot;t),\dots,p_{zk}(\cdot;t))\) and
+\[
+D_+(\theta_z,\theta_{z'};\pi,g)
+=
+1-\inf_{s\in[0,1]}
+\sum_{\ell\in Z}\pi_\ell
+\int_0^r
+g(t)
+\left(
+\int_{\mathcal Y}
+p_{z\ell}(y;t)^s p_{z'\ell}(y;t)^{1-s}\,dy
+\right)\,dt
+\]
+with the inner integral replaced by a sum in the discrete case. The impossibility result is sharp below this threshold, with the additional one dimensional obstruction \(\lambda r<1\) when \(|\Omega_{\pi,P}|\ge 2\). Above the threshold, exact recovery is again achieved by a polynomial time two phase algorithm under similar assumptions to the constant probability case.
 
 
-% The paper also proves robustness to monotone semirandom perturbations in the special case of the two-community GSBM, where an adversary is allowed to add intra-community edges and delete inter-community edges.
 
-
-\citep{gaudio2024exactcommunityrecoverygeometric} \citep{gaudio2024exact}
-\citep{gaudio2025sharpexactrecoverythreshold}
-\citep{gaudio2026exact} 
 
 \section{\textcolor{red}{Spectral}}
 (A confirmer) \citep{chen2016community}
