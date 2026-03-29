@@ -55,12 +55,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "papers/Gaudio_Jin_Exact_Recover_in_the_geometric_SBM.md",
+                "file": "papers/Gaudio_Guan_Niu_Wei_Exact_Label_Recovery_in_Euclidean_Random_Graphs.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Gaudio_Jin_Exact_Recover_in_the_geometric_SBM"
+              "title": "Gaudio_Guan_Niu_Wei_Exact_Label_Recovery_in_Euclidean_Random_Graphs"
             }
           }
         ],
@@ -226,10 +226,10 @@
       "bases:Créer une nouvelle base": false
     }
   },
-  "active": "54a4914ce8e1f4e8",
+  "active": "9af8000d03df69e4",
   "lastOpenFiles": [
-    "papers/Gaudio_Niu_Wei_Exact_Community_Recovery_in_the_geometric_SBM.md",
     "papers/Gaudio_Jin_Exact_Recover_in_the_geometric_SBM.md",
+    "papers/Gaudio_Niu_Wei_Exact_Community_Recovery_in_the_geometric_SBM.md",
     "papers/Gaudio_Jin_Exact_Recovery_in_the_Geometric_Hidden_Community_Model.md",
     "papers/Gaudio_Guan_Sharp_Exact_Recovery_Threshold_for_two_community_euclidian_random_graphs.md",
     "papers/Gaudio_Guan_Niu_Wei_Exact_Label_Recovery_in_Euclidean_Random_Graphs.md",

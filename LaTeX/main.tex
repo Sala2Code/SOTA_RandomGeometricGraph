@@ -216,7 +216,7 @@ E_S\coloneqq (2b+f_1)\frac{\log n}{n}
 \qquad
 E_D\coloneqq (2b-f_2)\frac{\log n}{n}
 \]
-where \(f_1\) and \(f_2\) are chosen from Chernoff type large deviation inequalities. Edges whose triangle count falls inside the ambiguous interval \([E_D,E_S]\) are removed. This deletes all inter community edges with high probability, while preserving enough informative intra community edges. It remains to show that the surviving intra community edges still connect each community, and this is exactly where the RAG connectivity results are used.
+where \(f_1\) and \(f_2\) are chosen from Chernoff type large deviation inequalities. Edges whose triangle count falls inside the ambiguous interval \([E_D,E_S]\) are removed. This deletes all inter community edges with high probability, while preserving enough informative intra community edges. Then, RAG connectivity results are used to show that the surviving intra community edges still connect each community.
 
 As a consequence, they obtain exact recovery in dimension \(1\) with explicit conditions and an impossibility result when \(a<1\) or \(a-b<1/2\). However, the exact recovery threshold for the latent one dimensional GBM is still not fully characterized, see Figure~\ref{fig:GBM}. A useful contrast is that this gap disappears when the latent positions are revealed. In that case, the one dimensional GBM has a sharp exact recovery threshold which coincides with the sharp connectivity threshold of the RAG. In higher dimension \(d>1\), they also prove a polynomial time exact recovery result at the correct order of magnitude,
 \[
@@ -355,7 +355,7 @@ This quantity plays the same role as in \citep{abbe2021community}. In fact, when
 
 \subsection{Geometric Hidden Community Model (GHCM)}
 
-The last model known to us is the Geometric Hidden Community Model (GHCM), as formulated in \citep{gaudio2026exact}. The geometric positions are observed, so the space \(\mathcal X \coloneq \mathbb{R}^d\) is not latent. Let \( W_n \coloneqq \left[-\frac{n^{1/d}}2,\frac{n^{1/d}}2\right]^d\) equipped with the toroidal metric \(\rho_n\). Let \(k\in\mathbb N\), \(Z\) be a label set with \(|Z|=k\) and prior \(\pi=(\pi_i)_{i\in Z}\). Points are sampled as a PPP on \( W_n\) with intensity measure \(\mu_n \coloneqq \lambda \mathrm{Leb}_{\mid  W_n}\) with \(\lambda > 0\). The big improvement is to consider weighted graphs, hence edges are not solely \(0\) or \(1\) but any real value, \(\mathcal Y \coloneqq \mathbb R\).
+The last model known to us is the Geometric Hidden Community Model (GHCM), as formulated in \citep{gaudio2026exact}. The geometric positions are observed, so the space \(\mathcal X \coloneq \mathbb{R}^d\) is not latent. Let \( W_n \coloneqq \left[-\frac{n^{1/d}}2,\frac{n^{1/d}}2\right]^d\) equipped with the toroidal metric \(\rho_n\). Let \(k\in\mathbb N\), \(Z\) be a label set with \(|Z|=k\) and prior \(\pi \coloneqq (\pi_i)_{i\in Z}\). Points are sampled as a PPP on \( W_n\) with intensity measure \(\mu_n \coloneqq \lambda \mathrm{Leb}_{\mid  W_n}\) with \(\lambda > 0\). The big improvement is to consider weighted graphs, hence edges are not solely \(0\) or \(1\) but any real value, \(\mathcal Y \coloneqq \mathbb R\).
 The most general GHCM model, from \citep{gaudio2026exact}, is distance dependent and is parametrized by a family of pairwise observation laws. For some \(r>0\), let
 \[
 P=\bigl(P_{zz'}(t)\bigr)_{z,z'\in Z,\ t\in[0,r]}\in \mathcal P(\mathcal Y)^{Z\times Z\times [0,r]}
@@ -373,9 +373,9 @@ P_{zz'}\!\left(\dfrac{\rho_n(x,y)}{(\log n)^{1/d}}\right) & \text{if } \rho_n(x,
 \end{cases}
 \]
 Thus geometry determines whether an observation is available and changes the law of this observation through the distance.
-This model definition allows us to capture problem such as \(\mathbb{Z}^2\)-synchronisation, submatrix localization and more.
+% This model definition allows us to capture problem such as \(\mathbb{Z}^2\)-synchronisation, submatrix localization and more.
 
-The original GHCM of \citep{gaudio2024exact} is recovered when \(P_{zz'}(t)\) does not depend on \(t\), so geometry only acts as an observation mask, it only determines whether this law is sampled or not. Hence the visibility radius is fixed to \((\log n)^{1/d}\), which corresponds to \(r\coloneqq 1\). This model contains the GSBM as the Bernoulli special case. The paper studies exact recovery in the logarithmic regime and identifies the information theoretic threshold,
+The original GHCM of \citep{gaudio2024exact} is recovered when \(P_{zz'}(t)\) does not depend on \(t\), so geometry acts as an observation mask, it only determines whether this law is sampled or not. Hence the visibility radius is fixed to \((\log n)^{1/d}\), which corresponds to \(r=1\). This model contains the GSBM as the Bernoulli special case. The paper studies exact recovery in the logarithmic regime and identifies the information theoretic threshold,
 \[
 \lambda \nu_d \min_{z\neq z'} D_+(\theta_z,\theta_{z'})=1
 \qquad \text{with} \qquad
@@ -390,15 +390,23 @@ D_+(\theta_z,\theta_{z'})
 1-\inf_{t\in[0,1]}
 \sum_{r\in Z}\pi_r \int p_{zr}(y)^t p_{z'r}(y)^{1-t}\,dy
 \]
-with the integral replaced by a sum in the discrete case. Above the threshold, exact recovery is achieved by a polynomial time algorithm in two phases under two main technical assumptions: a bounded log-likelihood ratio, and a distinctness condition requiring that for every \(z\in Z\), the laws \(P_{zi}\) and \(P_{zj}\) are different whenever \(i\neq j\). 
-In dimension \(1\), when \(|\Omega_{\pi,P}|=1\), the proof uses the stronger assumption that all laws \(P_{zz'}\) are pairwise distinct without needed \(\lambda > 1\).
-Above the threshold, exact recovery is achieved by a polynomial time algorithm in two phases under two main technical assumptions: a bounded log-likelihood ratio, and a distinctness condition requiring that for every \(z\in Z\), the laws \(P_{zi}\) and \(P_{zj}\) are different whenever \(i\neq j\). In dimension \(1\), it requires the additional condition \(\lambda>1\). This extra assumption only appears when the model still has non trivial permissible relabelings, that is, when the set
+with the integral replaced by a sum in the discrete case. Above the threshold, exact recovery is achieved by a polynomial time algorithm in two phases under two main technical assumptions. The first phase success almost exact recovery using MAP estimator. % c'est quoi cet estimateur ??
+Then, the second phase refines the labeling and the model exhibits the same local to global amplification phenomenon as in the SBM \citep{abbe2018community}
+Both assumptions are a bounded log-likelihood ratio, and a distinctness condition requiring that for every \(z\in Z\), the laws \(P_{zi}\) and \(P_{zj}\) are different whenever \(i\neq j\). The latter is used for the first phase during the propagation.
+In dimension \(1\), it requires the additional condition \(\lambda>1\). This extra assumption only appears when the model still has non trivial permissible relabelings, that is, when the set
 \[
 \Omega_{\pi,P}\coloneqq \{\omega:Z\to Z \text{ permutation}, \forall z,z'\in Z \\pi_z=\pi_{\omega(z)} \text{ and } P_{zz'}=P_{\omega(z)\omega(z')} \}
 \]
 contains more than the identity. In the special case \(|\Omega_{\pi,P}|=1\), the paper instead uses the stronger assumption that all laws \(P_{zz'}\) are pairwise distinct, and then no longer needs \(\lambda>1\).
 
 
+A subsequent work removes this distinctness assumption in a relevant two community setting. In \citep{gaudio2025sharpexactrecoverythreshold}, they consider \(k=2\), \(Z=\{1,2\}\), \(d\ge 2\), and observation laws satisfying \(P_{11}\neq P_{12}\) while \(P_{21}=P_{22}\).  
+This asymmetric setting captures, for instance, geometric planted dense subgraph and geometric submatrix localization, where the goal is to identify one structured community against a homogeneous background. 
+The information theoretic threshold is not changed. The difficulty is to build the first phase without distinctness. To resolve this, informally, the propagation of label is made by a clever and adaptive way. This yields almost exact recovery when \(\pi_1\lambda \nu_d>1\), and then exact recovery above the usual threshold \citep{gaudio2025sharpexactrecoverythreshold}. About two community setting, the algorithm is robust to monotone semirandom perturbation, that's to say where an adversary is allowed to add intra community edges and delete inter community edges \citep{gaudio2024exact}.
+
+
+
+% The paper also proves robustness to monotone semirandom perturbations in the special case of the two-community GSBM, where an adversary is allowed to add intra-community edges and delete inter-community edges.
 
 
 \citep{gaudio2024exactcommunityrecoverygeometric} \citep{gaudio2024exact}
