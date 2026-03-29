@@ -78,7 +78,11 @@ one can also obtain transitivity, and surely more, with attribute-based models
 \citep{Li_Sha_Huang_Zhang_2018}, 
 hypergraphs \citep{Ruggeri_2023} and even geometric hypergraphs
 \citep{Kov_cs_2025}.
-We will not consider these models here, in order to keep the focus on the geometric aspect.
+We will not consider these models here, in order to keep the focus on the geometric aspect. A related but distinct line of work considers mixture based latent position models, such as the Gaussian Mixture Block Model
+\citep{li2024spectralclusteringgaussianmixture}, where community labels determine node positions using gaussian distributions. See \citep{reynolds2009gaussian} \citep{NIPS1999_97d98119}.
+This differs from the geometric models considered here, where geometry directly affects edge formation rather than determining node placement. We therefore don't include these models in the core of this survey.
+
+
 Moreover, among the problems mentioned above, one is \textit{Distinguishability} which should not be confused with the \textit{Detection Problem} that we do not study here.
 The latter usually asks for conditions on the parameters defining the RGG under which the model is distinguishable from 
 an Erd\H{o}s-R\'enyi graph. Hence, this is not directly a community question. See,
@@ -91,12 +95,6 @@ and considered this as a community detection problem, \citep{valdivia2019latent}
 \citep{eldan2022community}.
 This is a different problem from the one we are interested in,
 and it's in some sense harder, because one wants to recover the position (a continuous label) of each node rather than a community (a discrete label).
-\textcolor{red}{TODO : parler des gaussian-mixture model + trouver ref ; voir commentaire latex !}
-A related but distinct line of work considers mixture-based latent position models, such as the Gaussian Mixture Block Model
-\citep{li2024spectralclusteringgaussianmixture}
-, where community labels determine node positions using gaussian distributions. See \citep{reynolds2009gaussian} \citep{NIPS1999_97d98119}.
-This differs from the geometric block models considered here where geometry modulates the pairwise interaction law rather than the node's spatial distribution.
- We therefore do not include these models in the core of this survey.
 
 % chatGPT exemple. L'idée est de recentré le probleme et de rediriger le lecteur (2-3 refs c'est bien) : A related but distinct line of work considers mixture-based latent position models, such as the Gaussian Mixture Block Model, in which the node positions themselves depend on the community label. This differs from the geometric block models considered here, where geometry affects the pairwise interaction law rather than the marginal distribution of node locations. We therefore do not include these models in the core of this survey.
 
@@ -320,13 +318,25 @@ Then, they also prove that there exists \(C(a,b,d) \geq 0\) such that
 \(\lambda \nu_d\Bigl(1-\sqrt{ab}-\sqrt{(1-a)(1-b)}\Bigr)>C(a,b,d)\) 
 is sufficient for exact recovery by GBG. They conjecture that the lower bound is in fact sharp. This conjecture was later confirmed by \citep{gaudio2024exact}.
 
-
+More recently, \citep{gaudio2025exactrecoverygeometricsbm} extended this sharp result. They consider a model where edges are only possible if they are in a visibility radius \(r(\log n)^{1/d}\) with \(r>0\), and assume mild regularity conditions on the connection functions such as supported on \([0,r]\), a finite number of intersections between \(f_{in}\) and \(f_{out}\), and no interval on which the two functions remain arbitrarily close. This includes in particular the previous indicator case, but also broad classes of piecewise regular or continuous kernels. Their main result is a complete characterization of the exact recovery threshold through the information quantity
+\[
+I(f_{in},f_{out})
+\coloneqq
+\lambda \nu_d r^d
+\int_0^r
+\Bigl(
+1-\sqrt{f_{in}(t)f_{out}(t)}
+-\sqrt{(1-f_{in}(t))(1-f_{out}(t))}
+\Bigr)
+\frac{d\,t^{d-1}}{r^d}\,dt
+\]
+which is a generalized Chernoff Hellinger divergence. They prove that exact recovery is achievable when \(I(f_{in},f_{out})>1\), while it is impossible when \(I(f_{in},f_{out})<1\). In dimension \(d=1\), one must additionally have \(\lambda r>1\), and exact recovery is impossible when \(\lambda r<1\). Hence, the paper shows that the exact recovery problem in the two community GSBM admits a sharp information theoretic threshold far beyond the step function case. They also provide a polynomial time algorithm achieving this threshold.
 
 
 \subsection{Geometric Kernel Block Model (GKBM)}
 
 \citep{avrachenkov2024community} introduce the Geometric Kernel Block Model (GKBM). The geometric positions are observed, so the space \(\mathcal X \coloneqq  \left]-\frac12,\frac12 \right ] \) is not latent, and it is equipped with the toroidal metric \(\rho\). Here again, \(n\) is a scaling parameter and not the number of nodes.
-Points are sampled as a PPP on \(\mathcal{X}\) with intensity measure \(\mu_n \coloneqq \lambda n \mathrm{Leb}_{\mid \mathcal{X}}\) with \(\lambda > 0\). They focus in the one dimensional case with two symmetric communities, although the techniques may extend to higher dimensions. The link probabilities are defined according to \(\phi : \mathbb{R}^+ \to [0,1]\) measurable with a support bounded by \(\kappa >0\). Let \(a,b \in [0,1]\),
+Points are sampled as a PPP on \(\mathcal{X}\) with intensity measure \(\mu_n \coloneqq \lambda n \mathrm{Leb}_{\mid \mathcal{X}}\) with \(\lambda > 0\). They focus in the one dimensional case with two symmetric communities, although the techniques may extend to higher dimensions. The link probabilities are defined according to \(\phi : \mathbb{R}^+ \to [0,1]\) measurable with a support bounded by \(r >0\). Let \(a,b \in [0,1]\),
 \[
 \mathrm{GKBM}(\lambda,a,b,\phi)\coloneqq
 \mathrm{UGCM}(\mathcal X,\rho,\mathcal X,\mu_n,\{-1,+1\},\mathrm{Ber}(1/2),\{0,1\},K_n)
@@ -340,10 +350,30 @@ The hard threshold version of the logarithmic GSBM leads to the explicit bound \
 \[
 I_\phi(a,b)\coloneqq 2\int_{\mathbb R_+}\left(1-\sqrt{ab}\,\phi(x)-\sqrt{(1-a\phi(x))(1-b\phi(x))}\right)\,dx
 \]
-This quantity plays the same role as in \citep{abbe2021community}. In fact, when \(\phi=\mathbf 1_{[0,1]}\), it reduces to the one dimensional hard threshold case. Their main result shows that exact recovery is impossible if \(\lambda \kappa<1\) or \(\lambda I_\phi(a,b)<1\). Conversely, if \(\lambda \kappa>1\) and \(\lambda I_\phi(a,b)>1\), then exact recovery is achievable under the additional assumption that \(\phi(x)>0\) for all \(x\in[0,\kappa]\) \citep{avrachenkov2024community}. They also propose a two phase algorithm, adapted from the recent GSBM exact recovery approach, where labels are first recovered on a small block and then propagated. The paper states that this procedure runs in time linear in the number of edges, this corresponds to a complexity of \(O(n\log n)\), in the logarithmic regime \citep{avrachenkov2024community}.
+This quantity plays the same role as in \citep{abbe2021community}. In fact, when \(\phi=\mathbf 1_{[0,1]}\), it reduces to the one dimensional hard threshold case. Their main result shows that exact recovery is impossible if \(\lambda r<1\) or \(\lambda I_\phi(a,b)<1\). Conversely, if \(\lambda r>1\) and \(\lambda I_\phi(a,b)>1\), then exact recovery is achievable under the additional assumption that \(\phi(x)>0\) for all \(x\in[0,r]\) \citep{avrachenkov2024community}. They also propose a two phase algorithm, adapted from the recent GSBM exact recovery approach, where labels are first recovered on a small block and then propagated. The paper states that this procedure runs in time linear in the number of edges, this corresponds to a complexity of \(O(n\log n)\), in the logarithmic regime \citep{avrachenkov2024community}.
 
 
-\subsection{\textcolor{red}{Geometric Hidden Community Model (GHCM)}}
+\subsection{Geometric Hidden Community Model (GHCM)}
+
+The last model known to us is the Geometric Hidden Community Model (GHCM), as formulated in \citep{gaudio2026exact}. The geometric positions are observed, so the space \(\mathcal X \coloneq \mathbb{R}^d\) is not latent. Let \( W_n \coloneqq \left[-\frac{n^{1/d}}2,\frac{n^{1/d}}2\right]^d\) equipped with the toroidal metric \(\rho_n\). Let \(k\in\mathbb N\), \(Z\) be a label set with \(|Z|=k\) and prior \(\pi=(\pi_i)_{i\in Z}\). Points are sampled as a PPP on \( W_n\) with intensity measure \(\mu_n \coloneqq \lambda \mathrm{Leb}_{\mid  W_n}\) with \(\lambda > 0\). The big improvement is to consider weighted graphs, hence edges are not solely \(0\) or \(1\) but any real value, \(\mathcal Y \coloneqq \mathbb R\).
+The most general GHCM model, from \citep{gaudio2026exact}, is distance dependent and is parametrized by a family of pairwise observation laws. For some \(r>0\), let
+\[
+P=\bigl(P_{zz'}(t)\bigr)_{z,z'\in Z,\ t\in[0,r]}\in \mathcal P(\mathcal Y)^{Z\times Z\times [0,r]}
+\]
+where \(P_{zz'}(t)\) is the law of the observation between two vertices of labels \(z\) and \(z'\) at distance \(t\). Since the graph is undirected, we assume \(P_{zz'}(t)=P_{z'z}(t)\). In the papers, these laws are taken either discrete or with density with respect to the Lebesgue measure on \(\mathbb R\). We write \(p_{zz'}(\cdot;t)\) for a probability mass function or a density of \(P_{zz'}(t)\).
+\[
+\mathrm{GHCM}(P,\lambda,\pi,k,d,r) \coloneqq \mathrm{UGCM}(\mathcal X,\rho_n,W_n,\mu_n,Z,\pi,\mathcal Y,K_n)
+\]
+The kernel \(K_n\) is then given by
+\[
+K_n : (x,y,z,z') \longmapsto
+\begin{cases}
+P_{zz'}\!\left(\dfrac{\rho_n(x,y)}{(\log n)^{1/d}}\right) & \text{if } \rho_n(x,y)\le r(\log n)^{1/d}\\
+\delta_0 & \text{otherwise}
+\end{cases}
+\]
+Thus geometry determines whether an observation is available and changes the law of this observation through the distance.
+This model definition allows us to capture problem such as \(\mathbb{Z}^2\)-synchronisation, submatrix localization and more.
 
 \citep{gaudio2024exactcommunityrecoverygeometric} \citep{gaudio2024exact}
 \citep{gaudio2025sharpexactrecoverythreshold}
