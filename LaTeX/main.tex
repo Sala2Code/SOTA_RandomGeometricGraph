@@ -375,6 +375,32 @@ P_{zz'}\!\left(\dfrac{\rho_n(x,y)}{(\log n)^{1/d}}\right) & \text{if } \rho_n(x,
 Thus geometry determines whether an observation is available and changes the law of this observation through the distance.
 This model definition allows us to capture problem such as \(\mathbb{Z}^2\)-synchronisation, submatrix localization and more.
 
+The original GHCM of \citep{gaudio2024exact} is recovered when \(P_{zz'}(t)\) does not depend on \(t\), so geometry only acts as an observation mask, it only determines whether this law is sampled or not. Hence the visibility radius is fixed to \((\log n)^{1/d}\), which corresponds to \(r\coloneqq 1\). This model contains the GSBM as the Bernoulli special case. The paper studies exact recovery in the logarithmic regime and identifies the information theoretic threshold,
+\[
+\lambda \nu_d \min_{z\neq z'} D_+(\theta_z,\theta_{z'})=1
+\qquad \text{with} \qquad
+\theta_z\coloneqq(p_{z1},\dots,p_{zk})
+\]
+with the additional one dimensional \(d=1\) obstruction, \(\lambda<1\). 
+In the present discrete/continuous setting, \(D
+_+\) is the Chernoff-Hellinger divergence given by
+\[
+D_+(\theta_z,\theta_{z'})
+=
+1-\inf_{t\in[0,1]}
+\sum_{r\in Z}\pi_r \int p_{zr}(y)^t p_{z'r}(y)^{1-t}\,dy
+\]
+with the integral replaced by a sum in the discrete case. Above the threshold, exact recovery is achieved by a polynomial time algorithm in two phases under two main technical assumptions: a bounded log-likelihood ratio, and a distinctness condition requiring that for every \(z\in Z\), the laws \(P_{zi}\) and \(P_{zj}\) are different whenever \(i\neq j\). 
+In dimension \(1\), when \(|\Omega_{\pi,P}|=1\), the proof uses the stronger assumption that all laws \(P_{zz'}\) are pairwise distinct without needed \(\lambda > 1\).
+Above the threshold, exact recovery is achieved by a polynomial time algorithm in two phases under two main technical assumptions: a bounded log-likelihood ratio, and a distinctness condition requiring that for every \(z\in Z\), the laws \(P_{zi}\) and \(P_{zj}\) are different whenever \(i\neq j\). In dimension \(1\), it requires the additional condition \(\lambda>1\). This extra assumption only appears when the model still has non trivial permissible relabelings, that is, when the set
+\[
+\Omega_{\pi,P}\coloneqq \{\omega:Z\to Z \text{ permutation}, \forall z,z'\in Z \\pi_z=\pi_{\omega(z)} \text{ and } P_{zz'}=P_{\omega(z)\omega(z')} \}
+\]
+contains more than the identity. In the special case \(|\Omega_{\pi,P}|=1\), the paper instead uses the stronger assumption that all laws \(P_{zz'}\) are pairwise distinct, and then no longer needs \(\lambda>1\).
+
+
+
+
 \citep{gaudio2024exactcommunityrecoverygeometric} \citep{gaudio2024exact}
 \citep{gaudio2025sharpexactrecoverythreshold}
 \citep{gaudio2026exact} 
