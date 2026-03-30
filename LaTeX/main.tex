@@ -158,7 +158,7 @@ Most works in the literature focus on the case \(k=2\). Although several ideas e
 Each vertex also belongs to a space \(\mathcal X\). In the following, we specify each time whether this space is latent or observed. For theoretical analysis, \(\mathcal{X}\) is often chosen for mathematical convenience. The Euclidean space \(\mathbb{R}^{d}\) is a natural reference because of its symmetry, homogeneity, isotropy, and direct geometric interpretation.
 % See \citep{abbe2021community}, \textcolor{red}{Citer ceux qui sont euclidiens}.
 In the following, \(d\) is an integer.
-We also encounter the torus, mainly to avoid boundary effects and to focus on the core ideas of the proofs. 
+We also encounter the torus \(\mathbb T^d\) mainly to avoid boundary effects and to focus on the core ideas of the proofs. 
 %\textcolor{red}{Todo citer}.
 Lastly, for latent models, the high-dimensional unit sphere \(\mathbb{S}^{d}\) is a standard reference space to model similarity, and it also provides convenient spectral properties \citep{decastro2020adaptiveestimationnonparametricgeometric}. A summary of theoretical works on \(\mathbb{S}^{d}\) is given in \citep{duchemin2023random}.
 
@@ -197,7 +197,7 @@ Finally, the \emph{dense regime} corresponds to the easiest setting, the graph c
 
 \subsection{Geometric Block Model (GBM)}
 
-Historically, one of the earliest geometric models for community detection is the Geometric Block Model (GBM) introduced in \citep{galhotra2018geometric}. They mainly study the case of two symmetric communities. In its general form, the model places each vertex at a latent position on the unit sphere \(\mathcal X \coloneqq \mathbb S^{d-1}\), sampled uniformly, and edges are drawn through a hard geometric rule. For \(d \in \mathbb{N} \backslash \{0,1\}, \ r_{in}, r_{out} \in [-1,1]\), \(r_{ij} \coloneqq  r_{in}\delta_{ij} + r_{out}(1-\delta_{ij}) \), they define
+One of the earliest geometric models for community detection is the Geometric Block Model (GBM) introduced in \citep{galhotra2018geometric}. They mainly study the case of two symmetric communities. In its general form, the model places each vertex at a latent position on the unit sphere \(\mathcal X \coloneqq \mathbb S^{d-1}\), sampled uniformly, and edges are drawn through a hard geometric rule. For \(d \in \mathbb{N} \backslash \{0,1\}, \ r_{in}, r_{out} \in [-1,1]\), \(r_{ij} \coloneqq  r_{in}\delta_{ij} + r_{out}(1-\delta_{ij}) \), they define
 \[
 \mathrm{GBM}(r_{in}, r_{out}, d) \coloneqq \mathrm{UGCM}(\mathcal X,\|\cdot\|_2,\ \mathcal X ,  \mathrm{Unif}( \mathcal X ),  \{-1,+1\},  \text{Ber}(1/2),  \{0,1\}, K_n)
 \]
@@ -211,15 +211,15 @@ r_{in} \coloneqq a\frac{\log n}{n} \qquad r_{out} \coloneqq b\frac{\log n}{n} \q
 \]
 This corresponds to the logarithmic regime. This regime matches the connectivity scale of one dimensional random geometric graphs. Their main algorithm is motif based, that is, for an observed edge \((u,v) \in E\), they count the number of common neighbors of \(u\) and \(v\), so the number of triangles containing this edge. Then they use this statistic to decide whether \(u\) and \(v\) belong to the same community. The geometry creates strong local dependence and transitivity. Unlike in the SBM, triangles are informative in the GBM. Still in this regime, the simple motif counting procedure already yields exact recovery with high probability when \(r_{in}\ge 4r_{out}\). The algorithm is efficient, and the journal version later clarifies that this one threshold guarantee from the conference paper is order optimal up to constants but restricted to that parameter range \citep{galhotra2018geometric,galhotra2023communityrecoverygeometricblock}.
 
-Firstly, \citep{galhotra2020connectivityrandomannulusgraphs} introduces the random annulus graph (RAG). Let \(I \coloneqq \left[b\left(\frac{\log n}{n}\right)^{1/d}, a\left(\frac{\log n}{n}\right)^{1/d}\right] \), they work on \(\mathbb S^d \) with \( RAG_d(n, I)\), a RGG where nodes are connected only if the distance between them falls inside \(I\), hence the name annulus graph. In dimension \(1\), they obtain a sharp connectivity threshold for RAG: the graph is connected with high probability if \(a>1\) and \(a-b>1/2\), and disconnected with high probability if \(a<1\) or \(a-b<1/2\). For \(d > 1\), they give only sufficient conditions \citep{galhotra2020connectivityrandomannulusgraphs}.
+Firstly, \citep{galhotra2020connectivityrandomannulusgraphs} introduces the random annulus graph (RAG). Let \(I \coloneqq \left[b\left(\frac{\log n}{n}\right)^{1/d}, a\left(\frac{\log n}{n}\right)^{1/d}\right] \). They study \( RAG_d(n, I)\) on \(\mathbb S^d \), a RGG where two nodes are connected only when the distance between them falls inside \(I\), hence the name annulus graph. In dimension \(1\), they obtain a sharp connectivity threshold for the RAG: the graph is connected with high probability if \(a>1\) and \(a-b>1/2\), and disconnected with high probability if \(a<1\) or \(a-b<1/2\). For \(d > 1\), they provide sufficient conditions \citep{galhotra2020connectivityrandomannulusgraphs}.
 
-Secondly, the main algorithmic refinement is to replace the original one threshold triangle rule by a two threshold procedure. The reason is that, once one leaves the regime \(r_{in}\ge 4r_{out}\), a single threshold is no longer sufficient. For inter community edges, the normalized triangle count is concentrated around \(2r_{out}\), whereas for intra community edges it depends on the latent distance and may lie either above or below that value. They therefore define two thresholds
+Secondly, the main algorithmic refinement is to replace the original one threshold triangle rule by a two threshold procedure. Once one leaves the regime \(r_{in}\ge 4r_{out}\), a single threshold is no longer sufficient. For inter community edges, the normalized triangle count is concentrated around \(2r_{out}\), whereas for intra community edges it depends on the latent distance and may lie either above or below that value. They therefore define two thresholds
 \[
 E_S\coloneqq (2b+f_1)\frac{\log n}{n}
 \qquad
 E_D\coloneqq (2b-f_2)\frac{\log n}{n}
 \]
-where \(f_1\) and \(f_2\) are chosen from Chernoff type large deviation inequalities. Edges whose triangle count falls inside the ambiguous interval \([E_D,E_S]\) are removed. This deletes all inter community edges with high probability, while preserving enough informative intra community edges. Then, RAG connectivity results are used to show that the surviving intra community edges still connect each community.
+where \(f_1\) and \(f_2\) are chosen from Chernoff type large deviation inequalities. Edges whose triangle count falls inside the ambiguous interval \([E_D,E_S]\) are removed. This removes all inter community edges with high probability, while preserving enough informative intra community edges. Then, RAG connectivity results are used to show that the surviving intra community edges still connect each community.
 
 As a consequence, they obtain exact recovery in dimension \(1\) with explicit conditions and an impossibility result when \(a<1\) or \(a-b<1/2\). However, the exact recovery threshold for the latent one dimensional GBM is still not fully characterized, see Figure~\ref{fig:GBM}. A useful contrast is that this gap disappears when the latent positions are revealed. In that case, the one dimensional GBM has a sharp exact recovery threshold which coincides with the sharp connectivity threshold of the RAG. In higher dimension \(d>1\), they also prove a polynomial time exact recovery result at the correct order of magnitude,
 \[
@@ -232,7 +232,7 @@ are sufficient, while recovery becomes impossible if one of these quantities is 
 \begin{figure}[H]
     \centering
     \includesvg[inkscapearea=page,width=0.8\textwidth]{img/GBM_fig5.svg}
-\caption{Phase diagram for exact recovery in the one dimensional latent GBM in the regime \(r_{in}=a\log n/n\) and \(r_{out}=b\log n/n\), reproduced from \citet{galhotra2023communityrecoverygeometricblock}, Figure~5. The red region corresponds to disconnected graphs, hence an impossibility result. The yellow region remains an open problem, and the green region corresponds to the parameter range certified by Algorithm~1 (Theorem~8).}
+\caption{Phase diagram for exact recovery in the one dimensional latent GBM in the regime \(r_{in}=a\log n/n\) and \(r_{out}=b\log n/n\), reproduced from \citet{galhotra2023communityrecoverygeometricblock}, Figure~5. The red region corresponds to disconnected graphs and therefore an impossibility result. The yellow region remains an open problem, and the green region corresponds to the parameter range certified by Algorithm~1 (Theorem~8).}
     \label{fig:GBM}
 \end{figure}
 
@@ -241,13 +241,16 @@ Finally, \citep{chien2020active} studies active learning in the latent GBM with 
 
 \subsection{Geometric Stochastic Block Model (GSBM)}
 
-\citep{sankararaman2018community} introduce the Geometric Stochastic Block Model (GSBM) which is later developed in full detail in \citep{abbe2021community}. The geometric positions are observed, the space \(\mathcal X\coloneqq \mathbb R^d\) is not latent. Here, \(n\) is a scaling parameter and not the number of nodes. Points are sampled as a PPP on a window \(W_n \coloneqq \left[-\frac{n^{1/d}}{2}, \frac{n^{1/d}}{2}\right]^d\) with intensity measure \(\mu_n \coloneqq \lambda \mathrm{Leb}_{\mid W_n}\) with \(\lambda > 0\). The window \(W_n\) has a volume \(n\). They study the case of two symmetric communities. Nodes are connected according to their distance and labels through \(f_{in}^{(n)}\) and \(f_{out}^{(n)}\). We assume for all \(r\geq 0\), \(1 \geq f_{in}^{(n)}(r) \geq f_{out}^{(n)}(r) \geq 0 \) and \(f_{in}^{(n)} \neq f_{out}^{(n)}\) up to Lebesgue measure \(0\). More assumptions on these functions are given according to the regime that we are interested. % We are in the framework of Soft-RGG. 
-The model is then defined as,
+\citep{sankararaman2018community} introduce the Geometric Stochastic Block Model (GSBM), which is later developed in full detail in \citep{abbe2021community}. 
+The geometric positions are observed, the space \(\mathcal X\coloneqq \mathbb R^d\) is not latent.
+The model allows edge probabilities to depend jointly on distance and community labels.
+Here, \(n\) is a scaling parameter and not the number of nodes. Points are sampled as a PPP on a window \(W_n \coloneqq \left[-\frac{n^{1/d}}{2}, \frac{n^{1/d}}{2}\right]^d\) with intensity measure \(\mu_n \coloneqq \lambda \mathrm{Leb}_{\mid W_n}\) with \(\lambda > 0\). The window \(W_n\) has a volume \(n\). They study the case of two symmetric communities. Nodes are connected according to their distance and labels through \(f_{in}^{(n)}\) and \(f_{out}^{(n)}\). We assume for all \(r\geq 0\), \(1 \geq f_{in}^{(n)}(r) \geq f_{out}^{(n)}(r) \geq 0 \) and \(f_{in}^{(n)} \neq f_{out}^{(n)}\) up to Lebesgue measure \(0\). More assumptions on these functions are given according to the regime that we are interested. % We are in the framework of Soft-RGG. 
+The model is then defined by,
 \[
 \mathrm{GSBM}(f_{in}^{(n)}, f_{out}^{(n)},\lambda,d) \coloneqq 
 \mathrm{UGCM}(\mathcal X, \rho_n, W_n, \mu_n, \{-1,+1\}, \text{Ber}(1/2), \{0,1\}, K_n)
 \]
-where the metric is the Euclidean distance in the sparse regime, \(\rho_n \coloneqq \| \cdot \|_2 \), and toroidal metric in the logarithmic regime, \(\rho_n \coloneqq \| \cdot \|_{T_n}\). The latter is to avoid boundary effects on \(W_n\) due to the infinity of neighbors a points can have, for the sparse regime this consideration is negligible. Moreover, the kernel is defined as,
+where the metric is the Euclidean distance in the sparse regime, \(\rho_n \coloneqq \| \cdot \|_2 \), and toroidal metric in the logarithmic regime, \(\rho_n \coloneqq \| \cdot \|_{T_n}\). The toroidal metric is used in the logarithmic regime to avoid boundary effects on \(W_n\), in the sparse regime these effects are asymptotically negligible. Moreover, the kernel is defined as,
 \[
 K_n: (x,y,z,z') \longmapsto \text{Ber}\left(f_{in}^{(n)}(\rho_n(x,y))\mathbf{1}\{z=z'\} + f_{out}^{(n)}(\rho_n(x,y))\mathbf{1}\{z\neq z'\}\right)
 \]
@@ -312,16 +315,16 @@ f_{out}^{(n)}: r \mapsto b\,\mathbf 1_{\{r\le (\log n)^{1/d}\}}
 \qquad 0\le b<a\le 1
 \]
 This should be viewed as a non trivial instance of the logarithmic regime. Denote by \(\nu_d\) the volume of the unit ball in \(\mathbb R^d\). In this case, they obtain an explicit necessary condition for exact recovery,
-\begin{equation}\label{eq:GBM_log_impossibility}
+\begin{equation}\label{eq:GSBM_log_impossibility}
     \lambda \nu_d\Bigl(1-\sqrt{ab}-\sqrt{(1-a)(1-b)}\Bigr)<1
     \quad\Longrightarrow\quad
     \text{exact recovery is impossible}
 \end{equation}
-Then, they also prove that there exists \(C(a,b,d) \geq 0\) such that
+They also prove that there exists \(C(a,b,d) \geq 0\) such that
 \(\lambda \nu_d\Bigl(1-\sqrt{ab}-\sqrt{(1-a)(1-b)}\Bigr)>C(a,b,d)\) 
 is sufficient for exact recovery by GBG. They conjecture that the lower bound is in fact sharp. This conjecture was later confirmed by \citep{gaudio2024exactcommunityrecoverygeometric}. The same sharp threshold also appears as a corollary of a more general model, GHCM, developed in \citep{gaudio2024exact}.
 
-More recently, \citep{gaudio2025exactrecoverygeometricsbm} extended this sharp result. They consider a model where edges are only possible if they are in a visibility radius \(r(\log n)^{1/d}\) with \(r>0\), and assume mild regularity conditions on the connection functions such as supported on \([0,r]\), a finite number of intersections between \(f_{in}\) and \(f_{out}\), and no interval on which the two functions remain arbitrarily close. This includes in particular the previous indicator case, but also broad classes of piecewise regular or continuous kernels. Their main result is a complete characterization of the exact recovery threshold through the information quantity
+More recently, \citep{gaudio2025exactrecoverygeometricsbm} extended this sharp result. They consider a model where edges are only possible if they are in a visibility radius \(r(\log n)^{1/d}\) with \(r>0\), and assume mild regularity conditions on the connection functions such as support contained in \([0,r]\), a finite number of intersections between \(f_{in}\) and \(f_{out}\), and no interval on which the two functions remain arbitrarily close. This includes in particular the previous indicator case, but also broad classes of piecewise regular or continuous kernels. Their main result is a complete characterization of the exact recovery threshold through the information quantity
 \[
 I(f_{in},f_{out})
 \coloneqq
@@ -338,7 +341,7 @@ which is a generalized Chernoff Hellinger divergence. They prove that exact reco
 
 \subsection{Geometric Kernel Block Model (GKBM)}
 
-\citep{avrachenkov2024community} introduce the Geometric Kernel Block Model (GKBM). The geometric positions are observed, so the space \(\mathcal X \coloneqq  \left]-\frac12,\frac12 \right ] \) is not latent, and it is equipped with the toroidal metric \(\rho\). Here again, \(n\) is a scaling parameter and not the number of nodes.
+\citep{avrachenkov2024community} introduce the Geometric Kernel Block Model (GKBM) which extends the logarithmic two community geometric setting by replacing the hard threshold rule with a more general geometric kernel. The geometric positions are observed, so the space \(\mathcal X \coloneqq  \left]-\frac12,\frac12 \right ] \) is not latent, and it is equipped with the toroidal metric \(\rho\). Here again, \(n\) is a scaling parameter and not the number of nodes.
 Points are sampled as a PPP on \(\mathcal{X}\) with intensity measure \(\mu_n \coloneqq \lambda n \mathrm{Leb}_{\mid \mathcal{X}}\) with \(\lambda > 0\). They focus in the one dimensional case with two symmetric communities, although the techniques may extend to higher dimensions. The link probabilities are defined according to \(\phi : \mathbb{R}^+ \to [0,1]\) measurable with a support bounded by \(r >0\). Let \(a,b \in [0,1]\),
 \[
 \mathrm{GKBM}(\lambda,a,b,\phi)\coloneqq
@@ -349,7 +352,7 @@ Moreover they study the logarithmic regime so the kernel is set as,
 K_n:(x,y,z,z')\longmapsto \mathrm{Ber}\!\left(\bigl(a\mathbf 1\{z=z'\}+b\mathbf 1\{z\neq z'\}\bigr)\phi\!\left(\frac{n}{\log n}\rho(x,y)\right)\right)
 \]
 
-The hard threshold version of the logarithmic GSBM leads to the explicit bound \eqref{eq:GBM_log_impossibility}. For the GKBM, the authors replace this hard threshold by a more general kernel on their restricted one dimensional model, and introduce the information quantity
+The hard threshold version of the logarithmic GSBM leads to the explicit bound \eqref{eq:GSBM_log_impossibility}. For the GKBM, the authors replace this hard threshold by a more general kernel on their restricted one dimensional model, and introduce the information quantity
 \[
 I_\phi(a,b)\coloneqq 2\int_{\mathbb R_+}\left(1-\sqrt{ab}\,\phi(x)-\sqrt{(1-a\phi(x))(1-b\phi(x))}\right)\,dx
 \]
@@ -358,7 +361,8 @@ This quantity plays the same role as in \citep{abbe2021community}. In fact, when
 
 \subsection{Geometric Hidden Community Model (GHCM)}
 
-The last model known to us is the Geometric Hidden Community Model (GHCM), as formulated in \citep{gaudio2026exact}. The geometric positions are observed, so the space \(\mathcal X \coloneq \mathbb{R}^d\) is not latent. Let \( W_n \coloneqq \left[-\frac{n^{1/d}}2,\frac{n^{1/d}}2\right]^d\) equipped with the toroidal metric \(\rho_n\). Let \(k\in\mathbb N\), \(Z\) be a label set with \(|Z|=k\) and prior \(\pi \coloneqq (\pi_i)_{i\in Z}\). Points are sampled as a PPP on \( W_n\) with intensity measure \(\mu_n \coloneqq \lambda \mathrm{Leb}_{\mid  W_n}\) with \(\lambda > 0\). The big improvement is to consider weighted graphs, hence edges are not solely \(0\) or \(1\) but any real value, \(\mathcal Y \coloneqq \mathbb R\).
+The most general model in this line of work is the Geometric Hidden Community Model (GHCM), as formulated in \citep{gaudio2026exact}. The main generalization is that pairwise observations are no longer restricted to Bernoulli edges, so we take \(\mathcal Y \coloneqq \mathbb R\).
+The geometric positions are observed, so the space \(\mathcal X \coloneq \mathbb{R}^d\) is not latent. Let \( W_n \coloneqq \left[-\frac{n^{1/d}}2,\frac{n^{1/d}}2\right]^d\) equipped with the toroidal metric \(\rho_n\). Let \(k\in\mathbb N\), \(Z\) be a label set with \(|Z|=k\) and prior \(\pi \coloneqq (\pi_i)_{i\in Z}\). Points are sampled as a PPP on \( W_n\) with intensity measure \(\mu_n \coloneqq \lambda \mathrm{Leb}_{\mid  W_n}\) with \(\lambda > 0\).
 The most general GHCM model, from \citep{gaudio2026exact}, is distance dependent and is parametrized by a family of pairwise observation laws. For some \(r>0\), let
 \[
 P=\bigl(P_{zz'}(t)\bigr)_{z,z'\in Z,\ t\in[0,r]}\in \mathcal P(\mathcal Y)^{Z\times Z\times [0,r]}
@@ -393,7 +397,7 @@ D_+(\theta_z,\theta_{z'})
 1-\inf_{t\in[0,1]}
 \sum_{r\in Z}\pi_r \int_{ \mathcal{Y} } p_{zr}(y)^t p_{z'r}(y)^{1-t}\,dy
 \]
-with the integral replaced by a sum in the discrete case. Above the threshold, exact recovery is achieved by a polynomial time algorithm in two phases under two main technical assumptions. The first phase success almost exact recovery using MAP estimator. % c'est quoi cet estimateur ??
+with the integral replaced by a sum in the discrete case. Above the threshold, exact recovery is achieved by a polynomial time algorithm in two phases under two main technical assumptions. The first phase achieves almost exact recovery using MAP estimator to initialize propagation.
 Then, the second phase refines the labeling and the model exhibits the same local to global amplification phenomenon as in the SBM \citep{abbe2018community}
 Both assumptions are a bounded log-likelihood ratio, and a distinctness condition requiring that for every \(z\in Z\), the laws \(P_{zi}\) and \(P_{zj}\) are different whenever \(i\neq j\). The first one can however be relaxed in some special cases, in particular for Gaussian variants such as \(\mathbb Z_2\)-synchronization \citep{gaudio2024exact}.
 The latter is used for the first phase during the propagation.
@@ -406,7 +410,7 @@ contains more than the identity. In the special case \(|\Omega_{\pi,P}|=1\), the
 
 A subsequent work removes this distinctness assumption in a relevant two community setting. In \citep{gaudio2025sharpexactrecoverythreshold}, they consider \(k=2\), \(Z=\{1,2\}\), \(d\ge 2\), and observation laws satisfying \(P_{11}\neq P_{12}\) while \(P_{21}=P_{22}\).  
 This asymmetric setting captures, for instance, geometric planted dense subgraph and geometric submatrix localization, where the goal is to identify one structured community against a homogeneous background. 
-The information theoretic threshold is not changed. The difficulty is to build the first phase without distinctness. To resolve this, informally, the propagation of label is made by a clever and adaptive way. This yields almost exact recovery when \(\pi_1\lambda \nu_d>1\), and then exact recovery above the usual threshold \citep{gaudio2025sharpexactrecoverythreshold}. About two community setting, the algorithm is robust to monotone semirandom perturbation, that's to say where an adversary is allowed to add intra community edges and delete inter community edges \citep{gaudio2024exact}.
+The information theoretic threshold is not changed. The difficulty is to build the first phase without distinctness. To resolve this, informally, the propagation of label is made by a clever and adaptive way. This yields almost exact recovery when \(\pi_1\lambda \nu_d>1\), and then exact recovery above the usual threshold \citep{gaudio2025sharpexactrecoverythreshold}. In the two community setting, the algorithm is robust to monotone semirandom perturbation, that's to say where an adversary is allowed to add intra community edges and delete inter community edges \citep{gaudio2024exact}.
 
 The last step is done in \citep{gaudio2026exact}, where the GHCM becomes fully distance dependent as in this definition.
 The information theoretic threshold then keeps the same form, but the Chernoff-Hellinger quantity must now average the information over all visible distances,
@@ -428,7 +432,7 @@ g(t)
 p_{z\ell}(y;t)^s p_{z'\ell}(y;t)^{1-s}\,dy
 \right)\,dt
 \]
-with the inner integral replaced by a sum in the discrete case. The impossibility result is sharp below this threshold, with the additional one dimensional obstruction \(\lambda r<1\) when \(|\Omega_{\pi,P}|\ge 2\). Above the threshold, exact recovery is again achieved by a polynomial time two phase algorithm under similar assumptions to the constant probability case.
+with the inner integral over \(y\) replaced by a sum in the discrete case. The impossibility result is sharp below this threshold, with the additional one dimensional obstruction \(\lambda r<1\) when \(|\Omega_{\pi,P}|\ge 2\). Above the threshold, exact recovery is again achieved by a polynomial time two phase algorithm under similar assumptions to the constant probability case.
 
 
 
@@ -475,6 +479,8 @@ Méthode spectrale sur Soft Geometric Block Model (SGBM) (Generalisation de Geom
 
 
 Nous devons estimer les paramètres des modèles. Dans le cas de Sankararamn et Baccelli, GBG peut être adapté.
+
+Supprimer la distinctness pour GHCM, ou au moins trouver des conditions plus faibles que celle-ci.
 
 
 \end{itemize}
