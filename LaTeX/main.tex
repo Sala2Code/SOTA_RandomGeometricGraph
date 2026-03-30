@@ -17,8 +17,8 @@
 \usepackage[authoryear]{natbib}
 
 
-\title{Community detection in geometric graphs: Recent advances until 2026}
-\titlerunning{Community detection in geometric graphs} 
+\title{Community detection in random geometric graphs: Recent advances until 2026}
+\titlerunning{Community detection in random geometric graphs} 
 \author{Raphaël Sala}
 \authorrunning{R. Sala}
 \institute{Affiliation à renseigner\\ \email{raphael.sala@utoulouse.fr}}
@@ -436,21 +436,58 @@ with the inner integral over \(y\) replaced by a sum in the discrete case. The i
 
 
 
+\section{Spectral methods in latent geometric models}
 
-\section{\textcolor{red}{Spectral}}
-(A confirmer) \citep{chen2016community}
+% Before turning to spectral methods designed specifically for geometric community models, we mention related works that clarify why geometry makes spectral recovery delicate.
+In sparse SBM, non geometric model, \citep{bordenave2015non} showed that spectral recovery may depend on the spectral representation that is used, working with non-backtracking operator rather than the common used adjacency matrix. In geometric graphs another difficulty appears, dominant eigenvectors may reflect the ambient geometry rather than the latent communities.
+\citep{meliot2019asymptotic} analyzed the spectrum of random geometric graphs, on compact Lie groups, illustrating that geometry alone can leave a strong signature in the spectrum even in the absence of communities.
+A related but distinct perspective was developed by \citep{chen2016community}, who studied exact recovery from noisy pairwise measurements available only on a local observation graph, such as lines, rings, grids, or small-world networks, instead of being sampled over all node pairs. They proposed two nearly linear time algorithms, based on a spectral initialization followed by propagation and local refinement, and proved that these methods achieve the information theoretic threshold for a broad class of locality constrained graphs.
+Then, \citep{peche2020robustness} proved that spectral recovery in the SBM can remain robust under suitable random geometric perturbations. They provide the first bridge between classical spectral community detection and geometric models.
 
-(papier SBM mais théorie intéressante) \citep{bordenave2015non}
 
-Cadre spectral intéressant pour certains espaces \citep{meliot2019asymptotic}
+Unlike the models discussed in Section 3, \citep{avrachenkov2021higher} is included here mainly for its spectral method rather than for a new information theoretic threshold. They introduce the Soft Geometric Block Model (SGBM), where the geometric positions are latent, so the space \(\mathcal X := \mathbb T^d = \mathbb R^d/\mathbb Z^d\) is not observed. The node positions are sampled i.i.d. uniformly on \(\mathcal X\) from \(\mu\). They study two balanced communities and define
+\[
+\mathrm{SGBM}(F_{\mathrm{in}},F_{\mathrm{out}},d)
+\coloneqq
+\mathrm{UGCM}\!\left(
+\mathcal X,\rho,\mathcal X,\mathrm{Unif}(\mathcal X),\{-1,+1\},\mathrm{Ber}\!\left(\tfrac12\right),\{0,1\},K
+\right)
+\]
+where \(\rho\) is the toroidal metric on \(\mathbb T^d\) and
+\[
+K : (x,y,z,z')
+\longmapsto
+\mathrm{Ber}\!\Big(
+F_{\mathrm{in}}(x-y)\mathbf 1_{\{z=z'\}}
++
+F_{\mathrm{out}}(x-y)\mathbf 1_{\{z\neq z'\}}
+\Big)
+\]
+Here \(F_{\mathrm{in}},F_{\mathrm{out}}:\mathbb T^d\to[0,1]\) are measurable connection functions. This framework contains for instance the SBM, the GBM and more. 
 
-Méthode spectrale + Robustesse (la perturbation est géométrique) \citep{peche2020robustness}
+\citep{avrachenkov2021higher} showed the Fiedler vector may correspond to a balanced geometric cut rather than to the hidden communities, so the informative eigenvector is not necessarily associated with the second eigenvalue. They therefore propose a higher order spectral clustering procedure, selecting an eigenvector of the adjacency matrix associated with a suitable higher-order eigenvalue identified through the Fourier coefficients of \(F_{\mathrm{in}}\) and \(F_{\mathrm{out}}\). 
+In the dense regime, they characterize the limiting spectrum of the model, they prove almost exact recovery for their method and then upgrade it to exact recovery by a refinement step.
+Their assumptions on \(F_{\mathrm{in}}\) and \(F_{\mathrm{out}}\) are mild. They require a Fourier regularity condition at \(0\), which is satisfied for a wide class of reasonable kernels, including functions differentiable at \(0\) and piecewise \(C^1\) functions continuous at \(0\). The main limitation is that the analysis is restricted to the dense regime, so it does not address the sparse or logarithmic settings that are central in Section~\ref{sec:models}.
 
-Méthode spectrale sur Soft Geometric Block Model (SGBM) (Generalisation de Geomemetric SBM)
-\citep{avrachenkov2021higher}
 
-\citep{allem2025multicommunityspectralclusteringgeometric}
-
+\citep{allem2025multicommunityspectralclusteringgeometric} extend the SGBM to consider \(k \geq 2\) homogeneous communities. Their goal is to identify a spectral procedure in a geometric setting with latent positions, not to find information theoretic thresholds. 
+Writing
+\[
+\mu_{\mathrm{in}} := \int_{\mathbb T^d} F_{\mathrm{in}}(x)\,dx
+\qquad
+\mu_{\mathrm{out}} := \int_{\mathbb T^d} F_{\mathrm{out}}(x)\,dx
+\]
+they define the target value
+\(\lambda^\star := n(\mu_{\mathrm{in}}-\mu_{\mathrm{out}}) / k\).
+Their algorithm selects the \(k-1\) eigenvectors of the adjacency matrix whose eigenvalues are closest to \(\lambda^\star\), embeds the vertices into \(\mathbb R^{k-1}\) using the rows of the resulting matrix, and then applies \(k\)-means. The informative object is no longer a single eigenvector but a \((k-1)\)-dimensional eigenspace. In the dense regime from a Davis-Kahan perturbation argument, they prove almost exact recovery and then obtain exact recovery after a refinement step. This result is under the same assumptions as in the two-community case, namely \(F_{\mathrm{in}}(0)=\widehat F_{\mathrm{in}}(0)\), \(F_{\mathrm{out}}(0)=\widehat F_{\mathrm{out}}(0)\), and 
+\[
+\widehat F_{\mathrm{in}}(z)+(k-1)\widehat F_{\mathrm{out}}(z)\neq \mu_{\mathrm{in}}-\mu_{\mathrm{out}}
+\quad \forall z\in\mathbb Z^d
+\]
+\[
+\widehat F_{\mathrm{in}}(z)-\widehat F_{\mathrm{out}}(z)\neq \mu_{\mathrm{in}}-\mu_{\mathrm{out}}
+\quad \forall z\in\mathbb Z^d\setminus\{0\}
+\]
 
 
 \section{Ouvertures}
@@ -465,6 +502,7 @@ Méthode spectrale sur Soft Geometric Block Model (SGBM) (Generalisation de Geom
     Communautés apparaissent dans un espace hyperbolique latent \citep{bruno2019community}
     Réponse 6ans plus tard : pas toujours ! + definition d'un modele pour "régler" ça
     \citep{guarino2025random}
+\end{itemize}
 % Bruno et al. : 
 % “les communautés peuvent émerger dans un embedding hyperbolique appris” ;
 % Guarino et al. :
@@ -482,8 +520,8 @@ Nous devons estimer les paramètres des modèles. Dans le cas de Sankararamn et 
 
 Supprimer la distinctness pour GHCM, ou au moins trouver des conditions plus faibles que celle-ci.
 
+Partir du cas dense dans les méthodes spectrales, allez sur du plus parcimonieux (sparse, logarithmique).
 
-\end{itemize}
 
 % Springer author-year bibliography style
 \bibliographystyle{plainnat}
