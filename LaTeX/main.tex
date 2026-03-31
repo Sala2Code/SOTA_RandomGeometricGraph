@@ -17,18 +17,20 @@
 \usepackage[authoryear]{natbib}
 
 
-\title{Community detection in random geometric graphs: Recent advances until 2026}
-\titlerunning{Community detection in random geometric graphs} 
+\title{Community detection in random geometric graph models: Recent advances up to 2026}
+\titlerunning{Community detection in random geometric graph models} 
 \author{Raphaël Sala}
 \authorrunning{R. Sala}
-\institute{Affiliation à renseigner\\ \email{raphael.sala@utoulouse.fr}}
+\institute{Master 1 IMA, Université de Toulouse\\
+Toulouse, France\\
+\email{raphael.sala@utoulouse.fr}}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-\textcolor{red}{TODO : introduction UGCM, presenter la litterature}
-\keywords{Community detection, geometric graphs, random geometric graphs, exact/partial recovery, spectral methods}
+This report surveys recent theoretical advances on community detection in geometric random graph models. These models incorporate spatial or latent geometric information and therefore generate strong local dependence, high triangle density, and transitivity. We review the main geometric community models studied in the literature, including the Geometric Block Model, the Geometric Stochastic Block Model, the Geometric Kernel Block Model, the Geometric Hidden Community Model and the Soft Geometric Block Model. We organize the literature by inference task and connectivity regime, with emphasis on weak, almost exact, and exact recovery, information-theoretic thresholds, and the algorithmic ideas used to achieve them. Particular attention is paid to the logarithmic degree regime, where recent works establish sharp exact-recovery thresholds together with efficient algorithms. We also discuss spectral approaches, extensions and open directions.
+\keywords{Community detection, geometric random graphs, spatial networks, exact recovery, partial recovery, information-theoretic thresholds, spectral methods}
 \end{abstract}
 
 \section{Introduction}\label{sec:intro}
@@ -78,7 +80,7 @@ one can also obtain transitivity, and surely more, with attribute-based models
 hypergraphs \citep{Ruggeri_2023} and even geometric hypergraphs
 \citep{Kov_cs_2025}.
 We will not consider these models here, in order to keep the focus on the geometric aspect. A related but distinct line of work considers mixture based latent position models, such as the Gaussian Mixture Block Model
-\citep{li2024spectralclusteringgaussianmixture}, where community labels determine node positions using gaussian distributions. See \citep{reynolds2009gaussian} \citep{NIPS1999_97d98119}.
+\citep{li2024spectralclusteringgaussianmixture}, where community labels determine node positions using Gaussian distributions. See \citep{reynolds2009gaussian} \citep{NIPS1999_97d98119}.
 This differs from the geometric models considered here, where geometry directly affects edge formation rather than determining node placement. We therefore don't include these models in the core of this survey.
 
 
@@ -153,7 +155,7 @@ We say that exact recovery is achievable if there exists a sequence of estimator
 \mathbb P\bigl(A_n(\hat{\sigma}_n,\sigma^\star)=1\bigr)\xrightarrow[n\to\infty]{} 1
 \]
 
-Most works in the literature focus on the case \(k=2\). Although several ideas extend beyond this setting, this is also the framework that we adopt in the following, except when specified otherwise. In that case, it is convenient to encode the labels by \(\{-1,+1\}\), instead of \([2] = \{1,2\}\). Then “up to permutation” reduces to a global sign flip.
+Most works in the literature focus on the case \(k=2\). Although several ideas extend beyond this setting, this is also the framework that we adopt in the following, except when specified otherwise. In that case, it is convenient to encode the labels by \(\{\pm1\}=\{-1,+1\}\), instead of \([2] = \{1,2\}\). Then “up to permutation” reduces to a global sign flip.
 
 Each vertex also belongs to a space \(\mathcal X\). In the following, we specify each time whether this space is latent or observed. For theoretical analysis, \(\mathcal{X}\) is often chosen for mathematical convenience. The Euclidean space \(\mathbb{R}^{d}\) is a natural reference because of its symmetry, homogeneity, isotropy, and direct geometric interpretation.
 % See \citep{abbe2021community}, \textcolor{red}{Citer ceux qui sont euclidiens}.
@@ -162,13 +164,13 @@ We also encounter the torus \(\mathbb T^d\) mainly to avoid boundary effects and
 %\textcolor{red}{Todo citer}.
 Lastly, for latent models, the high-dimensional unit sphere \(\mathbb{S}^{d}\) is a standard reference space to model similarity, and it also provides convenient spectral properties \citep{decastro2020adaptiveestimationnonparametricgeometric}. A summary of theoretical works on \(\mathbb{S}^{d}\) is given in \citep{duchemin2023random}.
 
-In Section~\ref{sec:models} we present models used throughout the literature. Hence, we suggest a model to unify them while remaining close to the notation used in the papers. We call it the \textit{Unified Geometric Community Model} (UGCM) and it is defined as,
+In Section~\ref{sec:models} we present models used throughout the literature. To unify notation, we use the following template while remaining close to the notation used in the papers. We call it the \textit{Unified Geometric Community Model} (UGCM) and it is defined as,
 \[
 \mathrm{UGCM} \left( \mathcal X, \rho, W_n, \mu_n, Z, \pi, \mathcal Y, K_n \right)
 \] 
 where \( \mathcal X \) is the ambient space and \(\rho\) is its metric. \(W_n \subset \mathcal X\) is the window where nodes are sampled at the scale $n$.  
 \(\mu_n\) governs the spatial sampling mechanism. Usually, the vertices are sampled either as \(n\) i.i.d. points in \(W_n\) with law \(\mu_n\) or as a Poisson Point Process (PPP) on \(W_n\)  with intensity measure \( \mu_n \). We denote by \(Z\) the label set, and by \(\pi=(\pi_i)_{i\in Z} \) the distribution of the labels.
-For all \(u \in V\) and independently, \( \sigma^\star(u) \sim \pi\). \(\mathcal Y\) the space of pairwise observation. Let \(\mathcal P(\mathcal Y)\) denote the set of probability distributions on \(\mathcal Y\), we consider the kernel observation,
+For all \(u \in V\) and independently, \( \sigma^\star(u) \sim \pi\). \(\mathcal Y\) is the space of pairwise observation. Let \(\mathcal P(\mathcal Y)\) denote the set of probability distributions on \(\mathcal Y\), we consider the observation kernel,
 \[
 K_n : \mathcal{X} \times \mathcal{X} \times Z \times Z \to \mathcal P(\mathcal Y)
 \]
@@ -197,23 +199,23 @@ Finally, the \emph{dense regime} corresponds to the easiest setting, the graph c
 
 \subsection{Geometric Block Model (GBM)}
 
-One of the earliest geometric models for community detection is the Geometric Block Model (GBM) introduced in \citep{galhotra2018geometric}. They mainly study the case of two symmetric communities. In its general form, the model places each vertex at a latent position on the unit sphere \(\mathcal X \coloneqq \mathbb S^{d-1}\), sampled uniformly, and edges are drawn through a hard geometric rule. For \(d \in \mathbb{N} \backslash \{0,1\}, \ r_{in}, r_{out} \in [-1,1]\), \(r_{ij} \coloneqq  r_{in}\delta_{ij} + r_{out}(1-\delta_{ij}) \), they define
+One of the earliest geometric models for community detection is the Geometric Block Model (GBM) introduced in \citep{galhotra2018geometric}. They mainly study the case of two symmetric communities. In its general form, the model places each vertex at a latent position on the unit sphere \(\mathcal X \coloneqq \mathbb S^{d-1}\), sampled uniformly, and edges are drawn through a hard geometric rule. For \(d \in \mathbb{N} \backslash \{0,1\}, \ r_\mathrm{in}, r_\mathrm{out} \in [-1,1]\), \(r_{ij} \coloneqq  r_\mathrm{in}\delta_{ij} + r_\mathrm{out}(1-\delta_{ij}) \), they define
 \[
-\mathrm{GBM}(r_{in}, r_{out}, d) \coloneqq \mathrm{UGCM}(\mathcal X,\|\cdot\|_2,\ \mathcal X ,  \mathrm{Unif}( \mathcal X ),  \{-1,+1\},  \text{Ber}(1/2),  \{0,1\}, K_n)
+\mathrm{GBM}(r_\mathrm{in}, r_\mathrm{out}, d) \coloneqq \mathrm{UGCM}(\mathcal X,\|\cdot\|_2,\ \mathcal X ,  \mathrm{Unif}( \mathcal X ),  \{\pm1\},  \text{Ber}(1/2),  \{0,1\}, K_n)
 \]
 with \(K_n : (x,y,z,z') \mapsto \mathbf{1}\{\langle x, y \rangle \geq r_{z,z'}\} \).
 % In the circular case, this is equivalent after reparametrization to a threshold rule based either on the Euclidean distance or on the geodesic distance.
-The condition \(r_{in}>r_{out}\) ensures that edges within communities are denser than across communities. The space \(\mathcal X\) is assumed latent, so recovery is done only from the adjacency matrix.
+The condition \(r_\mathrm{in}>r_\mathrm{out}\) ensures that edges within communities are denser than across communities. The space \(\mathcal X\) is assumed latent, so recovery is done only from the adjacency matrix.
 
 They study the one dimensional circular case, corresponding to \(\mathbb S^1 \subset \mathbb R^2\), hence \(d=2\) in the notation above, in the regime
 \[
-r_{in} \coloneqq a\frac{\log n}{n} \qquad r_{out} \coloneqq b\frac{\log n}{n} \qquad a>b>0
+r_\mathrm{in} \coloneqq a\frac{\log n}{n} \qquad r_\mathrm{out} \coloneqq b\frac{\log n}{n} \qquad a>b>0
 \]
-This corresponds to the logarithmic regime. This regime matches the connectivity scale of one dimensional random geometric graphs. Their main algorithm is motif based, that is, for an observed edge \((u,v) \in E\), they count the number of common neighbors of \(u\) and \(v\), so the number of triangles containing this edge. Then they use this statistic to decide whether \(u\) and \(v\) belong to the same community. The geometry creates strong local dependence and transitivity. Unlike in the SBM, triangles are informative in the GBM. Still in this regime, the simple motif counting procedure already yields exact recovery with high probability when \(r_{in}\ge 4r_{out}\). The algorithm is efficient, and the journal version later clarifies that this one threshold guarantee from the conference paper is order optimal up to constants but restricted to that parameter range \citep{galhotra2018geometric,galhotra2023communityrecoverygeometricblock}.
+This corresponds to the logarithmic regime. This regime matches the connectivity scale of one dimensional random geometric graphs. Their main algorithm is motif based, that is, for an observed edge \((u,v) \in E\), they count the number of common neighbors of \(u\) and \(v\), so the number of triangles containing this edge. Then they use this statistic to decide whether \(u\) and \(v\) belong to the same community. The geometry creates strong local dependence and transitivity. Unlike in the SBM, triangles are informative in the GBM. Still in this regime, the simple motif counting procedure already yields exact recovery with high probability when \(r_\mathrm{in}\ge 4r_\mathrm{out}\). The algorithm is efficient, and the journal version later clarifies that this one threshold guarantee from the conference paper is order optimal up to constants but restricted to that parameter range \citep{galhotra2018geometric,galhotra2023communityrecoverygeometricblock}.
 
 Firstly, \citep{galhotra2020connectivityrandomannulusgraphs} introduces the random annulus graph (RAG). Let \(I \coloneqq \left[b\left(\frac{\log n}{n}\right)^{1/d}, a\left(\frac{\log n}{n}\right)^{1/d}\right] \). They study \( RAG_d(n, I)\) on \(\mathbb S^d \), a RGG where two nodes are connected only when the distance between them falls inside \(I\), hence the name annulus graph. In dimension \(1\), they obtain a sharp connectivity threshold for the RAG: the graph is connected with high probability if \(a>1\) and \(a-b>1/2\), and disconnected with high probability if \(a<1\) or \(a-b<1/2\). For \(d > 1\), they provide sufficient conditions \citep{galhotra2020connectivityrandomannulusgraphs}.
 
-Secondly, the main algorithmic refinement is to replace the original one threshold triangle rule by a two threshold procedure. Once one leaves the regime \(r_{in}\ge 4r_{out}\), a single threshold is no longer sufficient. For inter community edges, the normalized triangle count is concentrated around \(2r_{out}\), whereas for intra community edges it depends on the latent distance and may lie either above or below that value. They therefore define two thresholds
+Secondly, the main algorithmic refinement is to replace the original one threshold triangle rule by a two threshold procedure. Once one leaves the regime \(r_\mathrm{in}\ge 4r_\mathrm{out}\), a single threshold is no longer sufficient. For inter community edges, the normalized triangle count is concentrated around \(2r_\mathrm{out}\), whereas for intra community edges it depends on the latent distance and may lie either above or below that value. They therefore define two thresholds
 \[
 E_S\coloneqq (2b+f_1)\frac{\log n}{n}
 \qquad
@@ -223,16 +225,16 @@ where \(f_1\) and \(f_2\) are chosen from Chernoff type large deviation inequali
 
 As a consequence, they obtain exact recovery in dimension \(1\) with explicit conditions and an impossibility result when \(a<1\) or \(a-b<1/2\). However, the exact recovery threshold for the latent one dimensional GBM is still not fully characterized, see Figure~\ref{fig:GBM}. A useful contrast is that this gap disappears when the latent positions are revealed. In that case, the one dimensional GBM has a sharp exact recovery threshold which coincides with the sharp connectivity threshold of the RAG. In higher dimension \(d>1\), they also prove a polynomial time exact recovery result at the correct order of magnitude,
 \[
-r_{out}=\Theta\!\left(\left(\frac{\log n}{n}\right)^{1/d}\right)
+r_\mathrm{out}=\Theta\!\left(\left(\frac{\log n}{n}\right)^{1/d}\right)
 \quad\text{and}\quad
-r_{in}-r_{out}=\Theta\!\left(\left(\frac{\log n}{n}\right)^{1/d}\right)
+r_\mathrm{in}-r_\mathrm{out}=\Theta\!\left(\left(\frac{\log n}{n}\right)^{1/d}\right)
 \]
 are sufficient, while recovery becomes impossible if one of these quantities is of smaller order \citep{galhotra2023communityrecoverygeometricblock}.
 
 \begin{figure}[H]
     \centering
     \includesvg[inkscapearea=page,width=0.8\textwidth]{img/GBM_fig5.svg}
-\caption{Phase diagram for exact recovery in the one dimensional latent GBM in the regime \(r_{in}=a\log n/n\) and \(r_{out}=b\log n/n\), reproduced from \citet{galhotra2023communityrecoverygeometricblock}, Figure~5. The red region corresponds to disconnected graphs and therefore an impossibility result. The yellow region remains an open problem, and the green region corresponds to the parameter range certified by Algorithm~1 (Theorem~8).}
+\caption{Phase diagram for exact recovery in the one dimensional latent GBM in the regime \(r_\mathrm{in}=a\log n/n\) and \(r_\mathrm{out}=b\log n/n\), reproduced from \citet{galhotra2023communityrecoverygeometricblock}, Figure~5. The red region corresponds to disconnected graphs and therefore an impossibility result. The yellow region remains an open problem, and the green region corresponds to the parameter range certified by Algorithm~1 (Theorem~8).}
     \label{fig:GBM}
 \end{figure}
 
@@ -244,47 +246,47 @@ Finally, \citep{chien2020active} studies active learning in the latent GBM with 
 \citep{sankararaman2018community} introduce the Geometric Stochastic Block Model (GSBM), which is later developed in full detail in \citep{abbe2021community}. 
 The geometric positions are observed, the space \(\mathcal X\coloneqq \mathbb R^d\) is not latent.
 The model allows edge probabilities to depend jointly on distance and community labels.
-Here, \(n\) is a scaling parameter and not the number of nodes. Points are sampled as a PPP on a window \(W_n \coloneqq \left[-\frac{n^{1/d}}{2}, \frac{n^{1/d}}{2}\right]^d\) with intensity measure \(\mu_n \coloneqq \lambda \mathrm{Leb}_{\mid W_n}\) with \(\lambda > 0\). The window \(W_n\) has a volume \(n\). They study the case of two symmetric communities. Nodes are connected according to their distance and labels through \(f_{in}^{(n)}\) and \(f_{out}^{(n)}\). We assume for all \(r\geq 0\), \(1 \geq f_{in}^{(n)}(r) \geq f_{out}^{(n)}(r) \geq 0 \) and \(f_{in}^{(n)} \neq f_{out}^{(n)}\) up to Lebesgue measure \(0\). More assumptions on these functions are given according to the regime that we are interested. % We are in the framework of Soft-RGG. 
+Here, \(n\) is a scaling parameter and not the number of nodes. Points are sampled as a PPP on a window \(W_n \coloneqq \left[-\frac{n^{1/d}}{2}, \frac{n^{1/d}}{2}\right]^d\) with intensity measure \(\mu_n \coloneqq \lambda \mathrm{Leb}_{\mid W_n}\) with \(\lambda > 0\). The window \(W_n\) has a volume \(n\). They study the case of two symmetric communities. Nodes are connected according to their distance and labels through \(f_\mathrm{in}^{(n)}\) and \(f_\mathrm{out}^{(n)}\). We assume for all \(r\geq 0\), \(1 \geq f_\mathrm{in}^{(n)}(r) \geq f_\mathrm{out}^{(n)}(r) \geq 0 \) and \(f_\mathrm{in}^{(n)} \neq f_\mathrm{out}^{(n)}\) up to Lebesgue measure \(0\). More assumptions on these functions are given according to the regime that we are interested. % We are in the framework of Soft-RGG. 
 The model is then defined by,
 \[
-\mathrm{GSBM}(f_{in}^{(n)}, f_{out}^{(n)},\lambda,d) \coloneqq 
-\mathrm{UGCM}(\mathcal X, \rho_n, W_n, \mu_n, \{-1,+1\}, \text{Ber}(1/2), \{0,1\}, K_n)
+\mathrm{GSBM}(f_\mathrm{in}^{(n)}, f_\mathrm{out}^{(n)},\lambda,d) \coloneqq 
+\mathrm{UGCM}(\mathcal X, \rho_n, W_n, \mu_n, \{\pm1\}, \text{Ber}(1/2), \{0,1\}, K_n)
 \]
 where the metric is the Euclidean distance in the sparse regime, \(\rho_n \coloneqq \| \cdot \|_2 \), and toroidal metric in the logarithmic regime, \(\rho_n \coloneqq \| \cdot \|_{T_n}\). The toroidal metric is used in the logarithmic regime to avoid boundary effects on \(W_n\), in the sparse regime these effects are asymptotically negligible. Moreover, the kernel is defined as,
 \[
-K_n: (x,y,z,z') \longmapsto \text{Ber}\left(f_{in}^{(n)}(\rho_n(x,y))\mathbf{1}\{z=z'\} + f_{out}^{(n)}(\rho_n(x,y))\mathbf{1}\{z\neq z'\}\right)
+K_n: (x,y,z,z') \longmapsto \text{Ber}\left(f_\mathrm{in}^{(n)}(\rho_n(x,y))\mathbf{1}\{z=z'\} + f_\mathrm{out}^{(n)}(\rho_n(x,y))\mathbf{1}\{z\neq z'\}\right)
 \]
 
 
 
-In the sparse regime, nodes have a finite expected degree. Accordingly, we assume that the connection functions do not depend on \(n\), namely, \(f_{in}^{(n)} = f_{in}\) and \(f_{out}^{(n)} = f_{out}\), and that
+In the sparse regime, nodes have a finite expected degree. Accordingly, we assume that the connection functions do not depend on \(n\), namely, \(f_\mathrm{in}^{(n)} = f_\mathrm{in}\) and \(f_\mathrm{out}^{(n)} = f_\mathrm{out}\), and that
 \[
-\int_{\mathbb R^d} f_{in}(\|x\|_2) + f_{out}(\|x\|_2)\mathrm{d}x < \infty
+\int_{\mathbb R^d} f_\mathrm{in}(\|x\|_2) + f_\mathrm{out}(\|x\|_2)\mathrm{d}x < \infty
 \]
 The metric is Euclidean, which allows the finite graphs to be viewed as restrictions of a single infinite random graph \citep{last2018lectures}. In this regime, the main question is weak recovery. 
 By monotonicity, there exists a critical value \(\lambda_c \in [0,\infty]\) separating the unsolvable and solvable phases. The first result is an impossibility criterion based on the auxiliary random connection model
-\(H_{\lambda,g(\cdot),d}\) defined on the same PPP of intensity \(\lambda\) where two points at distance \(r\) are connected independently with probability \(g(r)\). Denoting by \(\theta(H_{\lambda,g(\cdot),d})\) the percolation probability, the probability that the connected component of a typical node is infinite. They prove that if \(\theta(H_{\lambda,f_{in}-f_{out},d})=0\) then weak recovery is impossible. In other words, if the informative part \(f_{in}-f_{out}\) does not generate an infinite connected component, then the community information cannot propagate at long range. In particular, for \(d=1\), weak recovery is impossible for every \(\lambda>0\).
+\(H_{\lambda,g(\cdot),d}\) defined on the same PPP of intensity \(\lambda\) where two points at distance \(r\) are connected independently with probability \(g(r)\). Denoting by \(\theta(H_{\lambda,g(\cdot),d})\) the percolation probability, the probability that the connected component of a typical node is infinite. They prove that if \(\theta(H_{\lambda,f_\mathrm{in}-f_\mathrm{out},d})=0\) then weak recovery is impossible. In other words, if the informative part \(f_\mathrm{in}-f_\mathrm{out}\) does not generate an infinite connected component, then the community information cannot propagate at long range. In particular, for \(d=1\), weak recovery is impossible for every \(\lambda>0\).
 To prove the lower bound, they introduce an auxiliary problem called Information Flow from Infinity.
 %It asks whether one can estimate the label of a typical node better than random, given the graph, the node locations, and the true labels of nodes far away from it.
 They prove that this problem is easier than community detection, so its impossibility already implies the impossibility of weak recovery \citep{abbe2021community}.
 For \(d\ge 2\), this yields the explicit lower bound,
 \[
-\lambda \le \left(\int_{\mathbb R^d}\bigl(f_{in}(\|x\|_2)-f_{out}(\|x\|_2)\bigr)\,dx\right)^{-1}
+\lambda \le \left(\int_{\mathbb R^d}\bigl(f_\mathrm{in}(\|x\|_2)-f_\mathrm{out}(\|x\|_2)\bigr)\,dx\right)^{-1}
 \quad\Longrightarrow\quad
 \text{weak recovery is impossible}
 \]
 
 On the positive side, they introduce the Good Bad Grid (GBG) algorithm, its complexity is \(O(n^2)\). Although the graph is globally sparse, it remains locally dense because geometry creates many short loops and common neighbors. Hence, for two nearby nodes, the number of common neighbors carries information on whether they belong to the same community. The algorithm first compares nearby pairs using such local statistics, then partitions the space into small cells and propagates consistent decisions across the grid. Its analysis relies on a coupling with a dependent site percolation process. They prove that if \(d\ge 2\) then there exists \(\lambda_{upper}<\infty\) such that weak recovery is solvable for all \(\lambda\ge \lambda_{upper}\). Combined with the lower bound above, this implies
 \(0<\lambda_c<\infty\) so the sparse regime exhibits a non-trivial phase transition \citep{abbe2021community}.
-In some special cases, they obtain a sharp characterization of the threshold. If connection functions are hard thresholds, that is, if there exist \(R_{in}, R_{out} \geq 0\) such that,
+In some special cases, they obtain a sharp characterization of the threshold. If connection functions are hard thresholds, that is, if there exist \(R_\mathrm{in}, R_\mathrm{out} \geq 0\) such that,
 \[
-f_{in}: r \mapsto \mathbf{1}_{\{r\le R_{in}\}}
+f_\mathrm{in}: r \mapsto \mathbf{1}_{\{r\le R_\mathrm{in}\}}
 \qquad\text{and}\qquad
-f_{out}: r \mapsto \mathbf{1}_{\{r\le R_{out}\}}
+f_\mathrm{out}: r \mapsto \mathbf{1}_{\{r\le R_\mathrm{out}\}}
 \qquad\text{and}\qquad
-R_{in}\ge R_{out}
+R_\mathrm{in}\ge R_\mathrm{out}
 \]
-then weak recovery is solvable if and only if \(\theta(H_{\lambda,f_{in}-f_{out},d})>0\).
+then weak recovery is solvable if and only if \(\theta(H_{\lambda,f_\mathrm{in}-f_\mathrm{out},d})>0\).
 So, in this hard threshold case, the phase transition is fully characterized. More generally, they also show a weak form of asymptotic optimality for GBG, when the signal is strong enough, the fraction of correctly classified vertices can be made arbitrarily close to \(1\). In our notation, this means that for every \(\varepsilon>0\), there exists \(\lambda_0>0\) such that for all \(\lambda\ge \lambda_0\),
 \[
 \lim_{n\to\infty}\mathbb P\!\left(
@@ -294,14 +296,14 @@ A_n(\hat{\sigma}^{GBG, \lambda}_n,\sigma^\star)\ge 1-\varepsilon
 
 % This does not imply that GBG is optimal for every fixed \(\lambda\), and the exact characterization of the weak recovery threshold remains open beyond these special cases \citep{abbe2021community}.
 
-A related question, well studied in the SBM, is whether a graph with communities can be distinguished from a null model without community structure. In \citep{abbe2021community}, the authors formulate the same testing problem for the GSBM. The null model is a random connection model without communities, with the same spatial distribution of nodes and connection function \((f_{in}+f_{out})/2\). Hence, the null and alternative models have the same average degree. They prove that, as soon as \(f_{in}\neq f_{out}\) on a set of positive Lebesgue measure, the two induced probability measures are mutually singular. Therefore, the distinguishability problem is solvable with probability \(1-o_n(1)\) for every \(\lambda>0\), so it exhibits no phase transition. They construct an explicit test based on local triangle profiles. An interesting fact is that, in the sparse regime, one may detect the presence of communities while still being unable to recover a partition better than random. This is in contrast with the sparse SBM with two communities, where distinguishability and weak recovery coincide \citep{mossel2012stochasticblockmodelsreconstruction}.
+A related question, well studied in the SBM, is whether a graph with communities can be distinguished from a null model without community structure. In \citep{abbe2021community}, the authors formulate the same testing problem for the GSBM. The null model is a random connection model without communities, with the same spatial distribution of nodes and connection function \((f_\mathrm{in}+f_\mathrm{out})/2\). Hence, the null and alternative models have the same average degree. They prove that, as soon as \(f_\mathrm{in}\neq f_\mathrm{out}\) on a set of positive Lebesgue measure, the two induced probability measures are mutually singular. Therefore, the distinguishability problem is solvable with probability \(1-o_n(1)\) for every \(\lambda>0\), so it exhibits no phase transition. They construct an explicit test based on local triangle profiles. An interesting fact is that, in the sparse regime, one may detect the presence of communities while still being unable to recover a partition better than random. This is in contrast with the sparse SBM with two communities, where distinguishability and weak recovery coincide \citep{mossel2012stochasticblockmodelsreconstruction}.
 
 
-In the logarithmic regime, the connection functions now depend on \(n\) and satisfy for \(C_{in}>C_{out}\ge 0\),
+In the logarithmic regime, the connection functions now depend on \(n\) and satisfy for \(C_\mathrm{in}>C_\mathrm{out}\ge 0\),
 \[
-\int_{\mathbb R^d} f_{in}^{(n)}(\|x\|_{T_n})\,dx = C_{in}\log n
+\int_{\mathbb R^d} f_\mathrm{in}^{(n)}(\|x\|_{T_n})\,dx = C_\mathrm{in}\log n
 \qquad
-\int_{\mathbb R^d} f_{out}^{(n)}(\|x\|_{T_n})\,dx = C_{out}\log n
+\int_{\mathbb R^d} f_\mathrm{out}^{(n)}(\|x\|_{T_n})\,dx = C_\mathrm{out}\log n
 \]
 This is also the natural scale of connectivity for geometric graphs, which explains why exact recovery is studied in this regime. However, connectivity is not a necessary condition for exact recovery in the GSBM since the node locations are observed, isolated or weakly connected vertices may still be classified from their geometric position relative to the others.
 For the impossibility result, they introduce the genie estimator and the notion of a flip bad vertex, namely a vertex whose label is misclassified by the local likelihood test when all other labels are revealed. Writing \(N_n^{\mathrm{flip}}\) for the number of such vertices, they prove that if \(\mathbb E(N_n^{\mathrm{flip}})\xrightarrow[n\to\infty]{} \infty\) and if long range correlations between flip bad events are negligible, then \(N_n^{\mathrm{flip}}>0\) with high probability. Therefore exact recovery is impossible \citep{abbe2021community}.
@@ -309,9 +311,9 @@ On the positive side, they adapt the GBG algorithm to this regime. The local pai
 
 They then focus on a particular logarithmic model, defined by
 \[
-f_{in}^{(n)}: r \mapsto a\,\mathbf 1_{\{r\le (\log n)^{1/d}\}}
+f_\mathrm{in}^{(n)}: r \mapsto a\,\mathbf 1_{\{r\le (\log n)^{1/d}\}}
 \qquad
-f_{out}^{(n)}: r \mapsto b\,\mathbf 1_{\{r\le (\log n)^{1/d}\}}
+f_\mathrm{out}^{(n)}: r \mapsto b\,\mathbf 1_{\{r\le (\log n)^{1/d}\}}
 \qquad 0\le b<a\le 1
 \]
 This should be viewed as a non trivial instance of the logarithmic regime. Denote by \(\nu_d\) the volume of the unit ball in \(\mathbb R^d\). In this case, they obtain an explicit necessary condition for exact recovery,
@@ -324,19 +326,19 @@ They also prove that there exists \(C(a,b,d) \geq 0\) such that
 \(\lambda \nu_d\Bigl(1-\sqrt{ab}-\sqrt{(1-a)(1-b)}\Bigr)>C(a,b,d)\) 
 is sufficient for exact recovery by GBG. They conjecture that the lower bound is in fact sharp. This conjecture was later confirmed by \citep{gaudio2024exactcommunityrecoverygeometric}. The same sharp threshold also appears as a corollary of a more general model, GHCM, developed in \citep{gaudio2024exact}.
 
-More recently, \citep{gaudio2025exactrecoverygeometricsbm} extended this sharp result. They consider a model where edges are only possible if they are in a visibility radius \(r(\log n)^{1/d}\) with \(r>0\), and assume mild regularity conditions on the connection functions such as support contained in \([0,r]\), a finite number of intersections between \(f_{in}\) and \(f_{out}\), and no interval on which the two functions remain arbitrarily close. This includes in particular the previous indicator case, but also broad classes of piecewise regular or continuous kernels. Their main result is a complete characterization of the exact recovery threshold through the information quantity
+More recently, \citep{gaudio2025exactrecoverygeometricsbm} extended this sharp result. They consider a model where edges are only possible if they are in a visibility radius \(r(\log n)^{1/d}\) with \(r>0\), and assume mild regularity conditions on the connection functions such as support contained in \([0,r]\), a finite number of intersections between \(f_\mathrm{in}\) and \(f_\mathrm{out}\), and no interval on which the two functions remain arbitrarily close. This includes in particular the previous indicator case, but also broad classes of piecewise regular or continuous kernels. Their main result is a complete characterization of the exact recovery threshold through the information quantity
 \[
-I(f_{in},f_{out})
+I(f_\mathrm{in},f_\mathrm{out})
 \coloneqq
 \lambda \nu_d r^d
 \int_0^r
 \Bigl(
-1-\sqrt{f_{in}(t)f_{out}(t)}
--\sqrt{(1-f_{in}(t))(1-f_{out}(t))}
+1-\sqrt{f_\mathrm{in}(t)f_\mathrm{out}(t)}
+-\sqrt{(1-f_\mathrm{in}(t))(1-f_\mathrm{out}(t))}
 \Bigr)
 \frac{d\,t^{d-1}}{r^d}\,dt
 \]
-which is a generalized Chernoff Hellinger divergence. They prove that exact recovery is achievable when \(I(f_{in},f_{out})>1\), while it is impossible when \(I(f_{in},f_{out})<1\). In dimension \(d=1\), one must additionally have \(\lambda r>1\), and exact recovery is impossible when \(\lambda r<1\). Hence, the paper shows that the exact recovery problem in the two community GSBM admits a sharp information theoretic threshold far beyond the step function case. They also provide a polynomial time algorithm achieving this threshold.
+which is a generalized Chernoff Hellinger divergence. They prove that exact recovery is achievable when \(I(f_\mathrm{in},f_\mathrm{out})>1\), while it is impossible when \(I(f_\mathrm{in},f_\mathrm{out})<1\). In dimension \(d=1\), one must additionally have \(\lambda r>1\), and exact recovery is impossible when \(\lambda r<1\). Hence, the paper shows that the exact recovery problem in the two community GSBM admits a sharp information theoretic threshold far beyond the step function case. They also provide a polynomial time algorithm achieving this threshold.
 
 
 \subsection{Geometric Kernel Block Model (GKBM)}
@@ -345,7 +347,7 @@ which is a generalized Chernoff Hellinger divergence. They prove that exact reco
 Points are sampled as a PPP on \(\mathcal{X}\) with intensity measure \(\mu_n \coloneqq \lambda n \mathrm{Leb}_{\mid \mathcal{X}}\) with \(\lambda > 0\). They focus in the one dimensional case with two symmetric communities, although the techniques may extend to higher dimensions. The link probabilities are defined according to \(\phi : \mathbb{R}^+ \to [0,1]\) measurable with a support bounded by \(r >0\). Let \(a,b \in [0,1]\),
 \[
 \mathrm{GKBM}(\lambda,a,b,\phi)\coloneqq
-\mathrm{UGCM}(\mathcal X,\rho,\mathcal X,\mu_n,\{-1,+1\},\mathrm{Ber}(1/2),\{0,1\},K_n)
+\mathrm{UGCM}(\mathcal X,\rho,\mathcal X,\mu_n,\{\pm1\},\mathrm{Ber}(1/2),\{0,1\},K_n)
 \]
 Moreover they study the logarithmic regime so the kernel is set as,
 \[
@@ -450,7 +452,7 @@ Unlike the models discussed in Section 3, \citep{avrachenkov2021higher} is inclu
 \mathrm{SGBM}(F_{\mathrm{in}},F_{\mathrm{out}},d)
 \coloneqq
 \mathrm{UGCM}\!\left(
-\mathcal X,\rho,\mathcal X,\mathrm{Unif}(\mathcal X),\{-1,+1\},\mathrm{Ber}\!\left(\tfrac12\right),\{0,1\},K
+\mathcal X,\rho,\mathcal X,\mathrm{Unif}(\mathcal X),\{\pm1\},\mathrm{Ber}\!\left(\tfrac12\right),\{0,1\},K
 \right)
 \]
 where \(\rho\) is the toroidal metric on \(\mathbb T^d\) and
@@ -465,8 +467,10 @@ F_{\mathrm{out}}(x-y)\mathbf 1_{\{z\neq z'\}}
 \]
 Here \(F_{\mathrm{in}},F_{\mathrm{out}}:\mathbb T^d\to[0,1]\) are measurable connection functions. This framework contains for instance the SBM, the GBM and more. 
 
-\citep{avrachenkov2021higher} showed the Fiedler vector may correspond to a balanced geometric cut rather than to the hidden communities, so the informative eigenvector is not necessarily associated with the second eigenvalue. They therefore propose a higher order spectral clustering procedure, selecting an eigenvector of the adjacency matrix associated with a suitable higher-order eigenvalue identified through the Fourier coefficients of \(F_{\mathrm{in}}\) and \(F_{\mathrm{out}}\). 
-In the dense regime, they characterize the limiting spectrum of the model, they prove almost exact recovery for their method and then upgrade it to exact recovery by a refinement step.
+\citep{avrachenkov2021higher} showed the Fiedler vector may correspond to a balanced geometric cut rather than to the hidden communities, so the informative eigenvector is not necessarily associated with the second eigenvalue. Rather than taking the second eigenvector, they identify the relevant eigenvalue from the Fourier coefficients of \(F_{\mathrm{in}}\)
+and
+\(F_{\mathrm{out}}\) and use the associated eigenvector for clustering.
+In the dense regime, they characterize the limiting spectrum of the normalized adjacency matrix, they prove almost exact recovery for their method and then upgrade it to exact recovery by a refinement step.
 Their assumptions on \(F_{\mathrm{in}}\) and \(F_{\mathrm{out}}\) are mild. They require a Fourier regularity condition at \(0\), which is satisfied for a wide class of reasonable kernels, including functions differentiable at \(0\) and piecewise \(C^1\) functions continuous at \(0\). The main limitation is that the analysis is restricted to the dense regime, so it does not address the sparse or logarithmic settings that are central in Section~\ref{sec:models}.
 
 
@@ -489,38 +493,24 @@ Their algorithm selects the \(k-1\) eigenvectors of the adjacency matrix whose e
 \quad \forall z\in\mathbb Z^d\setminus\{0\}
 \]
 
+\section{Extensions and open directions}
 
-\section{Ouvertures}
-\begin{itemize}
-    \item Considérer des modèles hyperboliques, pas seulement labels \& distance-dependant,
-    car ceux-ci captent mieux les propriétés habituelles des réseaux 
-    \begin{itemize}
-        \item Clustering \citep{Krioukov_2016}
-        \item Degre inhomogène \citep{Baraba_si_1999}
-        \item "Communities with specific mixing patterns" (mesoscale) \citep{Toivonen_2006} 
-    \end{itemize} 
-    Communautés apparaissent dans un espace hyperbolique latent \citep{bruno2019community}
-    Réponse 6ans plus tard : pas toujours ! + definition d'un modele pour "régler" ça
-    \citep{guarino2025random}
-\end{itemize}
-% Bruno et al. : 
-% “les communautés peuvent émerger dans un embedding hyperbolique appris” ;
-% Guarino et al. :
-% “oui, mais la géométrie hyperbolique pure ne suffit pas toujours à expliquer la
-% structure mésoscopique ; il faut parfois ajouter une vraie composante de blocs.”
+The models reviewed in this report are mostly Euclidean and are designed for inference under explicit probabilistic assumptions on labels, positions, and edge formation. A different direction comes from hyperbolic latent representations. This viewpoint is motivated by the fact that hyperbolic geometry can reproduce several structural properties frequently observed in empirical networks, such as degree heterogeneity \citep{Baraba_si_1999}, strong clustering \citep{Krioukov_2016} and small-world \citep{watts1998collective}. 
+In this setting, communities are not necessarily introduced as planted labels in a recovery problem, but may instead emerge from the geometric organization of the embedded graph.
+This idea already appears in earlier hyperbolic embedding works such as HyperMap \citep{Papadopoulos_2015}, where the inferred hyperbolic coordinates reveal soft communities and can also be used for link prediction.
 
-\citep{Li_Sha_Huang_Zhang_2018}
-% au-delà des graphes géométriques, d’autres travaux incorporent
-% des informations latentes non topologiques, par exemple
-% des attributs de nœuds, souvent via des approches
-% d'embedding ou de factorisation non négative
+From this perspective, \citep{bruno2019community} study community detection after embedding an observed graph into a latent hyperbolic space using Mercator. Communities are then extracted from the angular organization of the embedded nodes through clustering heuristics. Their goal is not to establish information theoretic thresholds or recovery guarantees, but rather to use hyperbolic geometry as an intermediate representation in which community structure may become more detectable.
+% This makes the approach conceptually closer to latent-space modeling and network representation than to the exact recovery results surveyed above.
+A limitation of this purely geometric view is that geometry alone does not necessarily explain arbitrary mesoscale mixing patterns. This point is emphasized by \citep{guarino2025random}. They argue that classical hyperbolic models don't provide explicit control of block level interactions. To address this, they introduce a random hyperbolic block model, in which an explicit mesoscale structure is superimposed on the latent hyperbolic geometry. For the present survey, these works suggest that hyperbolic geometry is a promising representational framework, but not yet a theory of community recovery comparable to what is now available.
 
+Returning to models reviewed above, an important open question is parameter estimation. In \citep{abbe2021community}, the authors discuss a version of the GBG procedure that does not require explicit knowledge of the connection functions. However, turning such ideas into a statistically principled estimation method remains open.
+In particular, estimating $f_{\mathrm{in}}$, $f_{\mathrm{out}}$ or more generally the observation kernels, is poorly understood.
+Likewise, many theoretical works assume that the geometric positions are observed, whereas in practice the geometry may be latent, noisy, or only partially available.
 
-Nous devons estimer les paramètres des modèles. Dans le cas de Sankararamn et Baccelli, GBG peut être adapté.
+A second direction is to weaken assumptions. For instance, in the GHCM of \citep{gaudio2026exact},  sharp thresholds are now available in considerable generality, but the algorithmic results still rely on distinctness type assumptions ensuring that local neighborhoods contain enough information to separate the communities. Removing these assumptions, or replacing them by weaker %identifiable
+conditions, remains an open problem.
 
-Supprimer la distinctness pour GHCM, ou au moins trouver des conditions plus faibles que celle-ci.
-
-Partir du cas dense dans les méthodes spectrales, allez sur du plus parcimonieux (sparse, logarithmique).
+A third direction concerns algorithms. On the one hand, higher-order spectral clustering is effective in the dense regime \citep{avrachenkov2021higher,allem2025multicommunityspectralclusteringgeometric}. On the other hand, the sharp exact recovery results in the logarithmic regime rely on local propagation followed by refinement \citep{galhotra2023communityrecoverygeometricblock,abbe2021community,avrachenkov2024community,gaudio2026exact}. A natural question is therefore whether one can design spectral or hybrid methods that remain effective in sparser geometric graphs.
 
 
 % Springer author-year bibliography style
