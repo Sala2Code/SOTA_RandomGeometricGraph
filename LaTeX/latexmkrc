@@ -9,8 +9,9 @@ $aux_dir = 'build';
 # Put PDFs in ../pdf
 $out_dir = '.';
 
-# Enable bibliography with bibtex when needed
-$bibtex = 'bibtex %O %B';
+# Enable bibliography with bibtex when needed.
+# aux files are in build/, while refs_filtered.bib is in the LaTeX root.
+$bibtex = 'bibtex -include-directory=.. %O %B';
 
 # Always generate .synctex.gz for editor integration
 $pdf_mode = 1;
