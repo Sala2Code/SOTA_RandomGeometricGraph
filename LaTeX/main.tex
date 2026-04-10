@@ -39,12 +39,23 @@
 
 \begin{document}
 \maketitle
-% \tableofcontents
 
 \begin{abstract}
     This report surveys recent theoretical advances on community detection in random geometric graph models. These models incorporate spatial or latent geometric information and therefore generate strong local dependence, high triangle density, and transitivity. We review the main geometric community models studied in the literature, including the Geometric Block Model, the Geometric Stochastic Block Model, the Geometric Kernel Block Model, the Geometric Hidden Community Model and the Soft Geometric Block Model. We organize the literature by inference task and connectivity regime, with emphasis on weak, almost exact, and exact recovery, information-theoretic thresholds, and the algorithmic ideas used to achieve them. Particular attention is paid to the logarithmic degree regime, where recent works establish sharp exact-recovery thresholds together with efficient algorithms. We also discuss spectral approaches, extensions and open directions.
     \keywords{Community detection, random geometric graphs, spatial networks, exact recovery, partial recovery, information-theoretic thresholds, spectral methods}
 \end{abstract}
+
+\begingroup
+\let\clearpage\relax
+\setcounter{tocdepth}{2}
+\renewcommand{\contentsname}{}
+\makeatletter
+\let\l@title\@gobbletwo
+\let\l@author\@gobbletwo
+\let\authcount\@gobble
+\makeatother
+\tableofcontents
+\endgroup
 
 \section{Introduction}\label{sec:intro}
 
@@ -536,7 +547,7 @@ with the inner integral over \(y\) replaced by a sum in the discrete case. The i
 
 
 
-\section{Spectral methods in latent geometric models}
+\section{Spectral methods and Soft Geometric Block Model (SGBM)}
 
 % Before turning to spectral methods designed specifically for geometric community models, we mention related works that clarify why geometry makes spectral recovery delicate.
 In sparse SBM, non geometric model, \citep{bordenave2015non} showed that spectral recovery may depend on the spectral representation that is used, working with non-backtracking operator rather than the common used adjacency matrix. In geometric graphs another difficulty appears, dominant eigenvectors may reflect the ambient geometry rather than the latent communities.
