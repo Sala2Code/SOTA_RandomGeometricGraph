@@ -13,6 +13,18 @@
 \usepackage{hyperref}
 \usepackage{svg}
 \usepackage{float}
+\usepackage{booktabs}
+% In the preamble
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{makecell}
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}m{#1}}
+
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
 
 \usepackage[authoryear]{natbib}
 
@@ -27,16 +39,19 @@
 
 \begin{document}
 \maketitle
+% \tableofcontents
 
 \begin{abstract}
-This report surveys recent theoretical advances on community detection in geometric random graph models. These models incorporate spatial or latent geometric information and therefore generate strong local dependence, high triangle density, and transitivity. We review the main geometric community models studied in the literature, including the Geometric Block Model, the Geometric Stochastic Block Model, the Geometric Kernel Block Model, the Geometric Hidden Community Model and the Soft Geometric Block Model. We organize the literature by inference task and connectivity regime, with emphasis on weak, almost exact, and exact recovery, information-theoretic thresholds, and the algorithmic ideas used to achieve them. Particular attention is paid to the logarithmic degree regime, where recent works establish sharp exact-recovery thresholds together with efficient algorithms. We also discuss spectral approaches, extensions and open directions.
-\keywords{Community detection, geometric random graphs, spatial networks, exact recovery, partial recovery, information-theoretic thresholds, spectral methods}
+    This report surveys recent theoretical advances on community detection in random geometric graph models. These models incorporate spatial or latent geometric information and therefore generate strong local dependence, high triangle density, and transitivity. We review the main geometric community models studied in the literature, including the Geometric Block Model, the Geometric Stochastic Block Model, the Geometric Kernel Block Model, the Geometric Hidden Community Model and the Soft Geometric Block Model. We organize the literature by inference task and connectivity regime, with emphasis on weak, almost exact, and exact recovery, information-theoretic thresholds, and the algorithmic ideas used to achieve them. Particular attention is paid to the logarithmic degree regime, where recent works establish sharp exact-recovery thresholds together with efficient algorithms. We also discuss spectral approaches, extensions and open directions.
+    \keywords{Community detection, random geometric graphs, spatial networks, exact recovery, partial recovery, information-theoretic thresholds, spectral methods}
 \end{abstract}
 
 \section{Introduction}\label{sec:intro}
 
-Community detection consists in finding clusters in a graph where nodes share more connections with nodes of the same cluster
-than with nodes of other clusters. This broad topic is detailed in \citep{fortunato2010community}. In this 
+% Community detection consists in finding clusters in a graph where nodes share more connections with nodes of the same cluster
+% than with nodes of other clusters.
+Community detection studies graphs whose vertices belong to hidden groups, called communities, which influence the edge structure. Vertices in the same community tend to connect in a different way than vertices from different communities. The goal is to infer this latent community structure.
+This broad topic is detailed in \citep{fortunato2010community}. In this 
 report, we focus on random geometric graphs (RGG). Adding spatial information allows us to consider
 local information based on real or abstract proximity.  % The probability of connection between two nodes depends on their distance.
 In social networks, two individuals are more likely to be friends if they are geographically close,
@@ -46,8 +61,8 @@ and also in community detection problems \citep{sankararaman2020comhapdet}.
 
 The main reference model for community detection is the Stochastic Block Model (SBM)
 \citep{holland1983stochastic}. Each node carries a hidden community label and edge probabilities depend on whether two nodes belong to the same community or not.
-This model comes from the Erd\H{o}s-R\'enyi graph, where each node connects to others with the same probability \citep{erdHos1960evolution}. This model is now well understood,
-see \citep{abbe2018community}. Nonetheless, it has some drawbacks, since it is unrealistic to think that every node can connect to every other one with the same probability scale.
+This model comes from the Erd\H{o}s-R\'enyi graph, where each node connects to others with the same probability \citep{erdHos1960evolution}. SBM is now well understood,
+see \citep{abbe2018community}. Nonetheless, it has some limitations, since it is often unrealistic to assume that every pair of nodes interacts on the same probability scale.
 Around the same time as Erd\H{o}s-R\'enyi, the RGG was introduced by \citep{gilbert1961random}.
 Adding geometric information allows us to mimic some emergent behaviours of real networks,
 such as sparsity \citep{Del_Genio_2011},
@@ -103,17 +118,121 @@ and it's in some sense harder, because one wants to recover the position (a cont
 
 \section{Problem setting and inference tasks}\label{sec:setting}
 
-Formally, we observe a graph \(G \coloneqq (V,E)\), where \(V\) is the vertex set and \(E\) is the set of edges between vertices. Throughout the report, \(n\) denotes the asymptotic scaling parameter. Depending on the model, the observed number of vertices may be either deterministic or random, but is of order \(n\). We consider a simple undirected graph, without self-loops. The vertices are partitioned into \(k\) communities \(C_1,\dots,C_k\), so
-\(V=\bigsqcup_{i=1}^k C_i\). We denote by \(\sigma^\star:V\to [k]\) the ground-truth community label function, defined by \(\sigma^\star(v)=i\) whenever \(v\in C_i\). The community structure is hidden, and our goal is to recover it from the observed data.
+% Formally, we observe a graph \(G \coloneqq (V,E)\), where \(V\) is the vertex set and \(E\) is the set of edges between vertices. Throughout the report, \(n\) denotes the asymptotic scaling parameter. Depending on the model, the observed number of vertices may be either deterministic or random, but is of order \(n\). We consider a simple undirected graph, without self-loops. The vertices are partitioned into \(k\) communities \(C_1,\dots,C_k\), so
+% \(V=\bigsqcup_{i=1}^k C_i\). We denote by \(\sigma^\star:V\to [k]\) the ground-truth community label function, defined by \(\sigma^\star(v)=i\) whenever \(v\in C_i\). The community structure is hidden, and our goal is to recover it from the observed data.
+We observe a simple undirected graph \(G=(V,E)\), with no self-loops. Each vertex belongs to the ambient metric space \((\mathcal X, \rho)\), of dimension \(d\), and to an unknown community. In the following, we specify each time whether this space is latent or observed. The goal is to recover this hidden label structure from the available observations, the graph and the vertex positions or solely the graph. Throughout the report, \(n\) denotes the asymptotic scaling parameter, while the total number of observed vertices is of order \(n\).
+% Each vertex also belongs to a space \(\mathcal X\). In the following, we specify each time whether this space is latent or observed. 
+% For theoretical analysis, \(\mathcal{X}\) is often chosen for mathematical convenience. The Euclidean space \(\mathbb{R}^{d}\) is a natural reference because of its symmetry, homogeneity, isotropy, and direct geometric interpretation.
+% % See \citep{abbe2021community}, \textcolor{red}{Citer ceux qui sont euclidiens}.
+% In the following, \(d\) is an integer.
+% We also encounter the torus \(\mathbb T^d\) mainly to avoid boundary effects and to focus on the core ideas of the proofs. 
+% %\textcolor{red}{Todo citer}.
+% Lastly, for latent models, the high-dimensional unit sphere \(\mathbb{S}^{d}\) is a standard reference space to model similarity, and it also provides convenient spectral properties \citep{decastro2020adaptiveestimationnonparametricgeometric}. A summary of theoretical works on \(\mathbb{S}^{d}\) is given in \citep{duchemin2023random}.
+To compare models used throughout the literature and reviewed later, we introduce a unified geometric framework and remain close to the notation used in the papers. See Table~\ref{table1} for an informal overview of the models and their parameters.
+We call it the \textit{Unified Geometric Community Model} (UGCM) and it is defined as,
+\[
+\mathrm{UGCM} \left( \mathcal X, \rho, W_n, \mu_n, Z, \pi, \mathcal Y, K_n \right)
+\] 
+where \(W_n \subset \mathcal X\) is the window where nodes are sampled at the scale $n$.  
+% \(\mu_n\) governs the spatial sampling mechanism. Usually, the vertices are sampled either as \(n\) i.i.d. points in \(W_n\) with law \(\mu_n\) or as a Poisson Point Process (PPP) on \(W_n\)  with intensity measure \( \mu_n \). 
+Then, \(\mu_n\) describes how vertex locations are sampled. Usually, vertices are generated either as \(n\) i.i.d. points in \(W_n\) or as a Poisson Point Process (PPP) on \(W_n\) with the corresponding intensity measure. These two formulations lead to the same order of nodes and, in both cases, node locations are sampled independently. The Poisson formulation is often technically more convenient.
+We denote by \(Z\) the label set, and by \(\pi=(\pi_i)_{i\in Z} \) the distribution of the labels.
+% For all \(u \in V\) and independently, \( \sigma^\star(u) \sim \pi\).
+\(\mathcal Y\) is the space of pairwise observation. For a standard unweighted graph one has \(\mathcal Y=\{0,1\}\), while for a weighted graph one typically takes \(\mathcal Y=\mathbb{R}\).
+Let \(\mathcal P(\mathcal Y)\) denote the set of probability distributions on \(\mathcal Y\). We consider the kernel that specifies the distribution of the pairwise observation taking account positions and labels of the two vertices, denoted by
+\(
+K_n : \mathcal{X} \times \mathcal{X} \times Z \times Z \to \mathcal P(\mathcal Y)
+\)
+% and we observe 
+% \(Y_{uv}\mid (X,\sigma^\star)\sim K_n\bigl(X_u,X_v,\sigma^\star(u),\sigma^\star(v)\bigr)\)
+% for each unordered pair of vertices \(u,v\). 
+% The kernel is the core of the model.
 
-An estimator is therefore a function of the observations. Depending on the model, the observations may consist only of the graph \(G\), or of the graph together with the node locations \(X=(X_v)_{v\in V}\). Accordingly, we write the estimator as \(\hat{\sigma}=\hat{\sigma}(G)\) or \(\hat{\sigma}=\hat{\sigma}(G,X)\), and we view \(\hat{\sigma}:V\to [k]\) as an estimated labeling.
-In general, the labels are only identifiable up to a relabeling of the communities. Indeed, permuting the names of the communities does not change the underlying partition of the vertex set. For this reason, the quality of an estimator is measured up to permutation. Denoting by \(\mathfrak{S}_k\) the symmetric group on \([k]\), we define
+% We note that Soft-RGG introduced by \citep{Penrose_2016} and developed in \citep{duchemin2023random} can be seen as a special case of UGCM where there exists a function \(f_n : \mathbb{R}^+ \to [0,1]\) such that for every \(x,y\in\mathcal{X}\) and \(z,z'\in Z\), \(K_n(x,y,z,z') = \text{Ber}(f_n(\rho(x,y))) \). Moreover, a particular case of Soft-RGG are the usual random geometric graph, i.e. the hard-threshold special case, when \(f_n\) is an indicator function, i.e. there exists \(r_n>0\) such that  \(K_n(x,y,z,z') = \delta_{\mathbf{1}\{\rho(x,y)\le r_n\}}\). Then, this framework also accommodates weighted graphs, since the observation space \(\mathcal Y\) is not necessarily binary.
+
+\begin{table}[h]
+\centering
+\small
+\renewcommand{\arraystretch}{1.15}
+\setlength{\tabcolsep}{4pt}
+
+\begin{tabularx}{\textwidth}{
+    C{0.9cm}   % Model
+    C{1.6cm}   % Main parameters
+    L{2.1cm}   % Spatial sampling
+    C{1.25cm}   % Latent positions?
+    C{1.8cm}   % Communities studied
+    L{3.2cm}   % Informal observation rule
+}
+\toprule
+\makecell[c]{Model} &
+\makecell[c]{Main\\parameters} &
+\makecell[c]{Spatial\\sampling} &
+\makecell[c]{Latent\\positions?} &
+\makecell[c]{Communities\\studied} &
+\makecell[c]{Informal\\observation rule} \\
+\specialrule{0.2pt}{0pt}{0pt}
+
+GBM &
+\(r_{\mathrm{in}}, r_{\mathrm{out}}, d\) &
+\(n\) vertices i.i.d. uniform on \(\mathbb S^{d-1}\) &
+\centering \cmark{} &
+\centering 2 balanced &
+Deterministic edge, \allowbreak hard threshold according to \(r_{\mathrm{in}}\) and \(r_{\mathrm{out}}\) \\
+\specialrule{0.2pt}{0pt}{0pt}
+
+GSBM &
+\(\lambda, f_{\mathrm{in}}, f_{\mathrm{out}}, d\) &
+PPP on \(\left[\pm \frac{n^{1/d}}{2}\right]^d\) with intensity \(\lambda\) &
+\centering \xmark{} &
+\centering 2 balanced &
+Bernoulli edge and soft threshold according to \(f_{\mathrm{in}}(\cdot)\) and \(f_{\mathrm{out}}(\cdot)\) \\
+\specialrule{0.2pt}{0pt}{0pt}
+
+GKBM &
+\(\lambda, a, b, \phi\) &
+PPP on \(]-\tfrac12,\tfrac12]\) with intensity \(\lambda n\) &
+\centering \xmark{} &
+\centering 2 balanced &
+Bernoulli edge and soft threshold according to \(\phi(\cdot)\), \(a\) and \(b\) \\
+\specialrule{0.2pt}{0pt}{0pt}
+
+GHCM &
+\(\lambda, \pi, d, \allowbreak (P_{zz'})_{z,z'\in Z}\) &
+PPP on \(\left[\pm \frac{n^{1/d}}{2}\right]^d\) with intensity \(\lambda\) &
+\centering \xmark{} &
+\centering \(k \ge 2\) general &
+General pairwise observation law according to \(P_{zz'}\) \\
+\specialrule{0.2pt}{0pt}{0pt}
+
+SGBM &
+\(F_{\mathrm{in}}, F_{\mathrm{out}}, d\) &
+\(n\) vertices i.i.d. uniform on \(\mathbb T^d\) &
+\centering \cmark{} &
+\centering \(k \ge 2\) balanced &
+Bernoulli edge and soft threshold according to \(F_{\mathrm{in}}(\cdot)\) and \(F_{\mathrm{out}}(\cdot)\) \\
+
+\bottomrule
+\end{tabularx}
+
+\caption{Overview of the geometric community models discussed in this report. For each model, the formal definition and its assumptions on the main parameters are given in the corresponding sections.}\label{table1}
+\end{table}
+
+
+
+
+
+
+%An estimator is therefore a function of the observations. 
+Depending on the model, the observations may consist only of the graph \(G\) or of the graph together with the node locations \(X=(X_v)_{v\in V}\). 
+Accordingly, we write the estimator as \(\hat{\sigma}=\hat{\sigma}(G)\) or \(\hat{\sigma}=\hat{\sigma}(G,X)\), and we view \(\hat{\sigma}:V\to Z\) as an estimated labeling.  We denote \(\sigma^\star:V\to Z\) the ground truth community label function.
+Permuting the names of the communities does not change the underlying partition of the vertex set. For this reason, the quality of an estimator is measured up to permutation. Denoting by \(\mathfrak{S}_Z\) the symmetric group on \(Z\), we define
 \[
 A_n(\hat{\sigma},\sigma^\star)
 \coloneqq \frac{1}{|V|}
-\max_{\pi\in \mathfrak{S}_k}
+\max_{s \in \mathfrak{S}_Z}
 \sum_{u\in V}
-\mathbf{1}\bigl\{\hat{\sigma}(u)=\pi(\sigma^\star(u))\bigr\}
+\mathbf{1}\bigl\{\hat{\sigma}(u)=s(\sigma^\star(u))\bigr\}
 \]
 Thus, \(A_n(\hat{\sigma},\sigma^\star)\) measures the fraction of correctly classified vertices after the best possible relabeling of the communities. 
 We now give more formal definitions of the problems introduced in Section~\ref{sec:intro}.
@@ -155,32 +274,11 @@ We say that exact recovery is achievable if there exists a sequence of estimator
 \mathbb P\bigl(A_n(\hat{\sigma}_n,\sigma^\star)=1\bigr)\xrightarrow[n\to\infty]{} 1
 \]
 
-Most works in the literature focus on the case \(k=2\). Although several ideas extend beyond this setting, this is also the framework that we adopt in the following, except when specified otherwise. In that case, it is convenient to encode the labels by \(\{\pm1\}=\{-1,+1\}\), instead of \([2] = \{1,2\}\). Then “up to permutation” reduces to a global sign flip.
+Most works in the literature focus on the case \(k=2\). Although several ideas extend beyond this setting, this is also the framework that we adopt in the following, except when specified otherwise. In that case, it is convenient to encode the labels by \(\{\pm1\}\coloneqq \{-1,+1\}\). Then "up to permutation" reduces to a global sign flip.
 
-Each vertex also belongs to a space \(\mathcal X\). In the following, we specify each time whether this space is latent or observed. For theoretical analysis, \(\mathcal{X}\) is often chosen for mathematical convenience. The Euclidean space \(\mathbb{R}^{d}\) is a natural reference because of its symmetry, homogeneity, isotropy, and direct geometric interpretation.
-% See \citep{abbe2021community}, \textcolor{red}{Citer ceux qui sont euclidiens}.
-In the following, \(d\) is an integer.
-We also encounter the torus \(\mathbb T^d\) mainly to avoid boundary effects and to focus on the core ideas of the proofs. 
-%\textcolor{red}{Todo citer}.
-Lastly, for latent models, the high-dimensional unit sphere \(\mathbb{S}^{d}\) is a standard reference space to model similarity, and it also provides convenient spectral properties \citep{decastro2020adaptiveestimationnonparametricgeometric}. A summary of theoretical works on \(\mathbb{S}^{d}\) is given in \citep{duchemin2023random}.
 
-In Section~\ref{sec:models} we present models used throughout the literature. To unify notation, we use the following template while remaining close to the notation used in the papers. We call it the \textit{Unified Geometric Community Model} (UGCM) and it is defined as,
-\[
-\mathrm{UGCM} \left( \mathcal X, \rho, W_n, \mu_n, Z, \pi, \mathcal Y, K_n \right)
-\] 
-where \( \mathcal X \) is the ambient space and \(\rho\) is its metric. \(W_n \subset \mathcal X\) is the window where nodes are sampled at the scale $n$.  
-\(\mu_n\) governs the spatial sampling mechanism. Usually, the vertices are sampled either as \(n\) i.i.d. points in \(W_n\) with law \(\mu_n\) or as a Poisson Point Process (PPP) on \(W_n\)  with intensity measure \( \mu_n \). We denote by \(Z\) the label set, and by \(\pi=(\pi_i)_{i\in Z} \) the distribution of the labels.
-For all \(u \in V\) and independently, \( \sigma^\star(u) \sim \pi\). \(\mathcal Y\) is the space of pairwise observation. Let \(\mathcal P(\mathcal Y)\) denote the set of probability distributions on \(\mathcal Y\), we consider the observation kernel,
-\[
-K_n : \mathcal{X} \times \mathcal{X} \times Z \times Z \to \mathcal P(\mathcal Y)
-\]
-and for each unordered pair of vertices \(u,v\), we observe, 
-\[
-Y_{uv}\mid (X,\sigma^\star)\sim K_n\bigl(X_u,X_v,\sigma^\star(u),\sigma^\star(v)\bigr)
-\]
-The kernel is the core of the model. We note that Soft-RGG introduced by \citep{Penrose_2016} and developed in \citep{duchemin2023random} can be seen as a special case of UGCM where there exists a function \(f_n : \mathbb{R}^+ \to [0,1]\) such that for every \(x,y\in\mathcal{X}\) and \(z,z'\in Z\), \(K_n(x,y,z,z') = \text{Ber}(f_n(\rho(x,y))) \). Moreover, a particular case of Soft-RGG are the usual random geometric graph, i.e. the hard-threshold special case, when \(f_n\) is an indicator function, i.e. there exists \(r_n>0\) such that  \(K_n(x,y,z,z') = \delta_{\mathbf{1}\{\rho(x,y)\le r_n\}}\). Then, this framework also accommodates weighted graphs, since the observation space \(\mathcal Y\) is not necessarily binary.
-
-As we will see, several phase-transition phenomena depend on the connectivity scale of the graph, which is usually measured through the average degree. Let \(D_n\) denote the degree of a vertex chosen uniformly at random. We can distinguish three regimes of connectivity, depending on the growth of \(\mathbb E(D_n) \) as \(n\to\infty\).
+% As we will see, several phase transition phenomena depend on the connectivity scale of the graph, which is usually measured through the average degree. 
+Let \(D_n\) denote the degree of a vertex chosen uniformly at random. We can distinguish three regimes of connectivity, depending on the growth of \(\mathbb E(D_n) \) as \(n\to\infty\).
 The most realistic but also the most delicate regime is the \emph{sparse regime}. Each vertex only carries a finite amount of local information, the expected degree remains bounded,
 \[
 \mathbb E(D_n)=\Theta(1)
@@ -452,7 +550,7 @@ Unlike the models discussed in Section 3, \citep{avrachenkov2021higher} is inclu
 \mathrm{SGBM}(F_{\mathrm{in}},F_{\mathrm{out}},d)
 \coloneqq
 \mathrm{UGCM}\!\left(
-\mathcal X,\rho,\mathcal X,\mathrm{Unif}(\mathcal X),\{\pm1\},\mathrm{Ber}\!\left(\tfrac12\right),\{0,1\},K
+\mathcal X,\rho,\mathcal X,\mathrm{Unif}(\mathcal X),\{\pm1\},\mathrm{Ber}(1/2),\{0,1\},K
 \right)
 \]
 where \(\rho\) is the toroidal metric on \(\mathbb T^d\) and
