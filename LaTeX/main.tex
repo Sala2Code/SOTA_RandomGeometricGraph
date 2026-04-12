@@ -42,7 +42,7 @@
 
 \begin{abstract}
     This report surveys recent theoretical advances on community detection in random geometric graph models. These models incorporate spatial or latent geometric information and therefore generate strong local dependence, high triangle density, and transitivity. We review the main geometric community models studied in the literature, including the Geometric Block Model, the Geometric Stochastic Block Model, the Geometric Kernel Block Model, the Geometric Hidden Community Model and the Soft Geometric Block Model. We organize the literature by inference task and connectivity regime, with emphasis on weak, almost exact, and exact recovery, information-theoretic thresholds, and the algorithmic ideas used to achieve them. Particular attention is paid to the logarithmic degree regime, where recent works establish sharp exact-recovery thresholds together with efficient algorithms. We also discuss spectral approaches, extensions and open directions.
-    \keywords{Community detection, random geometric graphs, spatial networks, exact recovery, partial recovery, information-theoretic thresholds, spectral methods}
+    \keywords{Community detection, random geometric graphs, spatial networks, exact recovery, partial recovery, information theoretic thresholds, spectral methods}
 \end{abstract}
 
 \begingroup
@@ -54,8 +54,11 @@
 \let\l@author\@gobbletwo
 \let\authcount\@gobble
 \makeatother
+
 \tableofcontents
 \endgroup
+
+% \newpage
 
 \section{Introduction}\label{sec:intro}
 
@@ -308,31 +311,36 @@ Finally, the \emph{dense regime} corresponds to the easiest setting, the graph c
 
 \subsection{Geometric Block Model (GBM)}
 
-One of the earliest geometric models for community detection is the Geometric Block Model (GBM) introduced in \citep{galhotra2018geometric}. They mainly study the case of two symmetric communities. In its general form, the model places each vertex at a latent position on the unit sphere \(\mathcal X \coloneqq \mathbb S^{d-1}\), sampled uniformly, and edges are drawn through a hard geometric rule. For \(d \in \mathbb{N} \backslash \{0,1\}, \ r_\mathrm{in}, r_\mathrm{out} \in [-1,1]\), \(r_{ij} \coloneqq  r_\mathrm{in}\delta_{ij} + r_\mathrm{out}(1-\delta_{ij}) \), they define
+One of the earliest geometric models for community detection is the Geometric Block Model (GBM) introduced in \citep{galhotra2018geometric}. They study the case of two balanced communities and latent positions on the unit sphere \(\mathbb S^{d}\), sampled uniformly. For \(1 \geq r_{\mathrm{in}} > r_{\mathrm{out}} \geq -1\),
 \[
-\mathrm{GBM}(r_\mathrm{in}, r_\mathrm{out}, d) \coloneqq \mathrm{UGCM}(\mathcal X,\|\cdot\|_2,\ \mathcal X ,  \mathrm{Unif}( \mathcal X ),  \{\pm1\},  \text{Ber}(1/2),  \{0,1\}, K_n)
+\mathrm{GBM}(r_\mathrm{in}, r_\mathrm{out}, d) \coloneqq \mathrm{UGCM}(\mathbb S^{d},\|\cdot\|_2, \mathbb S^{d} ,  \mathrm{Unif}( \mathbb S^{d}),  \{\pm1\},  \text{Ber}(\tfrac12),  \{0,1\}, K_n)
 \]
-with \(K_n : (x,y,z,z') \mapsto \mathbf{1}\{\langle x, y \rangle \geq r_{z,z'}\} \).
+with \(K_n : (x,y,z,z') \mapsto \mathbf{1}\{\langle x, y \rangle \geq r_{\mathrm{in}}\mathbf 1_{\{z=z'\}}+
+r_{\mathrm{out}}\mathbf 1_{\{z\neq z'\}}\} \).
 % In the circular case, this is equivalent after reparametrization to a threshold rule based either on the Euclidean distance or on the geodesic distance.
-The condition \(r_\mathrm{in}>r_\mathrm{out}\) ensures that edges within communities are denser than across communities. The space \(\mathcal X\) is assumed latent, so recovery is done only from the adjacency matrix.
-
-They study the one dimensional circular case, corresponding to \(\mathbb S^1 \subset \mathbb R^2\), hence \(d=2\) in the notation above, in the regime
+% The condition \(r_\mathrm{in}>r_\mathrm{out}\) ensures that edges within communities are denser than across communities. The space \(\mathcal X\) is assumed latent, so recovery is done only from the adjacency matrix.
+They focus first on the one dimensional case, corresponding to \(\mathbb S^1 \subset \mathbb R^2\), in the logarithmic regime,
 \[
 r_\mathrm{in} \coloneqq a\frac{\log n}{n} \qquad r_\mathrm{out} \coloneqq b\frac{\log n}{n} \qquad a>b>0
 \]
-This corresponds to the logarithmic regime. This regime matches the connectivity scale of one dimensional random geometric graphs. Their main algorithm is motif based, that is, for an observed edge \((u,v) \in E\), they count the number of common neighbors of \(u\) and \(v\), so the number of triangles containing this edge. Then they use this statistic to decide whether \(u\) and \(v\) belong to the same community. The geometry creates strong local dependence and transitivity. Unlike in the SBM, triangles are informative in the GBM. Still in this regime, the simple motif counting procedure already yields exact recovery with high probability when \(r_\mathrm{in}\ge 4r_\mathrm{out}\). The algorithm is efficient, and the journal version later clarifies that this one threshold guarantee from the conference paper is order optimal up to constants but restricted to that parameter range \citep{galhotra2018geometric,galhotra2023communityrecoverygeometricblock}.
+This regime matches the connectivity scale of one dimensional random geometric graphs. In contrast with the SBM, local motif counts are informative thanks to the transitivity of the model. Indeed, if \((u,v)\in E\) then the number of common neighbors of \(u\) and \(v\), equivalently the number of triangles containing the edge \((u,v)\), depends on whether \(u\) and \(v\) lie in the same community because nearby vertices tend to have overlapping neighborhoods. So triangles carry community information. In the conference version \citep{galhotra2018geometric}, this leads to a simple one threshold triangle counting algorithm, which already achieves exact recovery with high probability in the regime \(r_\mathrm{in}\ge 4r_\mathrm{out}\).
 
-Firstly, \citep{galhotra2020connectivityrandomannulusgraphs} introduces the random annulus graph (RAG). Let \(I \coloneqq \left[b\left(\frac{\log n}{n}\right)^{1/d}, a\left(\frac{\log n}{n}\right)^{1/d}\right] \). They study \( RAG_d(n, I)\) on \(\mathbb S^d \), a RGG where two nodes are connected only when the distance between them falls inside \(I\), hence the name annulus graph. In dimension \(1\), they obtain a sharp connectivity threshold for the RAG: the graph is connected with high probability if \(a>1\) and \(a-b>1/2\), and disconnected with high probability if \(a<1\) or \(a-b<1/2\). For \(d > 1\), they provide sufficient conditions \citep{galhotra2020connectivityrandomannulusgraphs}.
+The later journal version \citep{galhotra2023communityrecoverygeometricblock} sharpens this analysis in two directions. First, they analyse connectivity of the random annulus graph (RAG) introduced in \citep{galhotra2020connectivityrandomannulusgraphs}. For
+\( I_n \coloneqq \left[b\left(\frac{\log n}{n}\right)^{1/d},\, a\left(\frac{\log n}{n}\right)^{1/d}\right]
+\) the graph \(RAG_d(n,I_n)\) is obtained by connecting two latent points only when their distance belongs to \(I_n\). In dimension \(1\), they prove a sharp connectivity threshold. With high probability \(RAG_1(n,I_n)\) is connected  if \(a>1\) and \(a-b>\frac12\)
+and disconnected if \(a<1\) or \(a-b<\frac12\).
+The condition \(a>1\) is the usual one dimensional connectivity requirement, while \(a-b>1/2\) is to get an annulus enough thick to avoid isolated vertices. For \(d>1\), \citep{galhotra2020connectivityrandomannulusgraphs} gives sufficient connectivity conditions of the same logarithmic order.
 
-Secondly, the main algorithmic refinement is to replace the original one threshold triangle rule by a two threshold procedure. Once one leaves the regime \(r_\mathrm{in}\ge 4r_\mathrm{out}\), a single threshold is no longer sufficient. For inter community edges, the normalized triangle count is concentrated around \(2r_\mathrm{out}\), whereas for intra community edges it depends on the latent distance and may lie either above or below that value. They therefore define two thresholds
+Second, \citep{galhotra2023communityrecoverygeometricblock} replaces the original one threshold triangle rule by a two threshold procedure. Once one leaves the regime \(r_\mathrm{in}\ge 4r_\mathrm{out}\), a single threshold is no longer sufficient. For inter community edges, the normalized triangle count is concentrated around \(2r_\mathrm{out}\), whereas for intra community edges it depends on the latent distance and may lie either above or below that value. They therefore define two thresholds
 \[
 E_S\coloneqq (2b+f_1)\frac{\log n}{n}
 \qquad
 E_D\coloneqq (2b-f_2)\frac{\log n}{n}
 \]
-where \(f_1\) and \(f_2\) are chosen from Chernoff type large deviation inequalities. Edges whose triangle count falls inside the ambiguous interval \([E_D,E_S]\) are removed. This removes all inter community edges with high probability, while preserving enough informative intra community edges. Then, RAG connectivity results are used to show that the surviving intra community edges still connect each community.
+where \(f_1,f_2>0\) are chosen from Chernoff type deviation bounds. An observed edge is classified as intra community if its triangle count is above \(E_S\), as inter community if it is below \(E_D\) and is discarded when its count falls in the ambiguous interval \([E_D,E_S]\). After the filtering step, the surviving graph contains only intra community edges, but not all of them because ambiguous edges may have been deleted.
+Under explicit conditions on \(a\) and \(b\), the surviving intra community graph is still connected in each community. The two connected components correspond to the two communities, this yields exact recovery.
 
-As a consequence, they obtain exact recovery in dimension \(1\) with explicit conditions and an impossibility result when \(a<1\) or \(a-b<1/2\). However, the exact recovery threshold for the latent one dimensional GBM is still not fully characterized, see Figure~\ref{fig:GBM}. A useful contrast is that this gap disappears when the latent positions are revealed. In that case, the one dimensional GBM has a sharp exact recovery threshold which coincides with the sharp connectivity threshold of the RAG. In higher dimension \(d>1\), they also prove a polynomial time exact recovery result at the correct order of magnitude,
+As a consequence, \citep{galhotra2023communityrecoverygeometricblock} proves exact recovery in dimension \(1\) with explicit conditions and an impossibility result when \(a<1\) or \(a-b<1/2\). However, the exact recovery threshold for the latent one dimensional GBM is still not fully characterized, see Figure~\ref{fig:GBM}. A useful contrast is that this gap disappears when the latent positions are revealed. In that case, the one dimensional GBM has a sharp exact recovery threshold which coincides with the sharp connectivity threshold of the RAG. In higher dimension \(d>1\), they also prove a polynomial time exact recovery result at the correct logarithmic scale,
 \[
 r_\mathrm{out}=\Theta\!\left(\left(\frac{\log n}{n}\right)^{1/d}\right)
 \quad\text{and}\quad
@@ -351,6 +359,7 @@ Finally, \citep{chien2020active} studies active learning in the latent GBM with 
 
 
 \subsection{Geometric Stochastic Block Model (GSBM)}
+
 
 \citep{sankararaman2018community} introduce the Geometric Stochastic Block Model (GSBM), which is later developed in full detail in \citep{abbe2021community}. 
 The geometric positions are observed, the space \(\mathcal X\coloneqq \mathbb R^d\) is not latent.
