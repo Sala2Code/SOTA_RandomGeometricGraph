@@ -205,7 +205,7 @@ Bernoulli edge and soft threshold according to \(f_{\mathrm{in}}(\cdot)\) and \(
 
 GKBM &
 \(\lambda, a, b, \phi\) &
-PPP on \(]-\tfrac12,\tfrac12]\) with intensity \(\lambda n\) &
+PPP on \break \(]\pm \tfrac n2]\) with intensity \(\lambda \) &
 \centering \xmark{} &
 \centering 2 balanced &
 Bernoulli edge and soft threshold according to \(\phi(\cdot)\), \(a\) and \(b\) \\
@@ -464,22 +464,24 @@ which is a generalized Chernoff Hellinger divergence. They prove that exact reco
 
 \subsection{Geometric Kernel Block Model (GKBM)}
 
-\citep{avrachenkov2024community} introduce the Geometric Kernel Block Model (GKBM) which extends the logarithmic two community geometric setting by replacing the hard threshold rule with a more general geometric kernel. The geometric positions are observed, so the space \(\mathcal X \coloneqq  \left]-\frac12,\frac12 \right ] \) is not latent, and it is equipped with the toroidal metric \(\rho\). Here again, \(n\) is a scaling parameter and not the number of nodes.
-Points are sampled as a PPP on \(\mathcal{X}\) with intensity measure \(\mu_n \coloneqq \lambda n \mathrm{Leb}_{\mid \mathcal{X}}\) with \(\lambda > 0\). They focus in the one dimensional case with two symmetric communities, although the techniques may extend to higher dimensions. The link probabilities are defined according to \(\phi : \mathbb{R}^+ \to [0,1]\) measurable with a support bounded by \(r >0\). Let \(a,b \in [0,1]\),
+\citep{avrachenkov2026communitydetectionblockmodels} introduce the Geometric Kernel Block Model (GKBM) which extends the logarithmic two community geometric setting by replacing the hard threshold rule with a general geometric kernel. The positions are observed. The space \( \mathcal X \coloneqq \left]-\frac n2,\frac n2 \right ] \) is equipped with the toroidal metric \(\rho\). Here again, \(n\) is a scaling parameter and not the number of nodes.
+Points are sampled from a PPP on \(\mathcal{X}\) with intensity \(\lambda > 0\). They focus in the one dimensional case with two symmetric communities, although the techniques may extend to higher dimensions. The link probabilities are defined according to \(\phi : \mathbb{R}^+ \to [0,1]\) measurable with a support bounded by \(r >0\). Let \(a,b \in [0,1]\),
 \[
 \mathrm{GKBM}(\lambda,a,b,\phi)\coloneqq
-\mathrm{UGCM}(\mathcal X,\rho,\mathcal X,\mu_n,\{\pm1\},\mathrm{Ber}(1/2),\{0,1\},K_n)
+\mathrm{UGCM}(\mathcal X,\rho,\mathcal X,\lambda \mathrm{Leb}_{\mid \mathcal X},\{\pm1\},\mathrm{Ber}(\tfrac{1}{2}),\{0,1\},K_n)
 \]
 Moreover they study the logarithmic regime so the kernel is set as,
 \[
-K_n:(x,y,z,z')\longmapsto \mathrm{Ber}\!\left(\bigl(a\mathbf 1\{z=z'\}+b\mathbf 1\{z\neq z'\}\bigr)\phi\!\left(\frac{n}{\log n}\rho(x,y)\right)\right)
+K_n:(x,y,z,z')\longmapsto \mathrm{Ber}\!\left(\bigl(a\mathbf 1\{z=z'\}+b\mathbf 1\{z\neq z'\}\bigr)\phi\!\left(\frac{\rho(x,y)}{\log n}\right)\right)
 \]
 
 The hard threshold version of the logarithmic GSBM leads to the explicit bound \eqref{eq:GSBM_log_impossibility}. For the GKBM, the authors replace this hard threshold by a more general kernel on their restricted one dimensional model, and introduce the information quantity
 \[
 I_\phi(a,b)\coloneqq 2\int_{\mathbb R_+}\left(1-\sqrt{ab}\,\phi(x)-\sqrt{(1-a\phi(x))(1-b\phi(x))}\right)\,dx
 \]
-This quantity plays the same role as in \citep{abbe2021community}. In fact, when \(\phi=\mathbf 1_{[0,1]}\), it reduces to the one dimensional hard threshold case. Their main result shows that exact recovery is impossible if \(\lambda r<1\) or \(\lambda I_\phi(a,b)<1\). Conversely, if \(\lambda r>1\) and \(\lambda I_\phi(a,b)>1\), then exact recovery is achievable under the additional assumption that \(\phi(x)>0\) for all \(x\in[0,r]\) \citep{avrachenkov2024community}. They also propose a two phase algorithm, adapted from the recent GSBM exact recovery approach, where labels are first recovered on a small block and then propagated. The paper states that this procedure runs in time linear in the number of edges, this corresponds to a complexity of \(O(n\log n)\), in the logarithmic regime \citep{avrachenkov2024community}.
+Remark~4.1 of \citep{avrachenkov2026communitydetectionblockmodels} shows that the local neighborhood can be represented by two Poisson point patterns, one for neighbors, with intensity functions \(a\phi\) and \(b\phi\), and one for non neighbors with intensity function \(1-a\phi\) and \(1-b\phi\). The quantity \(I_\phi(a,b)\) is exactly the Rényi divergence of order \(1/2\) between these two local Poisson laws. This quantity plays the same role as in \citep{abbe2021community}, when \(\phi=\mathbf 1_{[0,1]}\), it reduces to the one dimensional hard threshold case. Their main result shows that exact recovery is impossible if \(\lambda r<1\) or \(\lambda I_\phi(a,b)<1\). Conversely, if \(\lambda r>1\) and \(\lambda I_\phi(a,b)>1\), then exact recovery is achievable under the additional assumption that \(\phi(x)>0\) for all \(x\in[0,r]\) \citep{avrachenkov2026communitydetectionblockmodels}. 
+
+They also propose an explicit three phase algorithm, consisting of initialization, propagation, and refinement. It was adapted from the recent GSBM exact recovery approach, where labels are first recovered on a small block and then propagated. The paper states that this procedure runs in time linear in the number of edges, this corresponds to a complexity of \(O(n\log n)\), in the logarithmic regime \citep{avrachenkov2026communitydetectionblockmodels}.
 
 
 \subsection{Geometric Hidden Community Model (GHCM)}
@@ -631,7 +633,7 @@ Likewise, many theoretical works assume that the geometric positions are observe
 A second direction is to weaken assumptions. For instance, in the GHCM of \citep{gaudio2026exact},  sharp thresholds are now available in considerable generality, but the algorithmic results still rely on distinctness type assumptions ensuring that local neighborhoods contain enough information to separate the communities. Removing these assumptions, or replacing them by weaker %identifiable
 conditions, remains an open problem.
 
-A third direction concerns algorithms. On the one hand, higher-order spectral clustering is effective in the dense regime \citep{avrachenkov2021higher,allem2025multicommunityspectralclusteringgeometric}. On the other hand, the sharp exact recovery results in the logarithmic regime rely on local propagation followed by refinement \citep{galhotra2023communityrecoverygeometricblock,abbe2021community,avrachenkov2024community,gaudio2026exact}. A natural question is therefore whether one can design spectral or hybrid methods that remain effective in sparser geometric graphs.
+A third direction concerns algorithms. On the one hand, higher-order spectral clustering is effective in the dense regime \citep{avrachenkov2021higher,allem2025multicommunityspectralclusteringgeometric}. On the other hand, the sharp exact recovery results in the logarithmic regime rely on local propagation followed by refinement \citep{galhotra2023communityrecoverygeometricblock,abbe2021community,avrachenkov2026communitydetectionblockmodels,gaudio2026exact}. A natural question is therefore whether one can design spectral or hybrid methods that remain effective in sparser geometric graphs.
 
 
 % Springer author-year bibliography style
